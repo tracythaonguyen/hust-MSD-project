@@ -75,39 +75,5 @@ CREATE TABLE favorite (
 
 select * from category;
 select * from video;
-INSERT INTO category (category_name)
-VALUES
-('Movies'),
-('News'),
-('Interview'),
-('Podcast'),
-('Vlog'),
-('Presentation'),
-('Talkshow'),
-('Animations');
-
-INSERT INTO video(video_title, category_id, level, source_link)
-VALUES
-('Brooklyn Nine-Nine',1,'Medium','https://www.youtube.com/watch?v=LUE48DT8MyY'),
-('Mini cheesecakes', 2, 'Medium', 'https://www.youtube.com/watch?v=3NE6rb1n8iU');
-
-INSERT INTO track (track_id, video_id, start_time, end_time, transcript)
-VALUES
-(1, 1, 0, 1.07, 'Sir do you have a minute'),
-(2, 1, 1.07, 2.55, 'I wanted to apologize'),
-(3, 1, 2.55, 6.1, 'Being back at work has been weird');
-
-INSERT INTO tag (tag_name)
-VALUES
-('Education'),
-('Fashion'),
-('Language Learning');
-
-INSERT INTO tag_to_video (tag_id, video_id)
-VALUES
-(1, 1),
-(1, 2),
-(2, 2);
-
 select * from track
 
