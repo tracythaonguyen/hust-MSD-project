@@ -38,9 +38,9 @@ async function updateCategory(req, res) {
     const { name } = req.body
     const { id } = req.params
 
-    // if (!name) {
-    //   return res.status(400).json({ message: 'Name is required' })
-    // }
+    if (!name) {
+      return res.status(400).json({ message: 'Name is required' })
+    }
 
     const category = await pool.query(
       'UPDATE category SET category_name = $1 WHERE category_id = $2 RETURNING *',
