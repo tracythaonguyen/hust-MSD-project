@@ -10,7 +10,7 @@
 }
 
 .header-left {
-    margin: 30px 0px 0px 50px;
+    margin: 30px 0px 0px 70px;
 }
 
 .header-left:hover {
@@ -28,7 +28,7 @@
     height: 45px;
     border-radius: 80px;
     border: none;
-    
+
     font-size: 18px;
     font-weight: 500;
     letter-spacing: 0.44px;
@@ -44,4 +44,62 @@
     background: rgba(255, 255, 255, 0.30);
     box-shadow: 0px 20px 24px 0px rgba(0, 0, 0, 0.03);
     color: #FFF;
+}
+
+.header-body {
+    position: absolute;
+    top: 40%;
+    left: 90px;
+}
+
+.header-body .title {
+    color: #FFF;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: normal;
+
+}
+
+.header-body .desc {
+    color: #FFF;
+    font-size: 17px;
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+.header-button button {
+    border-radius: 80px;
+    background: rgba(255, 255, 255, 0.30);
+    width: 150px;
+    height: 50px;
+    border: none;
+    font-weight: 500;
+    color:#FFF;
+}
+
+.header-button {
+    font-size: 20px;
+    margin-top: 40px;
+    display: flex;
+}
+.header-button img{
+    width: 130px;
+    height: auto;
+    margin-top: -25px;
+    margin-left: 20px;
+}
+.header-button img:hover{
+    cursor: pointer;
+
+}
+.watch-work{
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+
+}
+.watch-work_text{
+    font-weight: 400;
+    margin: 12px 22px 0px -25px;
 }
