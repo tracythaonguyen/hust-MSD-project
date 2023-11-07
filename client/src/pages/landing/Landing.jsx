@@ -9,11 +9,11 @@ import Footer from '../../components/Footer';
 
 export const Landing = () => {
     return (
-        <div>
+        <div className='landingContainer'>
             <div className="landingHeader">
-                <img src={Header} className='bg'></img>
+                <img alt='' src={Header} className='bg'></img>
                 <div className="header-left">
-                    <img src={logoIcon} className='logo'></img>
+                    <img alt='' src={logoIcon} className='logo'></img>
                 </div>
                 <div className="header-right">
                     <button className='login'>Login</button>
@@ -35,7 +35,7 @@ export const Landing = () => {
                         </button>
 
                         <div className="watch-work">
-                            <img src={playIcon}></img>
+                            <img alt='' src={playIcon}></img>
                             <div className="watch-work_text">
                                 Watch how it works
                             </div>
