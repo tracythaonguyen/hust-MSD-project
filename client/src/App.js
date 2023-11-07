@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Login from './pages/login/Login'
-import RegisterPage from './pages/RegisterPage'
+import Register from './pages/login/Register'
 import HomePage from './pages/HomePage'
 import Landing from './pages/landing/Landing'
 import './App.css'
@@ -14,7 +14,7 @@ export default function App() {
                 <Switch>
                     <Route exact path="/" component={ Landing } />
                     <Route path="/login" component={ Login } />
-                    <Route path="/register" component={ RegisterPage } />
+                    <Route path="/register" component={ Register } />
                     <Route path="/home" component={ HomePage } />
                 </Switch>
         

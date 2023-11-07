@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../App.css'
-import axios from 'axios';
 import { useState } from 'react'
+import axios from 'axios';
+import login from '../../assets/images/login.png'
+import './login.css'
 
 
-export default function SignUpPage() {
+export const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -36,13 +37,28 @@ export default function SignUpPage() {
     }
 
     return (
-        <div className="text-center m-5-auto">
-            <h2>Join us</h2>
-            <h5>Create your personal account</h5>
-            <form onSubmit={handleRegister}>
+        <div className="loginContainer">
+            <div className="login-left">
+                <img src={login}></img>
+                <div className="img-text">
+                    <h2>We take your English higher</h2>
+                    <p>EICT is simply!</p>
+                </div>
+            </div>
+
+            <div className="login-right">
+                <h4>Welcome to EICT...!</h4>
+                <div className="option">
+                    <Link to='/login'>
+                        <div className="login ">Login</div>
+                    </Link>
+                    <div className="register visited">Register</div>
+                </div>
+                <p className='desc'>EICT is a learning-platform for student to sutdy English effectively.<br></br> Login to join our community</p>
+                <form onSubmit={handleRegister}>
                 <p>
                     <label>Username</label><br/>
-                    <input type="text" name="first_name" onChange={
+                    <input className='inputText' type="text" name="first_name" onChange={
                         (e) => {
                             setUsername(e.target.value);
                         }
@@ -51,7 +67,7 @@ export default function SignUpPage() {
 
                 <p>
                     <label>Password</label><br/>
-                    <input type="password" name="password" onChange={
+                    <input className='inputText' type="password" name="password" onChange={
                         (e) => {
                             setPassword(e.target.value);
                         }
@@ -60,7 +76,7 @@ export default function SignUpPage() {
                 
                 <p>
                     <label>Email address</label><br/>
-                    <input type="email" name="email" onChange={
+                    <input className='inputText' type="email" name="email" onChange={
                         (e) => {
                             setEmail(e.target.value);
                         }
@@ -68,7 +84,7 @@ export default function SignUpPage() {
                 </p>
                 <p>
                     <label>Phone number</label><br/>
-                    <input type="phone" name="phone" onChange={
+                    <input className='inputText' type="phone" name="phone" onChange={
                         (e) => {
                             setPhone(e.target.value);
                         }
@@ -82,10 +98,9 @@ export default function SignUpPage() {
                     <button id="sub_btn" type="submit">Register</button>
                 </p>
             </form>
-            <footer>
-                <p><Link to="/login">Back to Homepage</Link>.</p>
-            </footer>
+            </div>
         </div>
     )
-
 }
+
+export default Register

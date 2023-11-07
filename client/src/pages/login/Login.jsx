@@ -57,7 +57,9 @@ export const Login = () => {
                 <h4>Welcome to EICT...!</h4>
                 <div className="option">
                     <div className="login visited">Login</div>
-                    <div className="register">Register</div>
+                    <Link to='/register'>
+                        <div className="register">Register</div>
+                    </Link>
                 </div>
                 <p className='desc'>EICT is a learning-platform for student to sutdy English effectively.<br></br> Login to join our community</p>
                 <form onSubmit={handleLogin}>
