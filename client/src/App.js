@@ -17,7 +17,6 @@ export default function App() {
                     <Route path="/register" component={ Register } />
                     <Route path="/home" component={ HomePage } />
                 </Switch>
-        
             </div>
         </Router>
     )
