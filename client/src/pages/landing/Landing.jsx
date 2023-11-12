@@ -7,7 +7,19 @@ import Footer from '../../components/Footer';
 
 
 
+
 export const Landing = () => {
+
+    const login = () =>{
+
+    }
+
+    const register = () =>{
+
+    }
+
+
+
     return (
         <div className='landingContainer'>
             <div className="landingHeader">
@@ -16,8 +28,8 @@ export const Landing = () => {
                     <img alt='' src={logoIcon} className='logo'></img>
                 </div>
                 <div className="header-right">
-                    <button className='login'>Login</button>
-                    <button className='register'>Register</button>
+                    <button onClick={login} className='login'>Login</button>
+                    <button onClick={register} className='register'>Register</button>
                 </div>
 
                 <div className="header-body">
@@ -30,7 +42,7 @@ export const Landing = () => {
                         TOTC is an interesting platform that will teach<br></br> you in more an interactive way
                     </div>
                     <div className="header-button">
-                        <button className="join-for-free">
+                        <button onClick={register} className="join-for-free">
                             Join for free
                         </button>
 
