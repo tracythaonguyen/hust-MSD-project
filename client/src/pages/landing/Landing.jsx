@@ -4,21 +4,19 @@ import Header from '../../assets/images/Header-landing.png'
 import logoIcon from '../../assets/images/logo.svg'
 import playIcon from '../../assets/images/play_icon.png'
 import Footer from '../../components/Footer';
-
-
+import { useHistory } from "react-router-dom";
 
 
 export const Landing = () => {
+    const history = useHistory();
 
     const login = () =>{
-
+        history.push("/login");
     }
 
     const register = () =>{
-
+        history.push("/register");
     }
-
-
 
     return (
         <div className='landingContainer'>
