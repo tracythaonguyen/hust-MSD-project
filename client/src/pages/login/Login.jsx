@@ -19,7 +19,7 @@ export const Login = () => {
         //else,alert error
         //print form input
         e.preventDefault();
-        axios.post('http://localhost:8000/login', {
+        axios.get('http://localhost:8000/login', {
             username: username,
             password: password
         },//with token

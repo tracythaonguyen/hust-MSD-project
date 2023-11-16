@@ -2,6 +2,11 @@ import express from 'express'
 import accountController from '../controllers/account.controller.js'
 
 const router = express.Router()
+//login
+router.post('/login', accountController.login)
+// //register
+// router.post('/register', accountController.createAccount)
+
 
 // get all accounts
 router.get('/', accountController.getAllAccounts)
