@@ -1,4 +1,35 @@
 import pool from '../config/db.js'
+const jwt = require('jsonwebtoken');
+
+async function login(req, res) {
+  const { username, password } = req.body;
+  try {
+
+    //query by user name
+    let queryText = `SELECT * FROM account`
+    const queryParams = []
+
+    if (username) {
+      queryText += ' WHERE'
+      queryText += ` REPLACE(username, ' ', '') ILIKE $1`
+      queryParams.push(`%${username}%`)
+    }
+
+    queryText += ' ORDER BY account_id ASC'
+
+    const account = await pool.query(queryText, queryParams)
+
+    if (!account || !account.validPassword(password)) {
+        return res.status(401).json({ error: 'Invalid username or password' });
+    }
+
+    const token = generateToken(account);
+
+    res.json({ token });
+} catch (error) {
+    res.status(500).json({ error: 'Failed to login' });
+}
+}
 
 async function getAllAccounts(req, res) {
   try {
@@ -139,4 +170,5 @@ export default {
   updateUserName,
   createAccount,
   searchAccountByUserName,
+  login, 
 }
