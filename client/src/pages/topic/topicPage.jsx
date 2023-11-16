@@ -3,6 +3,7 @@ import './topic.css'
 import * as Constant from './Constant'
 
 import React, { useState } from 'react';
+import Footer from "../../components/Footer";
 
 export const TopicPage = () => {
     const boxStyle = {
@@ -11,7 +12,9 @@ export const TopicPage = () => {
 
     const smallBoxData = Array.from({ length: 12 }, (_, index) => ({
         id: index + 1,
-        content: `Small Box ${index + 1}`,
+        name: `Small Box ${index + 1}`,
+        image: `https://via.placeholder.com/150`,
+        progress: (index + 1) * 10, // Set progress value based on your data
     }));
 
     const itemsPerPage = 6;
@@ -34,13 +37,13 @@ export const TopicPage = () => {
     return (
         <div className="topicPage">
             <Header></Header>
+            {/*    TOPIC PART    */}
             <div className="box-container">
                 <div className="box" style={boxStyle}>
                     {/* Image container on the left */}
                     <div className="image-container">
                         <img src={Constant.TOPIC_LOGO} alt={"image"}/>
                     </div>
-
                     {/* Text box on the right */}
                     <div className="text-box">
                         {/* Content goes here */}
@@ -51,10 +54,21 @@ export const TopicPage = () => {
             </div>
             {/*    DATA PART    */}
             <div className="big-box">
+                <h2>TOPIC</h2>
                 <div className="small-box-container">
                     {visibleSmallBoxes.map((box) => (
                         <div key={box.id} className="small-box">
-                            {box.content}
+                            <img src={box.image} alt={box.name} />
+                            <div className="small-box-content">
+                                <div className="small-box-name">{box.name}</div>
+                                <div className="percentage-text">{box.progress}%</div>
+                            </div>
+                            <div className="progress-bar">
+                                <div
+                                    className="progress-bar-inner"
+                                    style={{ width: `${box.progress}%` }}
+                                />
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -67,6 +81,7 @@ export const TopicPage = () => {
                     </button>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     )
 }
