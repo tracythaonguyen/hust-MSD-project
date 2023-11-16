@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Landing from './landing/Landing';
 import BackgroundImage from '../assets/images/bg.png'
 
@@ -19,7 +19,7 @@ export default function HomePage() {
 
         <div className="text-center" style={HeaderStyle}>
             {isLogin == null ? (
-                <Landing /> // Display LandingPage if logged in
+                <Landing/> // Display LandingPage if logged in
             ) : (
                 <React.Fragment>
                     <h1 className="main-title home-page-title">Welcome {username} to our app</h1>

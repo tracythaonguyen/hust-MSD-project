@@ -5,7 +5,9 @@ import Login from './pages/login/Login'
 import Register from './pages/login/Register'
 import HomePage from './pages/HomePage'
 import Landing from './pages/landing/Landing'
+import UserPage from './pages/user/UserPage'
 import './App.css'
+import TopicPage from "./pages/topic/TopicPage";
 
 export default function App() {
     return (
@@ -16,6 +18,8 @@ export default function App() {
                     <Route path="/login" component={ Login } />
                     <Route path="/register" component={ Register } />
                     <Route path="/home" component={ HomePage } />
+                    <Route path="/user" component={ UserPage } />
+                    <Route path="/topic" component={ TopicPage } />
                 </Switch>
         
             </div>
