@@ -9,12 +9,12 @@
     color: #FFF;
     justify-content: center;
     padding-top: 45px;
-    font-family: Poppins;
+    font-family: Poppins, sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    letter-spacing: 0.88px;
+    letter-spacing: 1px;
 }
 
 .footer img {
@@ -23,10 +23,9 @@
 }
 
 .vertical-line {
-    border-left: 1px solid #626381;
-    ;
+    border-left: 1px solid #626381;;
     height: 50px;
-    margin: 0px 40px 0px 40px;
+    margin: 0 40px 0 40px;
 }
 
 .subscribe {
@@ -35,14 +34,15 @@
     text-align: center;
     font-size: 20px;
     font-weight: 500;
-    letter-spacing: 1.04px;
+    letter-spacing: 1px;
 }
 
-.footer-body .email{
+.footer-body .email {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
+
 .footer-body input {
     border-radius: 80px;
     border: 1px solid #83839A;
@@ -50,7 +50,7 @@
     padding-left: 20px;
 }
 
-.footer-body button{
+.footer-body button {
     border-radius: 60px;
     background: #49BBBD;
     border: none;
@@ -59,23 +59,23 @@
     color: #FFF;
 }
 
-.footer-body button:hover{
+.footer-body button:hover {
     cursor: pointer;
 }
 
-.footer-bottom-texts, .company{
+.footer-bottom-texts, .company {
     display: flex;
     color: #B2B3CF;
     font-size: 15px;
     font-weight: 400;
-    letter-spacing: 0.88px;
+    letter-spacing: 1px;
     justify-content: center;
 }
 
-.ft-text{
+.ft-text {
     margin: 20px 10px 3px 10px;
 }
 
-.company{
+.company {
     font-size: 13px;
 }
