@@ -1,9 +1,13 @@
-import Header from "../../components/Header";
+// Module
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+// CSS
 import './topic.css'
+// Components
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 import * as Constant from './Constant'
 
-import React, { useState } from 'react';
-import Footer from "../../components/Footer";
 
 export const TopicPage = () => {
     const boxStyle = {
@@ -55,9 +59,10 @@ export const TopicPage = () => {
             {/*    DATA PART    */}
             <div className="big-box">
                 <h2>TOPIC</h2>
+                <br/>
                 <div className="small-box-container">
                     {visibleSmallBoxes.map((box) => (
-                        <div key={box.id} className="small-box">
+                        <Link key={box.id} to={`/video/${box.id}`} className="small-box">
                             <img src={box.image} alt={box.name} />
                             <div className="small-box-content">
                                 <div className="small-box-name">{box.name}</div>
@@ -69,7 +74,7 @@ export const TopicPage = () => {
                                     style={{ width: `${box.progress}%` }}
                                 />
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
                 <div className="button-container">
