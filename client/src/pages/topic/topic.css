@@ -1,0 +1,95 @@
+/* styles.css */
+
+/*TOPIC DESCRIPTION PART*/
+
+.box-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh; /* Set the height to 100% of the viewport height */
+}
+
+.box {
+    width: 95%;
+    max-width: 2000px;
+    height: 250px;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.image-container {
+    width: 200px;
+    height: 200px;
+    margin-right: 10px;
+    border: 4px solid white; /* Border color for the circular image */
+    border-radius: 50%; /* Ensure the border follows the circular shape */
+    overflow: hidden; /* Hide the overflow from the circular shape */
+}
+
+.image-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover; /* Ensure the image covers the entire circular area */
+}
+
+.text-box {
+    height: 95%;
+    margin-left: 20px;
+    border-radius: 20px;
+    flex-grow: 1;
+    background-color: rgba(255, 255, 255, 0.8); /* Use rgba to set a transparent background color */
+    padding: 20px; /* Add padding to the text-box */
+}
+
+/* Additional styles for text inside the box */
+.text-box h2 {
+    margin-bottom: 10px; /* Add margin to the bottom of the heading */
+}
+
+.text-box p {
+    padding-top: 10px;
+    margin: 0; /* Remove default margin from the paragraphs */
+}
+
+/*TOPIC VIDEO LIST PART*/
+.big-box {
+    width: 100%;
+    max-width: 600px; /* Adjust the maximum width as needed */
+    border: 2px solid #3498db;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px auto;
+}
+
+.small-box-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.small-box {
+    width: calc(33.33% - 10px);
+    margin-bottom: 10px;
+    border: 2px solid #3498db;
+    padding: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
