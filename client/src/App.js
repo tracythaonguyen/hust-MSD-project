@@ -7,7 +7,7 @@ import HomePage from './pages/HomePage'
 import Landing from './pages/landing/Landing'
 import UserPage from './pages/user/UserPage'
 import './App.css'
-import TopicPage from "./pages/topic/topicPage";
+import TopicPage from "./pages/topic/TopicPage";
 
 export default function App() {
     return (

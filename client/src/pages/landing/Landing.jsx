@@ -4,7 +4,7 @@ import Header from '../../assets/images/Header-landing.png'
 import logoIcon from '../../assets/images/logo.svg'
 import playIcon from '../../assets/images/play_icon.png'
 import Footer from '../../components/Footer';
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 export const Landing = () => {
@@ -26,7 +26,7 @@ export const Landing = () => {
 
                 <div className="header-body">
                     <div className="title">
-                        <span className='title-color' style={{ color: '#F48C06', marginRight: '10px' }}>Studying</span>
+                        <span className='title-color' style={{color: '#F48C06', marginRight: '10px'}}>Studying</span>
                         Online is now
                         <br></br> much easier
                     </div>
@@ -47,7 +47,7 @@ export const Landing = () => {
                     </div>
                 </div>
             </div>
-            
+
             <Footer></Footer>
         </div>
     )

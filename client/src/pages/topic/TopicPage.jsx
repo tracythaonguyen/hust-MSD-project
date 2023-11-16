@@ -1,8 +1,8 @@
 // Module
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState} from 'react';
+import {Link} from 'react-router-dom';
 // CSS
-import './topic.css'
+import './TopicStyle.css'
 // Components
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
@@ -14,7 +14,7 @@ export const TopicPage = () => {
         background: `url('${Constant.BACKGROUND_IMAGE}') center/cover`,
     };
 
-    const smallBoxData = Array.from({ length: 12 }, (_, index) => ({
+    const smallBoxData = Array.from({length: 12}, (_, index) => ({
         id: index + 1,
         name: `Small Box ${index + 1}`,
         image: `https://via.placeholder.com/150`,
@@ -52,7 +52,8 @@ export const TopicPage = () => {
                     <div className="text-box">
                         {/* Content goes here */}
                         <h2>Change to Topic Name Here</h2>
-                        <p>Change to Topic Description Here. The Image and Background Image also should take from Topic Data</p>
+                        <p>Change to Topic Description Here. The Image and Background Image also should take from Topic
+                            Data</p>
                     </div>
                 </div>
             </div>
@@ -63,7 +64,7 @@ export const TopicPage = () => {
                 <div className="small-box-container">
                     {visibleSmallBoxes.map((box) => (
                         <Link key={box.id} to={`/video/${box.id}`} className="small-box">
-                            <img src={box.image} alt={box.name} />
+                            <img src={box.image} alt={box.name}/>
                             <div className="small-box-content">
                                 <div className="small-box-name">{box.name}</div>
                                 <div className="percentage-text">{box.progress}%</div>
@@ -71,7 +72,7 @@ export const TopicPage = () => {
                             <div className="progress-bar">
                                 <div
                                     className="progress-bar-inner"
-                                    style={{ width: `${box.progress}%` }}
+                                    style={{width: `${box.progress}%`}}
                                 />
                             </div>
                         </Link>
