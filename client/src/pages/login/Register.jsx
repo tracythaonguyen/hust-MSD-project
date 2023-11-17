@@ -11,29 +11,37 @@ export const Register = () => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
 
     const handleRegister = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/register', {
+
+        let accountInformation ={
             username: username,
             password: password,
             email: email,
-            phone: phone
-        })
-            .then((response) => {
-                console.log(response);
-                if (response.data.status === 'error') {
-                    console.log("Failed to register");
-                } else {
-                    setTimeout(() => {
-                        console.log("Register successfully");
-                        window.location.href = '/login';
-                    }, 2500);
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+            user_role: 'learner',
+            first_name: firstName,
+            last_name: lastName,
+        }
+        console.log(accountInformation)
+
+        // axios.post('http://localhost:8000/create', accountInformation)
+        // .then((response) => {
+        //     console.log(response);
+        //     if(response.data.status === 'error'){
+        //         console.log("Failed to register");
+        //     }else{
+        //             setTimeout(() => {
+        //             console.log("Register successfully");
+        //             window.location.href = '/login';
+        //         }, 2500);
+        //     }
+        // })
+        // .catch((error) =>{
+        //     console.log(error);
+        // });
     }
 
     return (
@@ -66,41 +74,47 @@ export const Register = () => {
                         } required/>
                     </p>
 
-                    <p>
-                        <label>Password</label><br/>
-                        <input className='inputText' type="password" name="password" onChange={
-                            (e) => {
-                                setPassword(e.target.value);
-                            }
-                        } required/>
-                    </p>
-
-                    <p>
-                        <label>Email address</label><br/>
-                        <input className='inputText' type="email" name="email" onChange={
-                            (e) => {
-                                setEmail(e.target.value);
-                            }
-                        } required/>
-                    </p>
-                    <p>
-                        <label>Phone number</label><br/>
-                        <input className='inputText' type="phone" name="phone" onChange={
-                            (e) => {
-                                setPhone(e.target.value);
-                            }
-                        } required/>
-                    </p>
-
-                    <p>
-                        <input type="checkbox" name="checkbox" id="checkbox" required/>
-                        <span>I agree all statements in <a href="https://google.com" target="_blank"
-                                                           rel="noopener noreferrer">terms of service</a></span>.
-                    </p>
-                    <p>
-                        <button id="sub_btn" type="submit">Register</button>
-                    </p>
-                </form>
+                <p>
+                    <label>Password</label><br/>
+                    <input className='inputText' type="password" name="password" onChange={
+                        (e) => {
+                            setPassword(e.target.value);
+                        }
+                    } required />
+                </p>
+                
+                <p>
+                    <label>Email address</label><br/>
+                    <input className='inputText' type="email" name="email" onChange={
+                        (e) => {
+                            setEmail(e.target.value);
+                        }
+                    } required />
+                </p>
+                <p>
+                    <label>First Name</label><br/>
+                    <input className='inputText' type="firstName" name="firstName" onChange={
+                        (e) => {
+                            setFirstName(e.target.value);
+                        }
+                    } required />
+                </p>
+                <p>
+                    <label>Last Name</label><br/>
+                    <input className='inputText' type="lastName" name="lastName" onChange={
+                        (e) => {
+                            setLastName(e.target.value);
+                        }
+                    } required />
+                </p>
+                
+                <p>
+                    <input type="checkbox" name="checkbox" id="checkbox" required /> <span>I agree all statements in <a href="https://google.com" target="_blank" rel="noopener noreferrer">terms of service</a></span>.
+                </p>
+                <p>
+                    <button id="sub_btn" type="submit">Register</button>
+                </p>
+            </form>
             </div>
         </div>
     )
