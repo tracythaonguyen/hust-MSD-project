@@ -6,7 +6,6 @@ import playIcon from '../../assets/images/play_icon.png'
 import Footer from '../../components/Footer';
 import { useHistory } from "react-router-dom";
 
-
 export const Landing = () => {
     const history = useHistory();
 
