@@ -4,7 +4,12 @@ import Header from '../../assets/images/Header-landing.png'
 import logoIcon from '../../assets/images/logo.svg'
 import playIcon from '../../assets/images/play_icon.png'
 import Footer from '../../components/Footer';
+<<<<<<< HEAD
 import { useHistory } from "react-router-dom";
+=======
+import {Link} from 'react-router-dom'
+
+>>>>>>> df4ab667b13377195f304ac36aed85229d99ddba
 
 export const Landing = () => {
     const history = useHistory();
@@ -25,13 +30,22 @@ export const Landing = () => {
                     <img alt='' src={logoIcon} className='logo'></img>
                 </div>
                 <div className="header-right">
+<<<<<<< HEAD
                     <button onClick={login} className='login'>Login</button>
                     <button onClick={register} className='register'>Register</button>
+=======
+                    <Link to='/login'>
+                        <button className='login'>Login</button>
+                    </Link>
+                    <Link to='/register'>
+                        <button className='register'>Register</button>
+                    </Link>
+>>>>>>> df4ab667b13377195f304ac36aed85229d99ddba
                 </div>
 
                 <div className="header-body">
                     <div className="title">
-                        <span className='title-color' style={{ color: '#F48C06', marginRight: '10px' }}>Studying</span>
+                        <span className='title-color' style={{color: '#F48C06', marginRight: '10px'}}>Studying</span>
                         Online is now
                         <br></br> much easier
                     </div>
@@ -52,7 +66,7 @@ export const Landing = () => {
                     </div>
                 </div>
             </div>
-            
+
             <Footer></Footer>
         </div>
     )
