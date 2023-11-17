@@ -4,10 +4,20 @@ import Header from '../../assets/images/Header-landing.png'
 import logoIcon from '../../assets/images/logo.svg'
 import playIcon from '../../assets/images/play_icon.png'
 import Footer from '../../components/Footer';
-import {Link} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 
 export const Landing = () => {
+    const history = useHistory();
+
+    const login = () =>{
+        history.push("/login");
+    }
+
+    const register = () =>{
+        history.push("/register");
+    }
+
     return (
         <div className='landingContainer'>
             <div className="landingHeader">
@@ -34,7 +44,7 @@ export const Landing = () => {
                         TOTC is an interesting platform that will teach<br></br> you in more an interactive way
                     </div>
                     <div className="header-button">
-                        <button className="join-for-free">
+                        <button onClick={register} className="join-for-free">
                             Join for free
                         </button>
 

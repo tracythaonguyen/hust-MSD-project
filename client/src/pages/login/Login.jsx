@@ -18,10 +18,10 @@ export const Login = () => {
         //else,alert error
         //print form input
         e.preventDefault();
-        axios.post('http://localhost:8000/login', {
-                username: username,
-                password: password
-            },//with token
+        axios.post('http://localhost:8000/account/login', {
+            username: username,
+            password: password
+        },//with token
         )
             .then((response) => {
                 console.log(response);
