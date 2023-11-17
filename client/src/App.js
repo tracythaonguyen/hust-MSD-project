@@ -4,7 +4,9 @@ import Login from './pages/login/Login'
 import Register from './pages/login/Register'
 import HomePage from './pages/HomePage'
 import Landing from './pages/landing/Landing'
+import UserPage from './pages/user/UserPage'
 import './App.css'
+import TopicPage from "./pages/topic/TopicPage";
 
 export default function App() {
     const isLogin = localStorage.getItem('token');
@@ -28,6 +30,8 @@ export default function App() {
                     <ProtectedRoute2 path="/login" component={ Login } />
                     <ProtectedRoute2 path="/register" component={ Register } />
                     <ProtectedRoute path="/home" component={ HomePage } />
+                    <ProtectedRoute path="/user" component={ UserPage } />
+                    <ProtectedRoute path="/topic" component={ TopicPage } />
                 </Switch>
             </div>
         </Router>
