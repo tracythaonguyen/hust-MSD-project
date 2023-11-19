@@ -1,8 +1,8 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import {Link} from 'react-router-dom'
+import {useState} from 'react'
 import axios from 'axios';
-import { toast } from 'react-hot-toast';
+import {toast} from 'react-hot-toast';
 import login from '../../assets/images/login.png'
 import './login.css'
 
@@ -12,7 +12,6 @@ export const Login = () => {
     const [password, setPassword] = useState('');
 
 
-
     const handleLogin = (e) => {
         //connect to api login,localhost:3000/login
         //if success,redirect to home page
@@ -20,9 +19,9 @@ export const Login = () => {
         //print form input
         e.preventDefault();
         axios.post('http://localhost:8000/login', {
-            username: username,
-            password: password
-        },//with token
+                username: username,
+                password: password
+            },//with token
         )
             .then((response) => {
                 console.log(response);
@@ -36,7 +35,7 @@ export const Login = () => {
                     window.location.href = '/home';
                 }, 1500);
             })
-            .catch((error) => {
+            .catch(() => {
                 toast.error("Failed to login");
                 alert("Failed to login");
                 console.log("Failed to login");
@@ -46,7 +45,7 @@ export const Login = () => {
     return (
         <div className="loginContainer">
             <div className="login-left">
-                <img src={login}></img>
+                <img src={login} alt={"Login Image"}></img>
                 <div className="img-text">
                     <h2>We take your English higher</h2>
                     <p>EICT is simply!</p>
@@ -61,29 +60,30 @@ export const Login = () => {
                         <div className="register">Register</div>
                     </Link>
                 </div>
-                <p className='desc'>EICT is a learning-platform for student to sutdy English effectively.<br></br> Login to join our community</p>
+                <p className='desc'>EICT is a learning-platform for student to study English effectively.<br></br> Login
+                    to join our community</p>
                 <form onSubmit={handleLogin}>
                     <p>
-                        <label>Username</label><br />
+                        <label>Username</label><br/>
                         <input className='inputText' type="text" name="username" required onChange={
                             (e) => {
                                 setUsername(e.target.value);
                             }
-                        } />
+                        }/>
                     </p>
                     <p>
                         <label>Password</label>
-                        <br />
+                        <br/>
                         <input className='inputText' type="password" name="password" required onChange={
                             (e) => {
                                 setPassword(e.target.value);
                             }
-                        } />
+                        }/>
                     </p>
                     <div className="form-bottom">
                         <div className="">
-                            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" />
-                            <label for="vehicle1" className='remember'> Remember me</label><br></br>
+                            <input type="checkbox"/>
+                            <label className='remember' style={{marginLeft: "10px"}}>Remember me</label><br></br>
 
                         </div>
                         <div className="forgot-pwd"> Forgot Password?</div>

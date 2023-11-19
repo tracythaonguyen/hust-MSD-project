@@ -2,12 +2,11 @@ import React from "react";
 import logoIcon from "../assets/images/logo2.png";
 import avatar from "../assets/images/avatar.png";
 import './header.css'
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 
 
 export const Header = () => {
     const name = "Linh";
-
     return (
         <div className="header">
             <Link to="/">
@@ -29,10 +28,10 @@ export const Header = () => {
                     <Link to='/'>
 
                         <div className="avatar">
-                            <img src={avatar}></img>
+                            <img src={avatar} alt={"Avatar"}></img>
                         </div>
                     </Link>
-                    <div className="name"><span style={{ color: "#5B5B5B" }}> Hi,</span> {name}</div>
+                    <div className="name"><span style={{color: "#5B5B5B"}}> Hi,</span> {name}</div>
                 </div>
             </div>
         </div>
