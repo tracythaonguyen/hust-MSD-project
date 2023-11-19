@@ -1,5 +1,4 @@
 import React from "react";
-import footerBg from "../assets/images/Footer.png";
 import logo from "../assets/images/logo.svg";
 
 import './footer.css'
