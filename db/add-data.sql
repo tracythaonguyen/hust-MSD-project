@@ -54,15 +54,16 @@ VALUES
 (3, 2),
 (9, 2);
 
-INSERT INTO history (learner_id, video_id)
+INSERT INTO progress (learner_id, video_id, highest_score)
 VALUES
-(2, 1),
-(4, 1),
-(2, 2);
+(2, 1, 30),
+(4, 1, 10);
 
-INSERT INTO progress (learner_id, video_id, track_id, score)
+INSERT INTO history (learner_id, video_id, track_id, track_score)
 VALUES
-(2, 1, 2, 20),
+(2, 1, 1, 10),
+(2, 1, 2, 10),
+(2, 1, 3, 10),
 (4, 1, 1, 10);
 
 INSERT INTO favorite (learner_id, video_id)
@@ -70,3 +71,8 @@ VALUES
 (2, 1),
 (3, 1),
 (2, 2);
+
+INSERT INTO CPA (learner_id, total_score)
+VALUES
+(2, 60),
+(4, 20);
