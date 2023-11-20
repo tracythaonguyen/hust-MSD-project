@@ -54,8 +54,8 @@ CREATE TABLE history (
   learner_id INT REFERENCES learner(learner_id),
   video_id INT,
   track_id INT,
-  track_score INT CHECK (track_score >= 0 AND track_score <= 100),
-  completed BOOLEAN,
+  -- track_score INT CHECK (track_score >= 0 AND track_score <= 100),
+  completed INT CHECK (completed >= 0 AND completed <= 1),
   FOREIGN KEY (video_id, track_id) REFERENCES track(video_id, track_id)
 );
 
@@ -64,10 +64,8 @@ CREATE TABLE progress (
   progress_id SERIAL PRIMARY KEY,
   learner_id INT REFERENCES learner(learner_id),
   video_id INT,
-  highest_score INT CHECK (highest_score >= 0 AND highest_score <= 100)
+  highest_score INT
 );
-
-
 
 CREATE TABLE favorite (
   favorite_id SERIAL PRIMARY KEY,
