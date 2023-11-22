@@ -1,0 +1,46 @@
+/*Top content*/
+.top-content {
+    background-image: url("../assets/images/banner_home.png");
+    width: 100vw;
+    height: 326px;
+    margin-bottom: 150px;
+    justify-content: center;
+
+}
+
+.search-group {
+    width: 80vw;
+}
+
+.search-box {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    height: 50px;
+    width: 80vw;
+}
+
+/*Advertisement content*/
+.advertisement {
+    background-color: #9DCCFF;
+    opacity: 0.2;
+    width: 100vw;
+    height: 600px;
+    margin-bottom: 150px;
+}
+
+/* Topic content */
+
+.topic-container {
+    background-color: #9DCCFF;
+    opacity: 0.2;
+    width: 100vw;
+    height: 1200px;
+    margin-bottom: 150px;
+}
+
+/* Recent videos */
+
+.recent-videos {
+    width: 100vw;
+    height: 500px;
+}
