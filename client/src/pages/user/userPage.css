@@ -1,0 +1,13 @@
+.userContainer{
+    display: flex;
+}
+
+.userContainer  .tasksBar{
+    flex: 1;
+        display: flex;
+        flex-direction: column;
+}
+
+.userContent{
+    flex: 4;
+}
