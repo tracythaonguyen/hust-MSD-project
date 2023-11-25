@@ -8,8 +8,50 @@
   flex-direction: column;
 }
 
-
-
 .userContent {
   flex: 4;
+}
+
+/* Task bar */
+.task {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 12px;
+  border-radius: 12px;
+  color: #252641;
+  font-family: Poppins;
+  font-size: 16px;
+  font-weight: 400;
+  margin: 10px;
+  border: none;
+}
+.task-1{
+background: #49BBBD;
+color: #fff;
+}
+.task-2{
+    background: rgba(244, 140, 6, 0.30);
+}
+.task-3{
+    background: rgba(157, 204, 255, 0.30);    ;
+}
+.task-4{
+    background: rgba(238, 100, 91, 0.30);    ;
+}
+.task img{
+    margin-right: 10px;
+    width: 20px;
+    margin-left: 8px;
+}
+.task:hover{
+    cursor: pointer;
+    background: #c0e3e4;
+    color: #fff;
+}
+button:active{
+   border: none;
+}
+button:focus{
+    outline: none;
 }

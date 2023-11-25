@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import "./userPage.css";
 import CameraIcon from "../../assets/images/add-camera_icon.png";
 import MarkedBookIcon from "../../assets/images/marked-book_icon.png";
+import MarkedBookWhiteIcon from "../../assets/images/marked-book-white_icon.png";
 
 export const UserPage = () => {
   const user = {
@@ -21,8 +22,8 @@ export const UserPage = () => {
       <Header></Header>
       <div className="userContainer">
         <div className="tasksBar">
-          <button className="task">
-            <img alt="book icon" src={MarkedBookIcon}></img>
+          <button className="task task-1">
+            <img alt="book icon" src={MarkedBookWhiteIcon}></img>
             <div className="taskText">Information Page</div>
           </button>
           <button className="task task-2">
