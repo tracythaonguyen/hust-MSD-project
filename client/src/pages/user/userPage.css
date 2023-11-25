@@ -1,13 +1,15 @@
-.userContainer{
-    display: flex;
+.userContainer {
+  display: flex;
 }
 
-.userContainer  .tasksBar{
-    flex: 1;
-        display: flex;
-        flex-direction: column;
+.userContainer .tasksBar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.userContent{
-    flex: 4;
+
+
+.userContent {
+  flex: 4;
 }
