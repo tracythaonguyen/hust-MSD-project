@@ -72,12 +72,14 @@ VALUES
 (9, 2);
 
 -- Insert data into the history table
-INSERT INTO history (learner_id, video_id, track_id)
+INSERT INTO history (learner_id, video_id, track_id, completed)
 VALUES
-(2, 1, 1),
-(2, 1, 2),
-(2, 1, 3),
-(4, 1, 1);
+(2, 1, 1,0),
+(2, 1, 2,0),
+(2, 1, 3,0),
+(4, 1, 1,1),
+(4, 1, 2,1),
+(4, 1, 3,0);
 
 -- Insert data into the progress table
 INSERT INTO progress (learner_id, video_id, highest_score)
