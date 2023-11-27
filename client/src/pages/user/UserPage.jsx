@@ -43,8 +43,6 @@ export const UserPage = () => {
         <div className="userContent">
           <div className="contentHeader">
             <button className="editInfo">Edit Information</button>
-          </div>
-          <div className="contentBody">
             <div className="avatarContainer">
               <img alt="avatar" src={user.avatar} className="avatar"></img>
               <img
@@ -54,15 +52,20 @@ export const UserPage = () => {
               ></img>
               <p className="name">{user.name}</p>
             </div>
+          </div>
 
+          <div className="contentBody">
             <div className="infoContainer">
               <div className="infos">
+                <div className="info">
                 <label className="infoLabel">Full Name</label>
                 <input
                   placeholder={user.name}
                   type="text"
                   className="inputText"
                 ></input>
+                </div>
+                
               </div>
               <div className="infos">
                 <div className="info">
@@ -79,12 +82,15 @@ export const UserPage = () => {
                 </div>
               </div>
               <div className="infos">
+                <div className="info">
                 <label className="infoLabel">Location</label>
                 <input
                   placeholder={user.location}
                   type="text"
                   className="inputText"
                 ></input>
+                </div>
+                
               </div>
 
               <div className="infos">
@@ -105,6 +111,8 @@ export const UserPage = () => {
                   ></input>
                 </div>
               </div>
+
+              <button className="saveBtn">Save</button>
             </div>
           </div>
         </div>
