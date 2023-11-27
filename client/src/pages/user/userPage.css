@@ -13,7 +13,7 @@
 }
 
 /* Task bar */
-.task {
+.userContainer .task {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -26,32 +26,148 @@
   margin: 10px;
   border: none;
 }
-.task-1{
-background: #49BBBD;
-color: #fff;
+.userContainer .task-1 {
+  background: #49bbbd;
+  color: #fff;
 }
-.task-2{
-    background: rgba(244, 140, 6, 0.30);
+.userContainer .task-2 {
+  background: rgba(244, 140, 6, 0.3);
 }
-.task-3{
-    background: rgba(157, 204, 255, 0.30);    ;
+.userContainer .task-3 {
+  background: rgba(157, 204, 255, 0.3);
 }
-.task-4{
-    background: rgba(238, 100, 91, 0.30);    ;
+.userContainer .task-4 {
+  background: rgba(238, 100, 91, 0.3);
 }
-.task img{
-    margin-right: 10px;
-    width: 20px;
-    margin-left: 8px;
+.userContainer .task img {
+  margin-right: 10px;
+  width: 20px;
+  margin-left: 8px;
 }
-.task:hover{
-    cursor: pointer;
-    background: #c0e3e4;
-    color: #fff;
+.userContainer .task:hover {
+  cursor: pointer;
+  background: #c0e3e4;
+  color: #fff;
 }
-button:active{
-   border: none;
+.userContainer .task:active {
+  border: none;
+  color: #252641;
 }
-button:focus{
-    outline: none;
+.userContainer button:focus {
+  outline: none;
+}
+
+/* Content, user  page on the right hand side */
+.contentHeader {
+  background: #49bbbd;
+  height: 143px;
+  margin-top: 10px;
+}
+
+.contentHeader .editInfo {
+  margin: 20px;
+}
+.avatarContainer .avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin-left: 42%;
+  border: 10px solid #fff;
+}
+
+.contentHeader .editInfo {
+  background: #e2f0ff;
+  color: #3e3e3e;
+  font-family: Poppins;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border: none;
+  border-radius: 7px;
+}
+.contentHeader .editInfo:hover {
+  cursor: pointer;
+  background: #fff;
+  color: #49bbbd;
+}
+.contentHeader .editInfo:active {
+  color: #2d3636;
+}
+.avatarContainer .cameraIcon {
+  width: 35px;
+  height: 40px;
+  margin-left: -50px;
+  margin-top: 90px;
+  border-radius: 50%;
+}
+
+.avatarContainer .cameraIcon:hover {
+  cursor: pointer;
+}
+.avatarContainer .name {
+  color: #252641;
+
+  text-align: center;
+  font-family: Poppins;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+/* User info */
+.userContainer .contentBody {
+  background: rgba(157, 204, 255, 0.2);
+  /* text-align: center; */
+  padding: 170px 40px 70px 100px;
+}
+
+.userContainer .infos {
+  color: #5b5b5b;
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+  display: flex;
+  letter-spacing: 0.5px;
+}
+
+.userContainer .info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-right: 30px;
+}
+.userContainer input {
+  width: 100%;
+  height: 45px;
+  border-radius: 8px;
+  border: 1px solid #d9d9d9;
+  background: rgba(217, 217, 217, 0.3);
+  margin-bottom: 10px;
+  padding-left: 15px;
+  margin-right: 10px;
+}
+
+.userContainer .info input:focus {
+  outline: none;
+  border: 1px solid #49bbbd;
+}
+
+.userContainer .saveBtn {
+  margin-left: 45%;
+  padding: 8px 14px;
+  margin-top: 50px;
+  background: #49bbbd;
+  border: none;
+  border-radius: 4px;
+  color: #3e3e3e;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.userContainer .saveBtn:hover {
+  cursor: pointer;
+  color: #ffffff97;
+  background: rgba(73, 187, 189, 0.8);
 }
