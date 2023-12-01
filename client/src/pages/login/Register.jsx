@@ -10,7 +10,7 @@ export const Register = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
+    // const [phone, setPhone] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
 
@@ -27,21 +27,21 @@ export const Register = () => {
         }
         console.log(accountInformation)
 
-        // axios.post('http://localhost:8000/create', accountInformation)
-        // .then((response) => {
-        //     console.log(response);
-        //     if(response.data.status === 'error'){
-        //         console.log("Failed to register");
-        //     }else{
-        //             setTimeout(() => {
-        //             console.log("Register successfully");
-        //             window.location.href = '/login';
-        //         }, 2500);
-        //     }
-        // })
-        // .catch((error) =>{
-        //     console.log(error);
-        // });
+        axios.post('http://localhost:8000/account/create', accountInformation)
+        .then((response) => {
+            console.log(response);
+            if(response.data.status === 'error'){
+                console.log("Failed to register");
+            }else{
+                    setTimeout(() => {
+                    console.log("Register successfully");
+                    window.location.href = '/login';
+                }, 2500);
+            }
+        })
+        .catch((error) =>{
+            console.log(error);
+        });
     }
 
     return (
