@@ -9,6 +9,9 @@ router.get('/', tagController.getAllTags)
 // search tag by name
 router.get('/search', tagController.searchTagByName)
 
+// search tag by id
+router.get('/:id', tagController.getTagById)
+
 // delete an tag by id
 router.delete('/:id', tagController.deleteTag)
 

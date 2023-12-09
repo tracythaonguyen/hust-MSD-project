@@ -106,10 +106,27 @@ async function searchTagByName(req, res) {
   }
 }
 
+async function getTagById(req, res) {
+  try {
+    const { id } = req.params
+    const tag = await pool.query('SELECT * FROM tag WHERE tag_id = $1', [id])
+    if (!tag.rows.length) {
+      return res.status(500).json({ message: 'Tag not found' })
+    }
+    return res.status(200).json({ message: 'success', data: tag.rows[0] })
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({
+      message: error.message,
+    })
+  }
+}
+
 export default {
   getAllTags,
   deleteTag,
   updateTag,
   createTag,
   searchTagByName,
+  getTagById,
 }
