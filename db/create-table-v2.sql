@@ -23,7 +23,7 @@ CREATE TABLE account (
 
 CREATE TABLE learner (
   learner_id SERIAL PRIMARY KEY,
-  age INT,
+  dob DATE,
   occupation VARCHAR(100),
   account_id INT REFERENCES account(account_id)
 );

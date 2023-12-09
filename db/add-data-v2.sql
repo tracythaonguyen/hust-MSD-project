@@ -18,12 +18,12 @@ VALUES
 ('alex_brown', 'alexbrownpass', 'alex.brown@example.com', 'learner', 'Alex', 'Brown');
 
 -- Insert data into the learner table
-INSERT INTO learner (age, occupation, account_id)
+INSERT INTO learner (dob, occupation, account_id)
 VALUES
-(25, 'Software Developer', 2),
-(22, 'Graphic Designer', 3),
-(28, 'Data Analyst', 4),
-(30, 'Researcher', 5);
+('1995-01-15', 'Software Developer', 2),
+('1998-06-20', 'Graphic Designer', 3),
+('1990-03-30', 'Data Analyst', 4),
+('2000-07-25', 'Researcher', 5);
 
 -- Insert data into the category table
 INSERT INTO category (category_name)
