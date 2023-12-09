@@ -108,10 +108,30 @@ async function searchCategoryByName(req, res) {
   }
 }
 
+async function getCategoryById(req, res) {
+  try {
+    const { id } = req.params
+    const category = await pool.query(
+      'SELECT * FROM category WHERE category_id = $1',
+      [id],
+    )
+    if (!category.rows.length) {
+      return res.status(500).json({ message: 'Category not found' })
+    }
+    return res.status(200).json({ message: 'success', data: category.rows[0] })
+  } catch (error) {
+    console.log(error.message)
+    return res.status(500).json({
+      message: error.message,
+    })
+  }
+}
+
 export default {
   getAllCategories,
   deleteCategory,
   updateCategory,
   createCategory,
   searchCategoryByName,
+  getCategoryById,
 }

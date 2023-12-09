@@ -9,6 +9,9 @@ router.get('/', categoryController.getAllCategories)
 // search category by name
 router.get('/search', categoryController.searchCategoryByName)
 
+// get category by id
+router.get('/:id', categoryController.getCategoryById)
+
 // delete an category by id
 router.delete('/:id', categoryController.deleteCategory)
 
