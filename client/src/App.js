@@ -5,6 +5,7 @@ import Register from './pages/login/Register'
 import HomePage from './pages/HomePage.jsx'
 import Landing from './pages/landing/Landing'
 import UserPage from './pages/user/UserPage'
+import VideoPage from './pages/video/VideoPage.jsx'
 import './App.css'
 import TopicPage from "./pages/topic/TopicPage";
 
@@ -32,6 +33,7 @@ export default function App() {
                     <ProtectedRoute path="/home" component={ HomePage } />
                     <ProtectedRoute path="/user" component={ UserPage } />
                     <ProtectedRoute path="/topic" component={ TopicPage } />
+                    <Route path="/video" component={ VideoPage } />
                 </Switch>
             </div>
         </Router>

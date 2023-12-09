@@ -1,0 +1,80 @@
+.videoPageContainer {
+  display: flex;
+}
+
+.videoPageContainer .videoPageRight {
+  flex: 3;
+}
+
+.videoPageContainer .videoPageLeft {
+  flex: 1;
+  margin: 30px ;
+}
+
+/* Video page left */
+.videoPageContainer .backButton {
+  background: #49bbbd;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  border: none;
+  font-size: 19px;
+  margin-bottom: 50px;
+}
+
+
+/* Task bar */
+.videoPageContainer .tasksBar {
+  display: flex;
+  flex-direction: column;
+
+  /* justify-content: space-between; */
+}
+
+.videoPageContainer .task {
+  display: flex;
+  flex-direction: row;
+  padding: 12px;
+  border-radius: 12px;
+  color: #252641;
+  font-family: Poppins;
+  font-size: 15px;
+  font-weight: 400;
+  margin: 10px 0px;
+  border: none;
+  background: rgba(226, 240, 255, 1);
+}
+
+.videoPageContainer .task:hover {
+  cursor: pointer;
+  background: #c0e3e4;
+  color: #fff;
+}
+.videoPageContainer .task:active {
+  border: none;
+  color: #252641;
+}
+.videoPageContainer button:focus {
+  outline: none;
+}
+
+.videoPageContainer .task img {
+  margin-right: 12px;
+  width: 20px;
+  margin-left: 8px;
+  margin-top: 2px;
+}
+
+.videoPageContainer .active {
+  background: #34a7ab;
+  color: #fff;
+}
+
+.videoPageContainer .task .taskTime {
+  color: #252641;
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: auto;
+  margin-top: 3px;
+}
