@@ -5,15 +5,18 @@ import MarkedBookIcon from "../../assets/images/marked-book_icon.png";
 import MarkedBookWhiteIcon from "../../assets/images/marked-book-white_icon.png";
 import IconClock from "../../assets/images/clock.png";
 import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
+import { Link } from 'react-router-dom';
 
 export default function VideoPage() {
   return (
     <div className="videoPage">
       <div className="videoPageContainer">
         <div className="videoPageLeft">
+          <Link to='/topic'>
           <button className="backButton">
             <FontAwesomeIcon icon={faArrowLeftLong} />
           </button>
+          </Link>
 
           <h4>Tracks</h4>
         <div className="tasksBar">
@@ -71,13 +74,13 @@ export default function VideoPage() {
                 </div>
                 <div className="videoTime">
                   <img alt="clock icon" src={IconClock}></img>
+                  <p>1 hour</p>
                 </div>
-                <p>1 hour</p>
             </div>
 
             <div className="videoPageInfo">
                 <div className="video">
-                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/4KqjNiw2Zq4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+                    <iframe width="100%" src="https://www.youtube.com/embed/wtOyw8JjYHY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
                 </div>
 
                 <div className="userScript">
