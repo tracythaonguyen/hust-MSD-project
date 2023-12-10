@@ -8,7 +8,7 @@
 
 .videoPageContainer .videoPageLeft {
   flex: 1;
-  margin: 30px ;
+  margin: 30px;
 }
 
 /* Video page left */
@@ -21,7 +21,6 @@
   font-size: 19px;
   margin-bottom: 50px;
 }
-
 
 /* Task bar */
 .videoPageContainer .tasksBar {
@@ -77,4 +76,46 @@
   font-weight: 400;
   margin-left: auto;
   margin-top: 3px;
+}
+
+/* Video Page right */
+.videoPageTop {
+  background: #49bbbd;
+  height: 150px;
+}
+
+.videoPageContainer .videoPageTitle {
+  color: #fff;
+  font-family: Poppins;
+  font-size: 37px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  padding: 30px;
+}
+
+.videoPageContainer .videoTime{
+  color: #fff;
+  font-size: 15px;
+  display: flex;
+  padding-left: 30px;
+  /* align-items: center; */
+}
+.videoPageContainer .videoTime img{
+  width: 17px;
+  height: 17px;
+  margin: 2px 4px;
+}
+
+
+/* video content info */
+
+.videoPageContainer .video{
+  width: 100%;
+  margin-top: 20px;
+}
+
+.videoPageContainer .video iframe{
+  border-radius: 20px;
+  height:550px;
 }
