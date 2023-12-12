@@ -7,6 +7,7 @@ import testRouter from './routes/test.router.js'
 import categoryRouter from './routes/category.router.js'
 import tagRouter from './routes/tag.router.js'
 import learnerRouter from './routes/learner.router.js'
+import videoRouter from './routes/video.router.js'
 
 dotenv.config()
 const app = express()
@@ -22,6 +23,7 @@ app.use('/test', testRouter)
 app.use('/category', categoryRouter)
 app.use('/tag', tagRouter)
 app.use('/learner', learnerRouter)
+app.use('/video', videoRouter)
 
 app.listen(port, () => {
   console.log('Backend is running on the port: ' + port)
