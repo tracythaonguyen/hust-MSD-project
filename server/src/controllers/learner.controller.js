@@ -33,7 +33,27 @@ async function deleteLearner(req, res) {
   }
 }
 
+async function createLearner(req, res) {
+  try {
+    const { age, occupation, account_id } = req.body
+    if (!account_id) {
+      return res.status(400).json({ message: 'Account id is required' })
+    }
+    const learner = await pool.query(
+      'INSERT INTO learner (age, occupation, account_id) VALUES ($1, $2, $3) RETURNING *',
+      [age, occupation, account_id],
+    )
+    return res
+      .status(200)
+      .json({ message: 'Learner was created!', data: learner.rows[0] })
+  } catch (error) {
+    console.error(error.message)
+    return res.status(500).json({ message: error.message })
+  }
+}
+
 export default {
   getAllLearners,
   deleteLearner,
+  createLearner,
 }

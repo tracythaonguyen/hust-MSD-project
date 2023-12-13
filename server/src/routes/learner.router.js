@@ -9,4 +9,7 @@ router.get('/', learnerController.getAllLearners)
 // delete an learner by id
 router.delete('/:id', learnerController.deleteLearner)
 
+// create an learner
+router.post('/create', learnerController.createLearner)
+
 export default router
