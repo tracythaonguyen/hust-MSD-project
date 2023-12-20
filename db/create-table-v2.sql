@@ -43,7 +43,7 @@ CREATE TABLE video (
   source_link TEXT NOT NULL,
   description TEXT NOT NULL,
   view INT,
-  upload_date DATE
+  upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE track (
@@ -82,7 +82,7 @@ CREATE TABLE progress (
   progress_id SERIAL PRIMARY KEY,
   learner_id INT REFERENCES learner(learner_id),
   video_id INT,
-  highest_score INT,
+  highest_score INT DEFAULT 0,
   click_time TIMESTAMP 
 );
 
@@ -97,5 +97,5 @@ CREATE TABLE feedback(
   learner_id INT REFERENCES learner(learner_id),
   video_id INT REFERENCES video(video_id),
   content VARCHAR(500) NOT NULL,
-  feedback_date DATE
+  feedback_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
