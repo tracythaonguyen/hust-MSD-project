@@ -176,45 +176,45 @@ h2 {
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0px 18.83px 47.08px #2f327d1a;
-    height: 100vh;
-    width: 42vw;
+    /* height: 100vh; */
+    width: 39vw;
 }
 
-.blog-image {
+.blog .blog-image {
     border-radius: 20px;
-    width: 39vw;
-    height: 55vh;
+    width: 33vw;
+    height: 48vh;
     object-fit: cover;
     margin-top: 30px;
     margin-bottom: 10px;
 }
 
-h3 {
+.blog h3 {
     color: #252641;
     font-size: 26px;
     font-weight: 500;
     letter-spacing: 0;
     line-height: 40px;
-    width: 600px;
+    /* width: 600px; */
     text-align: left;
 }
 
-.p3 {
+.blog .p3 {
     color: #696983;
     font-size: 20px;
     font-weight: 400;
     letter-spacing: 0.4px;
     line-height: 36px;
-    width: 600px;
+    /* width: 600px; */
     text-align: left;
 }
 
-.blog-footer {
+.blog .blog-footer {
     display: flex;
     justify-content: space-between;
 }
 
-.read-more {
+.blog .read-more {
     color: #696983;
     font-size: 20px;
     font-weight: 400;
@@ -223,7 +223,7 @@ h3 {
     text-decoration: underline;
 }
 
-.view-count {
+.blog .view-count {
     color: #696983;
     font-size: 20px;
     font-weight: 400;
@@ -231,14 +231,14 @@ h3 {
     line-height: 36px;
 }
 
-.nav {
+.middle-content .nav {
     margin-top: 50px;
     display: flex;
     justify-content: flex-end;
     font-size: 40;
 }
 
-.nav-btn {
+.middle-content .nav-btn {
     width: 40px;
     height: 40px;
     border-radius: 5px;
@@ -246,11 +246,28 @@ h3 {
     color: #FFFFFF;
     text-align: center;
     margin: 5px;
+    border: none;
+}
+.middle-content .nav-btn:focus {
+    border: none;
+    outline: none;
+}
+.middle-content .nav-btn:active {
+    background-color: #69d5d6;
+}
+.middle-content .nav-btn:hover {
+    border: none;
+}
+.middle-content .nav-btn:visited {
+    border: none;
 }
 
-.nav-btn .btn-fail {
+
+.middle-content .nav-btn .btn-fail {
     background-color: #99d7dd;
+    border: none;
 }
+
 
 /* Recent videos */
 
