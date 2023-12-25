@@ -101,7 +101,7 @@ export default function HomePage() {
                             <div className='group-blog'>
                                 {currentVideos.map((video) => (
                                     <div className='blog'>
-                                        <img alt='img' src={imgUrl} className='blog-image' />
+                                        <img alt='img' src="https://elearningindustry.com/wp-content/uploads/2015/10/6-convincing-reasons-take-elearning-course.jpg" className='blog-image' />
                                         <h3>{video.video_title}</h3>
                                         <p className='p3'>{video.description}</p>
                                         <div className='blog-footer'>
