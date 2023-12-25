@@ -24,4 +24,6 @@ router.post('/create', videoController.createVideoWithCategoryandTag)
 // get all tags of a video
 router.get('/getTags/:id', videoController.getAllTagsOfVideo)
 
+router.get('/getRecentLearningVideo/:id', videoController.getRecentLearningVideo)
+
 export default router
