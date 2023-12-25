@@ -57,6 +57,21 @@ export default function HomePage() {
         }
     };
 
+    //get recent learning videos
+    const [recentVideos, setRecentVideos] = useState([]);
+    useEffect(() => {
+        const getRecentVideos = async () => {
+            try {
+                const res = await axios.get("http://localhost:8000/video/getRecentLearningVideo/2");
+                setRecentVideos(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getRecentVideos();
+    }, []);
+
+
     return (
         <div className="text-center" style={HeaderStyle}>
             {/* {isLogin == null ? ( */}
@@ -101,7 +116,7 @@ export default function HomePage() {
                             <div className='group-blog'>
                                 {currentVideos.map((video) => (
                                     <div className='blog'>
-                                        <img alt='img' src="https://elearningindustry.com/wp-content/uploads/2015/10/6-convincing-reasons-take-elearning-course.jpg" className='blog-image' />
+                                        <img alt='img' src={video.link_img} className='blog-image' />
                                         <h3>{video.video_title}</h3>
                                         <p className='p3'>{video.description}</p>
                                         <div className='blog-footer'>
@@ -112,28 +127,6 @@ export default function HomePage() {
                                         </div>
                                     </div>
                                 ))}
-                                {/* <div className='blog'>
-                                    <img alt='img' src={imgUrl} className='blog-image' />
-                                    <h3>Class adds $30 million to its balance sheet for a Zoom-friendly edtech solution</h3>
-                                    <p className='p3'>Class, launched less than a year ago by Blackboard co-founder Michael Chasen, integrates exclusively...</p>
-                                    <div className='blog-footer'>
-                                        <p className='read-more'>Read more</p>
-                                        <div className='view-count'>
-                                            200,000
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className='blog'>
-                                    <img alt='img' src={imgUrl} className='blog-image' />
-                                    <h3>Class adds $30 million to its balance sheet for a Zoom-friendly edtech solution</h3>
-                                    <p className='p3'>Class, launched less than a year ago by Blackboard co-founder Michael Chasen, integrates exclusively...</p>
-                                    <div className='blog-footer'>
-                                        <p className='read-more'>Read more</p>
-                                        <div className='view-count'>
-                                            200,000
-                                        </div>
-                                    </div>
-                                </div> */}
                             </div>
                             <div className='nav'>
                                 <button className='nav-btn btn-fail' onClick={handlePrevPage}> &lt; </button>
@@ -147,42 +140,18 @@ export default function HomePage() {
                             </div>
 
                             <div className='video-group'>
-                                <div className='video'>
-                                    <img alt='img' src={imgUrl} className='video-image' />
-                                    <div className='video-info'>
-                                        <p className='topic-name'>Design</p>
-                                        <p className='time'>3h</p>
+                                {recentVideos.slice(0,4).map((video) => (
+                                    <div className='video'>
+                                        <img alt='img' src={video.link_img} className='video-image' />
+                                        <div className='video-info'>
+                                            <p className='topic-name'>{video.topic}</p>
+                                            <p className='time'>{video.time}</p>
+                                        </div>
+                                        <h4>{video.video_title}</h4>
+                                        <p className='p4'>{video.description}</p>
                                     </div>
-                                    <h4>AWS Certified solutions Architect</h4>
-                                    <p className='p4'>Lorem ipsum dolor sit amet, consectetur adipising elit, sed do eiusmod tempor</p>
-                                </div>
-                                <div className='video'>
-                                    <img alt='img' src={imgUrl} className='video-image' />
-                                    <div className='video-info'>
-                                        <p className='topic-name'>Design</p>
-                                        <p className='time'>3h</p>
-                                    </div>
-                                    <h4>AWS Certified solutions Architect</h4>
-                                    <p className='p4'>Lorem ipsum dolor sit amet, consectetur adipising elit, sed do eiusmod tempor</p>
-                                </div>
-                                <div className='video'>
-                                    <img alt='img' src={imgUrl} className='video-image' />
-                                    <div className='video-info'>
-                                        <p className='topic-name'>Design</p>
-                                        <p className='time'>3h</p>
-                                    </div>
-                                    <h4>AWS Certified solutions Architect</h4>
-                                    <p className='p4'>Lorem ipsum dolor sit amet, consectetur adipising elit, sed do eiusmod tempor</p>
-                                </div>
-                                <div className='video'>
-                                    <img alt='img' src={imgUrl} className='video-image' />
-                                    <div className='video-info'>
-                                        <p className='topic-name'>Design</p>
-                                        <p className='time'>3h</p>
-                                    </div>
-                                    <h4>AWS Certified solutions Architect</h4>
-                                    <p className='p4'>Lorem ipsum dolor sit amet, consectetur adipising elit, sed do eiusmod tempor</p>
-                                </div>
+                                ))}
+        
                             </div>
                         </div>
                     </div>
