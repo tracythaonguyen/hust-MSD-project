@@ -42,7 +42,8 @@ INSERT INTO video(video_title, category_id, level, source_link, description, lin
 VALUES
 ('Perry the Platypus plumber', 8, 'Easy', 'https://www.youtube.com/watch?v=nPz-OXEVafM', 'Clip from the Phineas and Ferb episode The Lemonade Stand', 'https://elearningindustry.com/wp-content/uploads/2015/10/6-convincing-reasons-take-elearning-course.jpg'),
 ('Brooklyn Nine-Nine',1,'Medium','https://www.youtube.com/watch?v=LUE48DT8MyY', 'A short conversation video','https://www.icajobguarantee.com/blog/wp-content/uploads/2020/09/WhatsApp-Image-2020-09-22-at-13.46.26-768x512.jpeg' ),
-('1 Minute Microwave CHOCOLATE CHIP COOKIE', 5, 'Medium', 'https://www.youtube.com/watch?v=Z6a6x0tH_pU', 'Easy 1 minute Chocolate Chip Cookies Recipe ! Microwave Chocolate Chip Cookie that tastes amazing!', 'https://ksg.keltron.in/common/renderImage?fileName=22MAR2019%2F1553235669.jpg');
+('1 Minute Microwave CHOCOLATE CHIP COOKIE', 5, 'Medium', 'https://www.youtube.com/watch?v=Z6a6x0tH_pU', 'Easy 1 minute Chocolate Chip Cookies Recipe ! Microwave Chocolate Chip Cookie that tastes amazing!', 'https://ksg.keltron.in/common/renderImage?fileName=22MAR2019%2F1553235669.jpg'),
+('Finding Nemo', 1,'Easy', 'https://www.youtube.com/watch?v=5SfQhkMsUFk', ' This short video will introduce you to a segment of a popular movie. Learn new words, phrases, and expressions of the English language. ','https://cdn.akamai.steamstatic.com/steam/apps/331450/capsule_616x353.jpg?t=1571778040');
 
 -- Insert data into the track table
 INSERT INTO track (track_id, video_id, start_time, end_time, transcript)
@@ -111,6 +112,7 @@ VALUES
 (2, 2, 30, '2023-12-21 20:30:45'),
 (2, 3, 30, '2023-12-21 19:30:45'),
 (2, 3, 30, '2023-12-23 15:30:45'),
+(2, 4, 30, '2023-12-23 20:30:45'),
 (4, 1, 10, '2023-12-21 08:05:12');
 
 -- Insert data into the favorite table
