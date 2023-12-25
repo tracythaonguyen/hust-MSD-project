@@ -41,6 +41,7 @@ CREATE TABLE video (
   category_id INT REFERENCES category(category_id),
   level VARCHAR(50),
   source_link TEXT NOT NULL,
+  link_img TEXT,
   description TEXT NOT NULL,
   view INT,
   upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP

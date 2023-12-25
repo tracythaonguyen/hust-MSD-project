@@ -38,11 +38,11 @@ VALUES
 ('Animations', 'Animated content ranging from traditional cartoons to modern computer-generated productions.');
 
 -- Insert data into the video table
-INSERT INTO video(video_title, category_id, level, source_link, description)
+INSERT INTO video(video_title, category_id, level, source_link, description, link_img)
 VALUES
-('Perry the Platypus plumber', 8, 'Easy', 'https://www.youtube.com/watch?v=nPz-OXEVafM', 'Clip from the Phineas and Ferb episode The Lemonade Stand'),
-('Brooklyn Nine-Nine',1,'Medium','https://www.youtube.com/watch?v=LUE48DT8MyY', 'A short conversation video'),
-('1 Minute Microwave CHOCOLATE CHIP COOKIE', 5, 'Medium', 'https://www.youtube.com/watch?v=Z6a6x0tH_pU', 'Easy 1 minute Chocolate Chip Cookies Recipe ! Microwave Chocolate Chip Cookie that tastes amazing!');
+('Perry the Platypus plumber', 8, 'Easy', 'https://www.youtube.com/watch?v=nPz-OXEVafM', 'Clip from the Phineas and Ferb episode The Lemonade Stand', 'https://elearningindustry.com/wp-content/uploads/2015/10/6-convincing-reasons-take-elearning-course.jpg'),
+('Brooklyn Nine-Nine',1,'Medium','https://www.youtube.com/watch?v=LUE48DT8MyY', 'A short conversation video','https://www.icajobguarantee.com/blog/wp-content/uploads/2020/09/WhatsApp-Image-2020-09-22-at-13.46.26-768x512.jpeg' ),
+('1 Minute Microwave CHOCOLATE CHIP COOKIE', 5, 'Medium', 'https://www.youtube.com/watch?v=Z6a6x0tH_pU', 'Easy 1 minute Chocolate Chip Cookies Recipe ! Microwave Chocolate Chip Cookie that tastes amazing!', 'https://ksg.keltron.in/common/renderImage?fileName=22MAR2019%2F1553235669.jpg');
 
 -- Insert data into the track table
 INSERT INTO track (track_id, video_id, start_time, end_time, transcript)
@@ -103,7 +103,14 @@ VALUES
 -- Insert data into the progress table
 INSERT INTO progress (learner_id, video_id, highest_score, click_time)
 VALUES 
-(2, 1, 30, '2023-12-21 15:30:45'),
+(2, 1, 30, '2023-12-25 15:30:45'),
+(3, 1, 30, '2023-12-21 15:30:45'),
+(2, 1, 30, '2023-12-21 11:30:45'),
+(3, 1, 30, '2023-12-21 10:30:45'),
+(4, 1, 30, '2023-12-21 15:30:45'),
+(2, 2, 30, '2023-12-21 20:30:45'),
+(2, 3, 30, '2023-12-21 19:30:45'),
+(2, 3, 30, '2023-12-23 15:30:45'),
 (4, 1, 10, '2023-12-21 08:05:12');
 
 -- Insert data into the favorite table
