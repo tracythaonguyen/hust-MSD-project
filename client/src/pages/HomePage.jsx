@@ -15,15 +15,30 @@ export default function HomePage() {
         localStorage.removeItem('username');
         window.location.href = '/';
     }
-    const isLogin = localStorage.getItem('token');
-    const username = localStorage.getItem('username');
+    const token = localStorage.getItem('token');
     // console.log("token", isLogin);
     // console.log("username", username);
-
+    const [user, setUser] = useState({});
+    //get user by token body
+    useEffect(() => {
+        const getUser = async () => {
+            try {
+                const res = await axios.get("http://localhost:8000/account/get-account-by-token/" + token, {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+                setUser(res.data);
+                console.log("user", res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getUser();
+    }, [token]);
+                
+                
 
     //connect to API to get videos
     const [videos, setVideos] = useState([]);
-    const [loading, setLoading] = useState(false);
      
     useEffect(() => {
         const getVideos = async () => {
@@ -74,7 +89,7 @@ export default function HomePage() {
 
     return (
         <div className="text-center" style={HeaderStyle}>
-            {/* {isLogin == null ? ( */}
+            {/* {token == null ? ( */}
             {false ? (
                 <Landing /> // Display LandingPage if logged in
             ) : (

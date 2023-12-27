@@ -34,14 +34,14 @@ export default function App() {
                     <ProtectedRoute path="/home" component={ HomePage } />
                     <ProtectedRoute path="/user" component={ UserPage } />
                     <ProtectedRoute path="/topic" component={ TopicPage } /> */}
-                    <Route exact path="/" component={ Landing } />
-                    <Route path="/login" component={ Login } />
-                    <Route path="/register" component={ Register } />
-                    <Route path="/home" component={ HomePage } />
-                    <Route path="/user" component={ UserPage } />
-                    <Route path="/topic" component={ TopicPage } />
-                    <Route path="/video" component={ VideoPage } />
-                    <Route path="/history" component={History } />
+                    <ProtectedRoute2 exact path="/" component={ Landing } />
+                    <ProtectedRoute2 path="/login" component={ Login } />
+                    <ProtectedRoute2 path="/register" component={ Register } />
+                    <ProtectedRoute path="/home" component={ HomePage } />
+                    <ProtectedRoute path="/user" component={ UserPage } />
+                    <ProtectedRoute path="/topic" component={ TopicPage } />
+                    <ProtectedRoute path="/video" component={ VideoPage } />
+                    <ProtectedRoute path="/history" component={History } />
                 </Switch>
             </div>
         </Router>

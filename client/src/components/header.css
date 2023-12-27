@@ -35,7 +35,7 @@
         .user {
             display: flex;
             align-items: center;
-            color: #000;
+            color: #5B5B5B;
             font-size: 16px;
             font-weight: 500;
             
@@ -60,4 +60,46 @@
 
 .header a:visited {
     color: #5B5B5B;
+}
+
+
+
+.header-right-item .profile {
+    display: flex;
+    align-items: center;
+    color: #5B5B5B;
+    font-size: 16px;
+    font-weight: 400;
+    width: 120px;
+    visibility: hidden;
+    border-top: 1px solid #E5E5E5;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    margin-top: 10px;
+}
+.header-right-item .logout{
+    display: flex;
+    align-items: center;
+    color: #5B5B5B;
+    font-size: 16px;
+    width: 120px;
+    font-weight: 400;
+    visibility: hidden;
+    border-top: 1px solid #E5E5E5;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    margin-top: 40px;
+}
+
+.header-right-item .profile:hover, .header-right-item .logout:hover{
+    background: #f5f3f3;
+    border-radius: 4px;
+    padding : 5px;
+    
+}
+
+.header-right-item .active{
+    visibility: visible;
 }
