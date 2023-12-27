@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage.jsx'
 import Landing from './pages/landing/Landing'
 import UserPage from './pages/user/UserPage'
 import VideoPage from './pages/video/VideoPage.jsx'
+import History from './pages/history/History.jsx'
 import './App.css'
 import TopicPage from "./pages/topic/TopicPage";
 // test Ci/cd
@@ -40,6 +41,7 @@ export default function App() {
                     <Route path="/user" component={ UserPage } />
                     <Route path="/topic" component={ TopicPage } />
                     <Route path="/video" component={ VideoPage } />
+                    <Route path="/history" component={History } />
                 </Switch>
             </div>
         </Router>
