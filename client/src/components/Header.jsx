@@ -10,6 +10,7 @@ export const Header = () => {
     const handleLogOut = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
+        localStorage.removeItem('learner_id');        
         window.location.href = '/';
     }
     const ShowOption = () => {

@@ -10,24 +10,16 @@ import { useState, useEffect } from 'react';
 
 
 export default function HomePage() {
-    const handleLogOut = () => {
-        localStorage.removeItem('token');
-        localStorage.removeItem('username');
-        window.location.href = '/';
-    }
     const token = localStorage.getItem('token');
-    // console.log("token", isLogin);
-    // console.log("username", username);
     const [user, setUser] = useState({});
     //get user by token body
     useEffect(() => {
         const getUser = async () => {
             try {
-                const res = await axios.get("http://localhost:8000/account/get-account-by-token/" + token, {
+                const res = await axios.get(`http://localhost:8000/learner/get-learner-by-token/${token}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setUser(res.data);
-                console.log("user", res.data);
             } catch (err) {
                 console.log(err);
             }
@@ -77,14 +69,19 @@ export default function HomePage() {
     useEffect(() => {
         const getRecentVideos = async () => {
             try {
-                const res = await axios.get("http://localhost:8000/video/getRecentLearningVideo/2");
+                const res = await axios.get(
+                    `http://localhost:8000/video/getRecentLearningVideo/${user.learner_id}`,
+                    {
+                        headers: { Authorization: `Bearer ${token}` },
+                    }
+                );
                 setRecentVideos(res.data);
             } catch (err) {
                 console.log(err);
             }
         };
         getRecentVideos();
-    }, []);
+    }, [user]);
 
 
     return (
