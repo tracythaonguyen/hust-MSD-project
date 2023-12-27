@@ -125,6 +125,14 @@ async function createAccount(req, res) {
       "INSERT INTO account (username, password, email, user_role, first_name, last_name) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
       [username, password, email, user_role, first_name, last_name]
     );
+
+    const accountId = account.rows[0].account_id;
+
+    await pool.query(
+      "INSERT INTO learner (account_id) VALUES ($1)",
+      [accountId]
+    );
+    
     return res
       .status(200)
       .json({ message: "Account was created!", data: account.rows[0] });
