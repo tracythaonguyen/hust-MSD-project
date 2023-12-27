@@ -1,6 +1,6 @@
 import express from 'express'
 import videoController from '../controllers/video.controller.js'
-import { verifyAdmin } from '../middlewares/verifyToken.js'
+import { verifyAdmin, verifyLearner } from '../middlewares/verifyToken.js'
 
 const router = express.Router()
 
@@ -25,6 +25,6 @@ router.post('/create', verifyAdmin,videoController.createVideoWithCategoryandTag
 // get all tags of a video
 router.get('/getTags/:id', videoController.getAllTagsOfVideo)
 
-router.get('/getRecentLearningVideo/:id', videoController.getRecentLearningVideo)
+router.get('/getRecentLearningVideo/:id', verifyLearner ,videoController.getRecentLearningVideo)
 
 export default router

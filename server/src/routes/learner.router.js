@@ -15,7 +15,7 @@ router.post('/create',verifyAdmin, learnerController.createLearner)
 // get an learner by id
 router.get('/:id', verifyLearner,learnerController.getLearnerById)
 
-// get an learner by account id
-router.get('/account/:id', verifyAdmin,learnerController.getLearnerByAccountId)
+// get an learner by token
+router.get('/get-learner-by-token/:token',verifyLearner, learnerController.getLearnerByToken)
 
 export default router
