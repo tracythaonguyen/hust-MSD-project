@@ -6,7 +6,20 @@ import {Link} from "react-router-dom";
 
 
 export const Header = () => {
-    const name = "Linh";
+    const name = localStorage.getItem('username');
+    const handleLogOut = () => {
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+        window.location.href = '/';
+    }
+    const ShowOption = () => {
+        const profile = document.querySelector('.right-item .profile');
+        const logout = document.querySelector('.right-item .logout');
+        console.log("z", profile);
+        logout.classList.toggle('active');
+        profile.classList.toggle('active');
+    }
+    
     return (
         <div className="header">
             <Link to="/">
@@ -31,7 +44,13 @@ export const Header = () => {
                             <img src={avatar} alt={"Avatar"}></img>
                         </div>
                     </Link>
-                    <div className="name"><span style={{color: "#5B5B5B"}}> Hi,</span> {name}</div>
+                    <div className="right-item">
+                        <div className="name" onClick={ShowOption}>Hi, <span style={{color: "#000"}}>{name}</span></div>
+                        <Link to='/user'>
+                        <div className="profile">Profile</div>
+                        </Link>
+                        <div className="logout" onClick={handleLogOut}>Logout</div>
+                    </div>
                 </div>
             </div>
         </div>
