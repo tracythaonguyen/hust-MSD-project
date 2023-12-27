@@ -164,7 +164,7 @@ async function searchAccountByUserName(req, res) {
 
 async function getAccountByToken(req, res) {
   try {
-    const { token } = req.body;
+    const { token } = req.params;
     const decoded = verify(token, process.env.ACCESS_TOKEN_SECRET);
     const account_id = decoded.account_id;
     const account = await pool.query(
