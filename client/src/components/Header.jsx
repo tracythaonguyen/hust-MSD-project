@@ -25,7 +25,7 @@ export const Header = () => {
                     <div className="header-right-item">About</div>
                 </Link>
                 <div className="header-right-item user">
-                    <Link to='/'>
+                    <Link to='/user'>
 
                         <div className="avatar">
                             <img src={avatar} alt={"Avatar"}></img>
