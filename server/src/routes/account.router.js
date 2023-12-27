@@ -23,6 +23,6 @@ router.put('/change-name/:id', accountController.updateUserName)
 router.post('/create', accountController.createAccount)
 
 // get account by token
-router.post('/get-account-by-token', accountController.getAccountByToken)
+router.get('/get-account-by-token/:token', accountController.getAccountByToken)
 
 export default router
