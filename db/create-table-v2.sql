@@ -25,8 +25,10 @@ CREATE TABLE learner (
   learner_id SERIAL PRIMARY KEY,
   dob DATE,
   occupation VARCHAR(100),
+  address VARCHAR(255),
+  phone_number INT,
   account_id INT REFERENCES account(account_id),
-  total_score INT
+  total_score INT DEFAULT 0
 );
 
 CREATE TABLE category (
@@ -84,7 +86,7 @@ CREATE TABLE progress (
   learner_id INT REFERENCES learner(learner_id),
   video_id INT,
   highest_score INT DEFAULT 0,
-  click_time TIMESTAMP 
+  click_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE favorite (
