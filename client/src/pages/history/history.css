@@ -88,4 +88,8 @@
     color: #3E3E3E;
     text-align: center;
   }
- 
+ .historyContainer .small-text{
+    font-size: 12px;
+    color: #3E3E3E;
+    margin-top: 10px;
+ }

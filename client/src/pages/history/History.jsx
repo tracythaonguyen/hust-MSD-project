@@ -5,24 +5,60 @@ import MarkedBookIcon from "../../assets/images/marked-book_icon.png";
 import MarkedBookWhiteIcon from "../../assets/images/marked-book-white_icon.png";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-export const History = () => {
-  const user = {
-    name: "Nguyen Van A",
-    email: "linhshark02@gmail.com",
-    birthdate: "01/01/2000",
-    phone: "0123456789",
-    address: "Ha Noi",
-    avatar:
-      "https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2023/02/hinh-avatar-anh-dai-dien-FB-mac-dinh.jpg?fit\u003d560%2C560\u0026ssl\u003d1",
-    occupation: "Student",
-    location: "Phuong Trung, Thanh Oai, Ha Noi",
-  };
+import axios from "axios";
+import { useEffect } from "react";
 
-  const smallBoxData = Array.from({ length: 12 }, (_, index) => ({
-    id: index + 1,
-    name: `Small Box ${index + 1}`,
-    image: `https://via.placeholder.com/150`,
-    progress: (index + 1) * 10, // Set progress value based on your data
+export const History = () => {
+  // const [recentVideos, setRecentVideos] = useState([]);
+  const token = localStorage.getItem("token");
+  const [user, setUser] = useState({});
+  const [recentVideos, setRecentVideos] = useState([]);
+
+  //get user by token body
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:8000/learner/get-learner-by-token/${token}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        setUser(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getUser();
+  }, [token]);
+
+
+  useEffect(() => {
+    const getRecentVideos = async () => {
+        try {
+            const res = await axios.get(
+                `http://localhost:8000/video/getRecentLearningVideo/${user.learner_id}`,
+                {
+                    headers: { Authorization: `Bearer ${token}` },
+                }
+            );
+            setRecentVideos(res.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    getRecentVideos();
+}, [user]);
+  
+
+  const smallBoxData = recentVideos.map((video, index) => ({
+    id: video.video_id,
+    name: video.video_title,
+    image: video.link_img,
+    progress: (index + 1) * 10, // Set progress value based on your data),
+    date: new Date(video.click_time).toLocaleDateString('en-US'),
+    time: new Date(video.click_time).toLocaleTimeString('en-US'),
   }));
 
   const itemsPerPage = 6;
@@ -95,6 +131,7 @@ export const History = () => {
                         style={{ width: `${box.progress}%` }}
                       />
                     </div>
+                    <div className="small-text">Recently watch: {box.date}, {box.time}</div>
                   </Link>
                 ))}
               </div>
