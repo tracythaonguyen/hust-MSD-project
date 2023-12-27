@@ -52,8 +52,80 @@ async function createLearner(req, res) {
   }
 }
 
+async function updateLearner(req, res) {
+  try {
+    const { age, occupation, account_id } = req.body
+    const { id } = req.params
+
+    if (!account_id) {
+      return res.status(400).json({ message: 'Account id is required' })
+    }
+
+    const learner = await pool.query(
+      'UPDATE learner SET age = $1, occupation = $2, account_id = $3 WHERE learner_id = $4 RETURNING *',
+      [age, occupation, account_id, id],
+    )
+    // Check if learner exists
+    if (!learner.rows.length) {
+      return res.status(404).json({ message: 'Learner not found' })
+    }
+    // Update learner if it exists
+    return res
+      .status(200)
+      .json({ message: 'Learner was updated!', data: learner.rows[0] })
+  } catch (error) {
+    console.error(error.message)
+    return res.status(500).json({ message: error.message })
+  }
+}
+
+async function getLearnerById(req, res) {
+  try {
+    const { id } = req.params
+    const learner = await pool.query(
+      'SELECT * FROM learner WHERE learner_id = $1',
+      [id],
+    )
+    // Check if learner exists
+    if (!learner.rows.length) {
+      return res.status(404).json({ message: 'Learner not found' })
+    }
+    // Get learner if it exists
+    return res
+      .status(200)
+      .json({ message: 'Learner was found!', data: learner.rows[0] })
+  } catch (error) {
+    console.error(error.message)
+    return res.status(500).json({ message: error.message })
+  }
+}
+
+async function getLearnerByAccountId(req, res) {
+  try {
+    const { id } = req.params
+    const learner = await pool.query(
+      'SELECT * FROM learner WHERE account_id = $1',
+      [id],
+    )
+    // Check if learner exists
+    if (!learner.rows.length) {
+      return res.status(404).json({ message: 'Learner not found' })
+    }
+    // Get learner if it exists
+    return res
+      .status(200)
+      .json({ message: 'Learner was found!', data: learner.rows[0] })
+  } catch (error) {
+    console.error(error.message)
+    return res.status(500).json({ message: error.message })
+  }
+}
+
 export default {
   getAllLearners,
   deleteLearner,
   createLearner,
+  updateLearner,
+  getLearnerById,
+  getLearnerByAccountId,
 }

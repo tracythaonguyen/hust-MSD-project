@@ -26,7 +26,7 @@ async function login(req, res) {
       res.status(401).json({ error: "Invalid username or password" });
     } else {
       //success => return token
-      const user = { name: username };
+      const user = { account_id: account[0].account_id, role: account[0].user_role };
       //ACCESS_TOKEN_SECRET = b33701b6be784f1b5363e4e8f8f600ad5af985de274299dc302f2186d29e3b9467acb6eae83e894a566836d6b71276d7336a785f249f4e5c7af6cde0e90014cb
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'});
       res.json({token: accessToken})
@@ -162,6 +162,23 @@ async function searchAccountByUserName(req, res) {
   }
 }
 
+async function getAccountByToken(req, res) {
+  try {
+    const { token } = req.body;
+    const decoded = verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const account_id = decoded.account_id;
+    const account = await pool.query(
+      "SELECT * FROM account WHERE account_id = $1",
+      [account_id]
+    );
+    return res.status(200).json(account.rows[0]);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+
 export default {
   getAllAccounts,
   deleteAccount,
@@ -169,4 +186,5 @@ export default {
   createAccount,
   searchAccountByUserName,
   login,
+  getAccountByToken
 };
