@@ -35,7 +35,7 @@ async function deleteCategory(req, res) {
 
 async function updateCategory(req, res) {
   try {
-    const { name } = req.body
+    const { name, description } = req.body
     const { id } = req.params
 
     if (!name) {
@@ -43,8 +43,8 @@ async function updateCategory(req, res) {
     }
 
     const category = await pool.query(
-      'UPDATE category SET category_name = $1 WHERE category_id = $2 RETURNING *',
-      [name, id],
+      'UPDATE category SET category_name = $1, category_description = $2 WHERE category_id = $3 RETURNING *',
+      [name, description, id],
     )
     // Check if category exists
     if (!category.rows.length) {
@@ -60,16 +60,44 @@ async function updateCategory(req, res) {
   }
 }
 
+async function updateCategoryDescription(req, res) {
+  try {
+    const { description } = req.body
+    const { id } = req.params
+
+    if (!description) {
+      return res.status(400).json({ message: 'Description is required' })
+    }
+
+    const category = await pool.query(
+      'UPDATE category SET category_description = $1 WHERE category_id = $2 RETURNING *',
+      [description, id],
+    )
+    // Check if category exists
+    if (!category.rows.length) {
+      return res.status(404).json({ message: 'Category not found' })
+    }
+    // Update category if it exists
+    return res.status(200).json({
+      message: 'Category description was updated!',
+      data: category.rows[0],
+    })
+  } catch (error) {
+    console.error(error.message)
+    return res.status(500).json({ message: error.message })
+  }
+}
+
 async function createCategory(req, res) {
   try {
-    const { name } = req.body
+    const { name, description } = req.body
     if (!name) {
       return res.status(400).json({ message: 'Name is required' })
     }
 
     const category = await pool.query(
-      'INSERT INTO category (category_name) VALUES ($1) RETURNING *',
-      [name],
+      'INSERT INTO category (category_name, category_description) VALUES ($1, $2) RETURNING *',
+      [name, description],
     )
     return res
       .status(200)
@@ -134,4 +162,5 @@ export default {
   createCategory,
   searchCategoryByName,
   getCategoryById,
+  updateCategoryDescription,
 }
