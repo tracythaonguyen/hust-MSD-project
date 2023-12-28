@@ -1,4 +1,4 @@
-import pool from '../db/pg.js'
+import pool from '../config/db.js'
 
 async function getAllHistories(req, res) {
   try {
