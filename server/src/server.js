@@ -11,6 +11,7 @@ import videoRouter from './routes/video.router.js'
 import trackRouter from './routes/track.router.js'
 import progressRouter from './routes/progress.router.js'
 import feedRouter from './routes/feed.router.js'
+import favoriteRouter from './routes/favorite.router.js'
 
 dotenv.config()
 const app = express()
@@ -30,6 +31,7 @@ app.use('/video', videoRouter)
 app.use('/track', trackRouter)
 app.use('/progress', progressRouter)
 app.use('/feed', feedRouter)
+app.use('/favorite', favoriteRouter)
 
 app.listen(port, () => {
   console.log('Backend is running on the port: ' + port)
