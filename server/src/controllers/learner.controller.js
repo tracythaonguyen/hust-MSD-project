@@ -1,6 +1,6 @@
 import pool from '../config/db.js'
 import jwt from 'jsonwebtoken'
-const { sign, verify } = jwt;
+const { sign, verify } = jwt
 
 async function getAllLearners(req, res) {
   try {
@@ -37,13 +37,13 @@ async function deleteLearner(req, res) {
 
 async function createLearner(req, res) {
   try {
-    const { age, occupation, account_id } = req.body
+    const { dob, occupation, account_id, total_score } = req.body
     if (!account_id) {
       return res.status(400).json({ message: 'Account id is required' })
     }
     const learner = await pool.query(
-      'INSERT INTO learner (age, occupation, account_id) VALUES ($1, $2, $3) RETURNING *',
-      [age, occupation, account_id],
+      'INSERT INTO learner (dob, occupation, account_id) VALUES ($1, $2, $3, $4) RETURNING *',
+      [dob, occupation, account_id, total_score],
     )
     return res
       .status(200)
@@ -56,7 +56,7 @@ async function createLearner(req, res) {
 
 async function updateLearner(req, res) {
   try {
-    const { age, occupation, account_id } = req.body
+    const { dob, occupation, account_id, total_score } = req.body
     const { id } = req.params
 
     if (!account_id) {
@@ -64,8 +64,8 @@ async function updateLearner(req, res) {
     }
 
     const learner = await pool.query(
-      'UPDATE learner SET age = $1, occupation = $2, account_id = $3 WHERE learner_id = $4 RETURNING *',
-      [age, occupation, account_id, id],
+      'UPDATE learner SET dob = $1, occupation = $2, account_id = $3, total_score = $4 WHERE learner_id = $5 RETURNING *',
+      [dob, occupation, account_id, total_score, id],
     )
     // Check if learner exists
     if (!learner.rows.length) {
@@ -75,6 +75,33 @@ async function updateLearner(req, res) {
     return res
       .status(200)
       .json({ message: 'Learner was updated!', data: learner.rows[0] })
+  } catch (error) {
+    console.error(error.message)
+    return res.status(500).json({ message: error.message })
+  }
+}
+
+async function updateLearnerScore(req, res) {
+  try {
+    const { total_score } = req.body
+    const { id } = req.params
+
+    if (!account_id) {
+      return res.status(400).json({ message: 'Account id is required' })
+    }
+
+    const learner = await pool.query(
+      'UPDATE learner SET total_score = $1 WHERE learner_id = $2 RETURNING *',
+      [total_score, id],
+    )
+    // Check if learner exists
+    if (!learner.rows.length) {
+      return res.status(404).json({ message: 'Learner not found' })
+    }
+    // Update learner if it exists
+    return res
+      .status(200)
+      .json({ message: 'Learner score was updated!', data: learner.rows[0] })
   } catch (error) {
     console.error(error.message)
     return res.status(500).json({ message: error.message })
@@ -103,20 +130,19 @@ async function getLearnerById(req, res) {
 }
 async function getLearnerByToken(req, res) {
   try {
-    const { token } = req.params;
-    const decoded = verify(token, process.env.ACCESS_TOKEN_SECRET);
-    const account_id = decoded.account_id;
+    const { token } = req.params
+    const decoded = verify(token, process.env.ACCESS_TOKEN_SECRET)
+    const account_id = decoded.account_id
     const account = await pool.query(
-      "SELECT * FROM learner WHERE account_id = $1",
-      [account_id]
-    );
-    return res.status(200).json(account.rows[0]);
+      'SELECT * FROM learner WHERE account_id = $1',
+      [account_id],
+    )
+    return res.status(200).json(account.rows[0])
   } catch (error) {
-    console.error(error.message);
-    return res.status(500).json({ message: "Internal server error" });
+    console.error(error.message)
+    return res.status(500).json({ message: 'Internal server error' })
   }
 }
-
 
 export default {
   getAllLearners,
@@ -124,5 +150,6 @@ export default {
   createLearner,
   updateLearner,
   getLearnerById,
-  getLearnerByToken
+  getLearnerByToken,
+  updateLearnerScore,
 }
