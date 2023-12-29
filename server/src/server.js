@@ -2,7 +2,7 @@ import cors from 'cors'
 import express from 'express'
 import dotenv from 'dotenv'
 
-// import accountRouter from './routes/account.router.js'
+import accountRouter from './routes/account.router.js'
 import testRouter from './routes/test.router.js'
 import categoryRouter from './routes/category.router.js'
 import tagRouter from './routes/tag.router.js'
@@ -10,6 +10,9 @@ import learnerRouter from './routes/learner.router.js'
 import videoRouter from './routes/video.router.js'
 import trackRouter from './routes/track.router.js'
 import progressRouter from './routes/progress.router.js'
+import feedRouter from './routes/feed.router.js'
+import favoriteRouter from './routes/favorite.router.js'
+import historyRouter from './routes/history.router.js'
 
 dotenv.config()
 const app = express()
@@ -20,7 +23,7 @@ app.use(express.urlencoded({ extended: true }))
 
 const port = process.env.PORT || 6969
 
-// app.use('/account', accountRouter)
+app.use('/account', accountRouter)
 app.use('/test', testRouter)
 app.use('/category', categoryRouter)
 app.use('/tag', tagRouter)
@@ -28,6 +31,9 @@ app.use('/learner', learnerRouter)
 app.use('/video', videoRouter)
 app.use('/track', trackRouter)
 app.use('/progress', progressRouter)
+app.use('/feed', feedRouter)
+app.use('/favorite', favoriteRouter)
+app.use('/history', historyRouter)
 
 app.listen(port, () => {
   console.log('Backend is running on the port: ' + port)

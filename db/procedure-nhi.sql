@@ -40,6 +40,9 @@ BEGIN
                         RAISE NOTICE 'Failed to insert row with invalid learner_id: %', p_learner_id;
                 END;
             END LOOP;
+
+            INSERT INTO progress (learner_id, video_id)
+            VALUES (p_learner_id, p_video_id);
         END;
     END IF;
 END;

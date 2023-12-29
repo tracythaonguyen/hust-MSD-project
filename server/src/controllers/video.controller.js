@@ -62,7 +62,15 @@ async function updateVideoTitle(req, res) {
 
 async function createVideoWithCategoryandTag(req, res) {
   try {
-    const { title, level, source_link, category_id, tags } = req.body
+    const {
+      title,
+      level,
+      source_link,
+      link_img,
+      description,
+      category_id,
+      tags,
+    } = req.body
     if (!title) {
       return res.status(400).json({ message: 'Title is required' })
     }
@@ -155,6 +163,26 @@ async function getAllTagsOfVideo(req, res) {
   }
 }
 
+//function get rencent learning video based on learner id
+async function getRecentLearningVideo(req, res) {
+  try {
+    const { id } = req.params
+    console.log('z', id)
+    const recentVideo = await pool.query(
+      `SELECT video_id, video_title, level, description, link_img, category_name, max(click_time) AS click_time
+      FROM
+        video NATURAL JOIN progress NATURAL JOIN category
+      WHERE learner_id = $1 GROUP BY video_id, video_title, level, description, link_img, category_name 
+      ORDER BY click_time DESC ;`,
+      [id],
+    )
+    return res.status(200).json(recentVideo.rows)
+  } catch (error) {
+    console.error(error.message)
+    return res.status(500).json({ message: 'Internal server error22' })
+  }
+}
+
 export default {
   getAllVideos,
   deleteVideo,
@@ -163,4 +191,5 @@ export default {
   getVideoById,
   createVideoWithCategoryandTag,
   getAllTagsOfVideo,
+  getRecentLearningVideo,
 }
