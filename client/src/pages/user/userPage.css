@@ -1,11 +1,16 @@
 .userContainer {
   display: flex;
 }
+.userContainer a {
+  text-decoration: none;
+}
 
 .userContainer .tasksBar {
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding-right: 20px;
+  /* width: 40px; */
 }
 
 .userContent {
@@ -25,6 +30,7 @@
   font-weight: 400;
   margin: 10px;
   border: none;
+  width: 100%;
 }
 .userContainer .task-1 {
   background: #49bbbd;
@@ -58,16 +64,16 @@
 }
 
 /* Content, user  page on the right hand side */
-.contentHeader {
+.userContainer .contentHeader {
   background: #49bbbd;
   height: 143px;
   margin-top: 10px;
 }
 
-.contentHeader .editInfo {
+.userContainer .contentHeader .editInfo {
   margin: 20px;
 }
-.avatarContainer .avatar {
+.userContainer .avatarContainer .avatar {
   width: 180px;
   height: 180px;
   border-radius: 50%;
@@ -75,7 +81,7 @@
   border: 10px solid #fff;
 }
 
-.contentHeader .editInfo {
+.userContainer .contentHeader .editInfo {
   background: #e2f0ff;
   color: #3e3e3e;
   font-family: Poppins;
@@ -85,15 +91,15 @@
   border: none;
   border-radius: 7px;
 }
-.contentHeader .editInfo:hover {
+.userContainer .contentHeader .editInfo:hover {
   cursor: pointer;
   background: #fff;
   color: #49bbbd;
 }
-.contentHeader .editInfo:active {
+.userContainer .contentHeader .editInfo:active {
   color: #2d3636;
 }
-.avatarContainer .cameraIcon {
+.userContainer .avatarContainer .cameraIcon {
   width: 35px;
   height: 40px;
   margin-left: -50px;
@@ -101,10 +107,10 @@
   border-radius: 50%;
 }
 
-.avatarContainer .cameraIcon:hover {
+.userContainer .avatarContainer .cameraIcon:hover {
   cursor: pointer;
 }
-.avatarContainer .name {
+.userContainer .avatarContainer .name {
   color: #252641;
 
   text-align: center;

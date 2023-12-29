@@ -1,172 +1,198 @@
-// import pool from "../config/db.js";
-// import jwt from "jsonwebtoken";
+import pool from "../config/db.js";
+import jwt from "jsonwebtoken";
 
-// const { sign, verify } = jwt;
+const { sign, verify } = jwt;
 
-// async function login(req, res) {
-//   const { username, password } = req.body;
-//   try {
-//     //query by user name
-//     let queryText = `SELECT * FROM account`;
-//     const queryParams = [];
+async function login(req, res) {
+  const { username, password } = req.body;
+  try {
+    //query by user name
+    let queryText = `SELECT * FROM account`;
+    const queryParams = [];
 
-//     if (username) {
-//       queryText += " WHERE";
-//       queryText += ` REPLACE(username, ' ', '') ILIKE $1`;
-//       queryParams.push(`%${username}%`);
-//     }
+    if (username) {
+      queryText += " WHERE";
+      queryText += ` REPLACE(username, ' ', '') ILIKE $1`;
+      queryParams.push(`%${username}%`);
+    }
 
-//     queryText += " ORDER BY account_id ASC";
+    queryText += " ORDER BY account_id ASC";
 
-//     let account = await pool.query(queryText, queryParams);
-//     account = account.rows;
+    let account = await pool.query(queryText, queryParams);
+    account = account.rows;
 
-//     let pwd = account[0].password;
-//     if (pwd != password) {
-//       res.status(401).json({ error: "Invalid username or password" });
-//     } else {
-//       //success => return token
-//       const user = { name: username };
-//       //ACCESS_TOKEN_SECRET = b33701b6be784f1b5363e4e8f8f600ad5af985de274299dc302f2186d29e3b9467acb6eae83e894a566836d6b71276d7336a785f249f4e5c7af6cde0e90014cb
-//       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'});
-//       res.json({token: accessToken})
-//     }
-//   } catch (error) {
-//     res.status(500).json({ error: "Failed to login" });
-//   }
-// }
+    let pwd = account[0].password;
+    if (pwd != password) {
+      res.status(401).json({ error: "Invalid username or password" });
+    } else {
+      //success => return token
+      const user = { account_id: account[0].account_id, role: account[0].user_role };
+      //ACCESS_TOKEN_SECRET = b33701b6be784f1b5363e4e8f8f600ad5af985de274299dc302f2186d29e3b9467acb6eae83e894a566836d6b71276d7336a785f249f4e5c7af6cde0e90014cb
+      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'});
+      res.json({token: accessToken})
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Failed to login" });
+  }
+}
 
-// async function getAllAccounts(req, res) {
-//   try {
-//     const allAccounts = await pool.query(
-//       "SELECT * FROM account ORDER BY account_id ASC"
-//     );
-//     console.log(allAccounts.rows);
-//     return res.status(200).json(allAccounts.rows);
-//   } catch (error) {
-//     console.error(error.message);
-//     return res.status(400).json({ message: error.message });
-//   }
-// }
+async function getAllAccounts(req, res) {
+  try {
+    const allAccounts = await pool.query(
+      "SELECT * FROM account ORDER BY account_id ASC"
+    );
+    console.log(allAccounts.rows);
+    return res.status(200).json(allAccounts.rows);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(400).json({ message: error.message });
+  }
+}
 
-// async function deleteAccount(req, res) {
-//   try {
-//     const { id } = req.params;
-//     const account = await pool.query(
-//       "DELETE FROM account WHERE account_id = $1 RETURNING *",
-//       [id]
-//     );
-//     // Check if account exists
-//     if (!account.rows.length) {
-//       return res.status(404).json({ message: "Account not found" });
-//     }
-//     return res
-//       .status(200)
-//       .json({ message: "Account was deleted!", data: account.rows[0] });
-//   } catch (error) {
-//     console.error(error.message);
-//     return res.status(500).json({ message: error.message });
-//   }
-// }
+async function deleteAccount(req, res) {
+  try {
+    const { id } = req.params;
+    const account = await pool.query(
+      "DELETE FROM account WHERE account_id = $1 RETURNING *",
+      [id]
+    );
+    // Check if account exists
+    if (!account.rows.length) {
+      return res.status(404).json({ message: "Account not found" });
+    }
+    return res
+      .status(200)
+      .json({ message: "Account was deleted!", data: account.rows[0] });
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ message: error.message });
+  }
+}
 
-// async function updateUserName(req, res) {
-//   try {
-//     const { username } = req.body;
-//     const { id } = req.params;
+async function updateUserName(req, res) {
+  try {
+    const { username } = req.body;
+    const { id } = req.params;
 
-//     if (!username) {
-//       return res.status(400).json({ message: "User name is required" });
-//     }
+    if (!username) {
+      return res.status(400).json({ message: "User name is required" });
+    }
 
-//     const account = await pool.query(
-//       "UPDATE account SET username = $1 WHERE account_id = $2 RETURNING *",
-//       [username, id]
-//     );
-//     // Check if account exists
-//     if (!account.rows.length) {
-//       return res.status(404).json({ message: "Account not found" });
-//     }
-//     // Update account if it exists
-//     return res
-//       .status(200)
-//       .json({ message: "Account was updated!", data: account.rows[0] });
-//   } catch (error) {
-//     console.error(error.message);
-//     return res.status(500).json({ message: error.message });
-//   }
-// }
+    const account = await pool.query(
+      "UPDATE account SET username = $1 WHERE account_id = $2 RETURNING *",
+      [username, id]
+    );
+    // Check if account exists
+    if (!account.rows.length) {
+      return res.status(404).json({ message: "Account not found" });
+    }
+    // Update account if it exists
+    return res
+      .status(200)
+      .json({ message: "Account was updated!", data: account.rows[0] });
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ message: error.message });
+  }
+}
 
-// async function createAccount(req, res) {
-//   try {
-//     const { username, password, email, user_role, first_name, last_name } =
-//       req.body;
+async function createAccount(req, res) {
+  try {
+    const { username, password, email, user_role, first_name, last_name } =
+      req.body;
 
-//     if (!username) {
-//       return res.status(400).json({ message: "User name is required" });
-//     }
+    if (!username) {
+      return res.status(400).json({ message: "User name is required" });
+    }
 
-//     if (!password) {
-//       return res.status(400).json({ message: "Password is required" });
-//     }
+    if (!password) {
+      return res.status(400).json({ message: "Password is required" });
+    }
 
-//     if (!email) {
-//       return res.status(400).json({ message: "Email is required" });
-//     }
+    if (!email) {
+      return res.status(400).json({ message: "Email is required" });
+    }
 
-//     if (!user_role) {
-//       return res.status(400).json({ message: "User role is required" });
-//     }
+    if (!user_role) {
+      return res.status(400).json({ message: "User role is required" });
+    }
 
-//     if (!first_name) {
-//       return res.status(400).json({ message: "First name is required" });
-//     }
+    if (!first_name) {
+      return res.status(400).json({ message: "First name is required" });
+    }
 
-//     const account = await pool.query(
-//       "INSERT INTO account (username, password, email, user_role, first_name, last_name) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-//       [username, password, email, user_role, first_name, last_name]
-//     );
-//     return res
-//       .status(200)
-//       .json({ message: "Account was created!", data: account.rows[0] });
-//   } catch (error) {
-//     console.error(error.message);
-//     return res.status(500).json({ message: error.message });
-//   }
-// }
+    const account = await pool.query(
+      "INSERT INTO account (username, password, email, user_role, first_name, last_name) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+      [username, password, email, user_role, first_name, last_name]
+    );
 
-// async function searchAccountByUserName(req, res) {
-//   try {
-//     const { username } = req.query;
-//     let queryText = `SELECT * FROM account`;
+    const accountId = account.rows[0].account_id;
 
-//     const queryParams = [];
+    await pool.query(
+      "INSERT INTO learner (account_id) VALUES ($1)",
+      [accountId]
+    );
+    
+    return res
+      .status(200)
+      .json({ message: "Account was created!", data: account.rows[0] });
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ message: error.message });
+  }
+}
 
-//     if (username) {
-//       queryText += " WHERE";
-//       queryText += ` REPLACE(username, ' ', '') ILIKE $1`;
-//       queryParams.push(`%${username}%`);
-//     }
+async function searchAccountByUserName(req, res) {
+  try {
+    const { username } = req.query;
+    let queryText = `SELECT * FROM account`;
 
-//     queryText += " ORDER BY account_id ASC";
+    const queryParams = [];
 
-//     const account = await pool.query(queryText, queryParams);
+    if (username) {
+      queryText += " WHERE";
+      queryText += ` REPLACE(username, ' ', '') ILIKE $1`;
+      queryParams.push(`%${username}%`);
+    }
 
-//     if (account.rows.length === 0) {
-//       return res.status(404).json({ message: "Account not found" });
-//     }
+    queryText += " ORDER BY account_id ASC";
 
-//     return res.status(200).json(account.rows);
-//   } catch (error) {
-//     console.error(error.message);
-//     return res.status(500).json({ message: "Internal server error" });
-//   }
-// }
+    const account = await pool.query(queryText, queryParams);
 
-// export default {
-//   getAllAccounts,
-//   deleteAccount,
-//   updateUserName,
-//   createAccount,
-//   searchAccountByUserName,
-//   login,
-// };
+    if (account.rows.length === 0) {
+      return res.status(404).json({ message: "Account not found" });
+    }
+
+    return res.status(200).json(account.rows);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+async function getAccountByToken(req, res) {
+  try {
+    const { token } = req.params;
+    const decoded = verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const account_id = decoded.account_id;
+    const account = await pool.query(
+      "SELECT * FROM account WHERE account_id = $1",
+      [account_id]
+    );
+    return res.status(200).json(account.rows[0]);
+  } catch (error) {
+    console.error(error.message);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
+
+export default {
+  getAllAccounts,
+  deleteAccount,
+  updateUserName,
+  createAccount,
+  searchAccountByUserName,
+  login,
+  getAccountByToken
+};

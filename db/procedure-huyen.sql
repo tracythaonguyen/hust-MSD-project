@@ -1,100 +1,115 @@
-CREATE OR REPLACE FUNCTION update_total_score()
+-- for update total_score in learner table
+CREATE OR REPLACE FUNCTION update_learner_score()
 RETURNS TRIGGER AS $$
 DECLARE
-    v_level VARCHAR(50);
-    multiplier FLOAT;
+    video_level VARCHAR(50);
+    score_increment INT;
 BEGIN
-    SELECT level INTO v_level 
-    FROM video 
-    WHERE video_id = NEW.video_id;
+    -- Retrieve the level of the video
+    SELECT level INTO video_level FROM video WHERE video_id = NEW.video_id;
 
-    IF v_level = 'hard' THEN
-        multiplier := 3;
-    ELSIF v_level = 'medium' THEN
-        multiplier := 2;
+    -- Determine the score increment based on the level of the video
+    CASE video_level
+        WHEN 'Easy' THEN score_increment := 1;
+        WHEN 'Medium' THEN score_increment := 2;
+        WHEN 'Hard' THEN score_increment := 3;
+        ELSE score_increment := 0; -- Default case if the level is not defined
+    END CASE;
+
+    UPDATE learner SET total_score = total_score + score_increment WHERE learner_id = NEW.learner_id;
+
+    RETURN NEW;
+END;
+$$ 
+LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_update_score
+AFTER UPDATE OF completed ON history
+FOR EACH ROW
+WHEN (OLD.completed = 0 AND NEW.completed = 1)
+EXECUTE PROCEDURE update_learner_score();
+
+select * from history;
+INSERT INTO history (learner_id, video_id, track_id)
+VALUES 
+(3, 1, 1),
+(3, 2, 1);
+UPDATE history SET completed = 1 WHERE learner_id = 3 AND video_id = 1 AND track_id = 1;
+select * from learner;
+UPDATE history SET completed = 1 WHERE learner_id = 3 AND video_id = 2 AND track_id = 1;
+select * from learner;
+
+--for update click_time in progress table
+CREATE OR REPLACE FUNCTION update_click_time(p_learner_id INT, p_video_id INT)
+RETURNS VOID AS $$
+BEGIN
+    -- Check if a progress record already exists for this learner and video
+    IF EXISTS (SELECT 1 FROM progress WHERE learner_id = p_learner_id AND video_id = p_video_id) THEN
+        -- Update the existing record
+        UPDATE progress 
+        SET click_time = CURRENT_TIMESTAMP 
+        WHERE learner_id = p_learner_id AND video_id = p_video_id;
     ELSE
-        multiplier := 1;
+        -- Insert a new record if it does not exist
+        INSERT INTO progress (learner_id, video_id, click_time)
+        VALUES (p_learner_id, p_video_id, CURRENT_TIMESTAMP);
     END IF;
+END;
+$$ LANGUAGE plpgsql;
 
-    UPDATE CPA
-    SET total_score = total_score + (1 * multiplier)
-    WHERE learner_id = NEW.learner_id;
+SELECT update_click_time(2, 3);
+select * from progress;
+
+
+--for update highest_score in progress table whenever user finish a track
+CREATE OR REPLACE FUNCTION update_highest_score()
+RETURNS TRIGGER AS $$
+DECLARE
+    video_level VARCHAR(50);
+    score_increment INT;
+    current_highest_score INT;
+    new_total_score INT;
+BEGIN
+    -- Retrieve the level of the video
+    SELECT level INTO video_level FROM video WHERE video_id = NEW.video_id;
+
+    -- Determine the score increment based on the level of the video
+    CASE video_level
+        WHEN 'Easy' THEN score_increment := 1;
+        WHEN 'Medium' THEN score_increment := 2;
+        WHEN 'Hard' THEN score_increment := 3;
+        ELSE score_increment := 0; -- Default case if the level is not defined
+    END CASE;
+
+    -- Calculate new total score
+    SELECT SUM(score_increment) INTO new_total_score
+    FROM history
+    WHERE learner_id = NEW.learner_id AND video_id = NEW.video_id AND completed = 1;
+
+    -- Retrieve the current highest score
+    SELECT highest_score INTO current_highest_score
+    FROM progress
+    WHERE learner_id = NEW.learner_id AND video_id = NEW.video_id;
+
+    -- Update the highest score if the new total score is greater
+    IF new_total_score > current_highest_score THEN
+        UPDATE progress
+        SET highest_score = new_total_score
+        WHERE learner_id = NEW.learner_id AND video_id = NEW.video_id;
+    END IF;
 
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
--- Trigger to call the function when a track is marked as completed
-CREATE TRIGGER update_score_after_completion
+CREATE TRIGGER trigger_update_highest_score
 AFTER UPDATE OF completed ON history
 FOR EACH ROW
-WHEN (NEW.completed = 1)
-EXECUTE FUNCTION update_total_score();
-
-
---Test case 1: complete track in hard video:
-INSERT INTO account (username, password, email, user_role, first_name, last_name) VALUES ('test_user1', 'test_pass', 'test1@example.com', 'learner', 'Test', 'User1');
-INSERT INTO learner (age, occupation, account_id) VALUES (25, 'Test Occupation', (SELECT account_id FROM account WHERE username = 'test_user1'));
-INSERT INTO category (category_name) VALUES ('Hard Level Category');
-INSERT INTO video (video_title, category_id, level, source_link) VALUES ('Hard Level Video', (SELECT category_id FROM category WHERE category_name = 'Hard Level Category'), 'hard', 'http://example.com');
-INSERT INTO track (track_id, video_id, start_time, end_time, transcript) VALUES (101, (SELECT video_id FROM video WHERE video_title = 'Hard Level Video'), 0, 60, 'Test Transcript');
-INSERT INTO CPA (learner_id, total_score) VALUES ((SELECT learner_id FROM learner WHERE account_id = (SELECT account_id FROM account WHERE username = 'test_user1')), 0);
-
-INSERT INTO history (learner_id, video_id, track_id, completed)
-VALUES
-((SELECT learner_id 
-  FROM learner 
-  WHERE account_id = (SELECT account_id 
-					  FROM account 
-					  WHERE username = 'test_user1')), (SELECT video_id 
-														FROM video 
-														WHERE video_title = 'Hard Level Video'), 101, 0);
-
-UPDATE history 
-SET completed = 1 
-WHERE learner_id = (SELECT learner_id 
-					FROM learner 
-					WHERE account_id = (SELECT account_id 
-										FROM account 
-										WHERE username = 'test_user1')) 
-AND video_id = (SELECT video_id 
-				FROM video 
-				WHERE video_title = 'Hard Level Video') 
-AND track_id = 101;
-
-SELECT * FROM CPA WHERE learner_id = (SELECT learner_id FROM learner WHERE account_id = (SELECT account_id FROM account WHERE username = 'test_user1'));
-
---Test case 2: complete track in medium video:
-
--- Insert data for test case 2
-INSERT INTO account (username, password, email, user_role, first_name, last_name) VALUES ('test_user2', 'test_pass', 'test2@example.com', 'learner', 'Test', 'User2');
-INSERT INTO learner (age, occupation, account_id) VALUES (26, 'Test Occupation 2', (SELECT account_id FROM account WHERE username = 'test_user2'));
-INSERT INTO category (category_name) VALUES ('Medium Level Category');
-INSERT INTO video (video_title, category_id, level, source_link) VALUES ('Medium Level Video', (SELECT category_id FROM category WHERE category_name = 'Medium Level Category'), 'medium', 'http://example.com');
-INSERT INTO track (track_id, video_id, start_time, end_time, transcript) VALUES (201, (SELECT video_id FROM video WHERE video_title = 'Medium Level Video'), 0, 60, 'Test Transcript 2');
-INSERT INTO CPA (learner_id, total_score) VALUES ((SELECT learner_id FROM learner WHERE account_id = (SELECT account_id FROM account WHERE username = 'test_user2')), 10);
-
--- Initial state in history (track not completed)
-INSERT INTO history (learner_id, video_id, track_id, completed)
-VALUES
-((SELECT learner_id FROM learner WHERE account_id = (SELECT account_id FROM account WHERE username = 'test_user2')), (SELECT video_id FROM video WHERE video_title = 'Medium Level Video'), 201, 0);
-
--- Mark the track as completed
-UPDATE history 
-SET completed = 1 
-WHERE learner_id = (SELECT learner_id FROM learner WHERE account_id = (SELECT account_id FROM account WHERE username = 'test_user2')) 
-AND video_id = (SELECT video_id FROM video WHERE video_title = 'Medium Level Video') 
-AND track_id = 201;
-
--- Check the updated score
-SELECT * FROM CPA WHERE learner_id = (SELECT learner_id FROM learner WHERE account_id = (SELECT account_id FROM account WHERE username = 'test_user2'));
-
-select * from learner
+WHEN (OLD.completed = 0 AND NEW.completed = 1)
+EXECUTE PROCEDURE update_highest_score();
 
 select * from history
 
-select * from video
-
-select * from category
-
-select * from track
+INSERT INTO account(username, password, email, user_role, first_name, last_name) values ('hazel_lime','hazellime','hazel.lime@example.com', 'learner', 'Hazel', 'Lime');
+INSERT INTO learner(dob, occupation, address, phone_number, account_id) VALUES('2002-11-08', 'Student', '203 St BroadWay', '0987654321', 8);
+select add_history(1, 6)

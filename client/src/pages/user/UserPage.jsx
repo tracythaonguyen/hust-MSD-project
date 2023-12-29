@@ -4,6 +4,7 @@ import "./userPage.css";
 import CameraIcon from "../../assets/images/add-camera_icon.png";
 import MarkedBookIcon from "../../assets/images/marked-book_icon.png";
 import MarkedBookWhiteIcon from "../../assets/images/marked-book-white_icon.png";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 export const UserPage = () => {
   const user = {
@@ -26,14 +27,18 @@ export const UserPage = () => {
             <img alt="book icon" src={MarkedBookWhiteIcon}></img>
             <div className="taskText">Information Page</div>
           </button>
+          <Link to="/history">
           <button className="task task-2">
             <img alt="book icon" src={MarkedBookIcon}></img>
             <div className="taskText">Video History Page</div>
           </button>
+          </Link>
+          <Link to="/history">
           <button className="task task-3">
             <img alt="book icon" src={MarkedBookIcon}></img>
             <div className="taskText">Video Favourite Page</div>
           </button>
+          </Link>
           <button className="task task-4">
             <img alt="book icon" src={MarkedBookIcon}></img>
             <div className="taskText">Something Page</div>
