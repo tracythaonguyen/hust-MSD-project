@@ -86,7 +86,7 @@
 
 .videoPageContainer .videoPageTitle {
   color: #fff;
-  font-family: Poppins;
+  /* font-family: Poppins; */
   font-size: 37px;
   font-style: normal;
   font-weight: 400;
@@ -113,9 +113,15 @@
 .videoPageContainer .video{
   width: 100%;
   margin-top: 20px;
+  height: 500px;
 }
 
-.videoPageContainer .video iframe{
+/* .videoPageContainer .video ReactPlayer {
   border-radius: 20px;
-  height:550px;
+  height: 500px;
+} */
+
+.videoPageContainer .videoPageRight .videoPageInfo {
+  display: flex;
+  flex-direction: column;
 }
