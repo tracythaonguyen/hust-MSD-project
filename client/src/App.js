@@ -41,7 +41,7 @@ export default function App() {
                     <ProtectedRoute path="/home" component={ HomePage } />
                     <ProtectedRoute path="/user" component={ UserPage } />
                     <ProtectedRoute path="/topic" component={ TopicPage } />
-                    <ProtectedRoute path="/video" component={ VideoPage } />
+                    <ProtectedRoute path="/video" component={ VideoPage  } />
                     <ProtectedRoute path="/history" component={History } />
                 </Switch>
             </div>
