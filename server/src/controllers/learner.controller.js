@@ -56,7 +56,7 @@ async function createLearner(req, res) {
 
 async function updateLearner(req, res) {
   try {
-    const { dob, occupation, account_id, total_score } = req.body
+    const { dob, occupation, account_id , address, phone_number} = req.body
     const { id } = req.params
 
     if (!account_id) {
@@ -64,8 +64,13 @@ async function updateLearner(req, res) {
     }
 
     const learner = await pool.query(
-      'UPDATE learner SET dob = $1, occupation = $2, account_id = $3, total_score = $4 WHERE learner_id = $5 RETURNING *',
-      [dob, occupation, account_id, total_score, id],
+      `UPDATE learner SET 
+      dob = $1, occupation = $2, 
+      account_id = $3, 
+      address = $4,
+      phone_number = $5
+      WHERE learner_id = $6 RETURNING *`,
+      [dob, occupation, account_id, address, phone_number, id],
     )
     // Check if learner exists
     if (!learner.rows.length) {

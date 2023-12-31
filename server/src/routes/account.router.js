@@ -16,8 +16,8 @@ router.get('/search', accountController.searchAccountByUserName)
 // delete an account by id
 router.delete('/:id', verifyAdmin,accountController.deleteAccount)
 
-// update account username
-router.put('/change-name/:id', accountController.updateUserName)
+// update account
+router.put('/update-account/:id', accountController.updateAccount)
 
 // create account
 router.post('/create', accountController.createAccount)
