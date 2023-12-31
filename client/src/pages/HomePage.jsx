@@ -5,26 +5,15 @@ import './HomePage.css';
 import imgUrl from '../assets/images/ads.png';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
+import {useUser} from "../components/UserContext";
 
 
 export default function HomePage() {
     const history = useHistory();
     const token = localStorage.getItem('token');
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState(useUser());
     //get user by token body
-    useEffect(() => {
-        const getUser = async () => {
-            try {
-                const res = await axios.get(`http://localhost:8000/learner/get-learner-by-token/${token}`, {
-                    headers: {Authorization: `Bearer ${token}`},
-                });
-                setUser(res.data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        getUser().then(r => console.log(r));
-    }, [token]);
+    
 
     //connect to API to get videos
     const [videos, setVideos] = useState([]);
