@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from "../components/Header";
 import Footer from '../components/Footer';
 import './HomePage.css';
 import imgUrl from '../assets/images/ads.png';
 import axios from 'axios';
-import {useState, useEffect} from 'react';
-import { useHistory } from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 
 
 export default function HomePage() {
@@ -101,12 +100,12 @@ export default function HomePage() {
             // Navigate to TopicPage with searchResults
             history.push({
                 pathname: '/videoList',
-                state: { initVideoListData: newVideoList },
+                state: {initVideoListData: newVideoList},
             });
         } else {
             history.push({
                 pathname: '/videoList',
-                state: { initVideoListData: videos },
+                state: {initVideoListData: videos},
             });
         }
     }
