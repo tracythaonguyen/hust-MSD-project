@@ -8,7 +8,7 @@ import UserPage from './pages/user/UserPage'
 import VideoPage from './pages/video/VideoPage.jsx'
 import History from './pages/history/History.jsx'
 import './App.css'
-import TopicPage from "./pages/topic/TopicPage";
+import VideoListPage from "./pages/videoList/VideoListPage";
 
 // test Ci/cd
 export default function App() {
@@ -34,13 +34,16 @@ export default function App() {
                     <ProtectedRoute2 path="/register" component={ Register } />
                     <ProtectedRoute path="/home" component={ HomePage } />
                     <ProtectedRoute path="/user" component={ UserPage } />
-                    <ProtectedRoute path="/topic" component={ TopicPage } /> */}
+                    <ProtectedRoute path="/topic" component={ SearchPage } /> */}
                     <ProtectedRoute2 exact path="/" component={ Landing } />
                     <ProtectedRoute2 path="/login" component={ Login } />
                     <ProtectedRoute2 path="/register" component={ Register } />
                     <ProtectedRoute path="/home" component={ HomePage } />
                     <ProtectedRoute path="/user" component={ UserPage } />
-                    <ProtectedRoute path="/topic" component={ TopicPage } />
+                    {/*<ProtectedRoute path="/topic" component={ SearchPage } />*/}
+                    {/*Search video page*/}
+                    <ProtectedRoute path="/videoList" component={ VideoListPage } />
+
                     <ProtectedRoute path="/video" component={ VideoPage  } />
                     <ProtectedRoute path="/history" component={History } />
                 </Switch>

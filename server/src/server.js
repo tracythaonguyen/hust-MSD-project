@@ -14,6 +14,23 @@ import feedRouter from './routes/feed.router.js'
 import favoriteRouter from './routes/favorite.router.js'
 import historyRouter from './routes/history.router.js'
 
+
+
+// Comment if not need test connection
+//#region  test connection
+// import pool from "./config/db.js";
+// pool.connect().then(() => {
+//   pool.query("SELECT NOW()", (err, res) => {
+//     // if connected, write data
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log(res.rows);
+//     }
+//   });
+// });
+//#endregion
+
 dotenv.config()
 const app = express()
 
@@ -38,5 +55,10 @@ app.use('/history', historyRouter)
 app.listen(port, () => {
   console.log('Backend is running on the port: ' + port)
 })
+
+
+
+
+
 
 export default app
