@@ -48,7 +48,7 @@ export const Header = () => {
                     <div className="right-item">
                         <div className="name" onClick={ShowOption}>Hi, <span style={{color: "#000"}}>{name}</span></div>
                         <Link to='/user'>
-                            <div className="profile">Profile</div>
+                        <div className="profile">Profile</div>
                         </Link>
                         <div className="logout" onClick={handleLogOut}>Logout</div>
                     </div>

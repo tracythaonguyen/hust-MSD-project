@@ -1,5 +1,5 @@
 body {
-    font-family: "Poppins-SemiBold", Helvetica;
+    font-family: "Poppins-SemiBold", Helvetica, serif;
 }
 
 /*Top content*/
@@ -15,7 +15,7 @@ body {
 
 .search-group {
     width: 60vw;
-    margin: 40 auto 40 auto;
+    margin: 40px auto 40px auto;
 
 }
 
@@ -36,7 +36,8 @@ body {
     color: #82839a99;
     font-size: 20px;
     font-weight: 400;
-    letter-spacing: 0.8px;
+    letter-spacing: 1px;
+    padding-left: 20px;
 }
 
 .search-button {
@@ -66,7 +67,7 @@ body {
     color: #252641;
     font-size: 24px;
     font-weight: 500;
-    letter-spacing: 0.96px;
+    letter-spacing: 1px;
     padding: 10px;
 }
 
@@ -109,14 +110,14 @@ h1 {
     color: #696983;
     font-size: 24px;
     font-weight: 400;
-    letter-spacing: 0.48px;
+    letter-spacing: 1px;
     line-height: 32px;
     width: 600px;
 }
 
 .start-btn {
     background-color: #49bbbd;
-    border: 0px;
+    border: 0;
     border-radius: 12px;
     height: 63px;
     width: 236px;
@@ -156,7 +157,7 @@ h2 {
     color: #000000;
     font-size: 30px;
     font-weight: 500;
-    letter-spacing: 0.6px;
+    letter-spacing: 1px;
 }
 
 .see-all {
@@ -175,7 +176,7 @@ h2 {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 20px;
-    box-shadow: 0px 18.83px 47.08px #2f327d1a;
+    box-shadow: 0 19px 47px #2f327d1a;
     /* height: 100vh; */
     width: 39vw;
 }
@@ -195,6 +196,7 @@ h2 {
     font-weight: 500;
     letter-spacing: 0;
     line-height: 40px;
+    margin-left: 20px;
     /* width: 600px; */
     text-align: left;
 }
@@ -203,13 +205,15 @@ h2 {
     color: #696983;
     font-size: 20px;
     font-weight: 400;
-    letter-spacing: 0.4px;
+    letter-spacing: 1px;
     line-height: 36px;
+    margin-left: 20px;
     /* width: 600px; */
     text-align: left;
 }
 
 .blog .blog-footer {
+    margin-left: 20px;
     display: flex;
     justify-content: space-between;
 }
@@ -218,7 +222,7 @@ h2 {
     color: #696983;
     font-size: 20px;
     font-weight: 400;
-    letter-spacing: 0.4px;
+    letter-spacing: 1px;
     line-height: 36px;
     text-decoration: underline;
 }
@@ -227,15 +231,15 @@ h2 {
     color: #696983;
     font-size: 20px;
     font-weight: 400;
-    letter-spacing: 0.4px;
+    letter-spacing: 1px;
     line-height: 36px;
 }
 
 .middle-content .nav {
-    margin-top: 50px;
+    margin-top: 40px;
     display: flex;
     justify-content: flex-end;
-    font-size: 40;
+    font-size: 20px;
 }
 
 .middle-content .nav-btn {
@@ -291,7 +295,7 @@ h2 {
 .video {
     background-color: #ffffff;
     border-radius: 20px;
-    box-shadow: 0px 18.83px 47.08px #0000001a;
+    box-shadow: 0 19px 47px #0000001a;
     height: 500px;
     width: 320px;
     padding: 15px;
@@ -312,8 +316,8 @@ h2 {
     color: #696983;
     font-size: 14px;
     font-weight: 500;
-    letter-spacing: 0.28px;
-    line-height: 25.2px;
+    letter-spacing: 1px;
+    line-height: 25px;
 }
 
 h4 {
@@ -329,7 +333,7 @@ h4 {
     color: #696983;
     font-size: 18px;
     font-weight: 400;
-    letter-spacing: 0.36px;
-    line-height: 32.4px;
+    letter-spacing: 1px;
+    line-height: 32px;
     text-align: left;
 }
