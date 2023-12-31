@@ -17,10 +17,10 @@ export const VideoListPage = () => {
     // Convert initVideoListData to smallBoxData
     if (initVideoListData !== undefined && initVideoListData.length !== 0) {
         console.log("Search results: " + initVideoListData);
-        smallBoxData = initVideoListData.map((searchResult) => ({
-            id: searchResult.id,
-            name: searchResult.video_title,
-            image: searchResult.link_img,
+        smallBoxData = initVideoListData.map(({video_id, link_img, video_title}) => ({
+            id: video_id,
+            name: video_title,
+            image: link_img,
             // progress: searchResult.progress,
         }));
     }

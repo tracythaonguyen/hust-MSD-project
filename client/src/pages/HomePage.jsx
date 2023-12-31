@@ -5,16 +5,13 @@ import './HomePage.css';
 import imgUrl from '../assets/images/ads.png';
 import axios from 'axios';
 import {useHistory} from 'react-router-dom';
-import {useUser} from "../components/UserContext";
-
-
+import useFetchUser from "../utilities/useFetchUser";
+import useFetchRecentVideos from "../utilities/useFetchRecentVideos";
 export default function HomePage() {
     const history = useHistory();
     const token = localStorage.getItem('token');
-    const [user, setUser] = useState(useUser());
-    //get user by token body
-    
-
+    const user = useFetchUser(token);
+    const recentVideos = useFetchRecentVideos(user, token);
     //connect to API to get videos
     const [videos, setVideos] = useState([]);
 
@@ -49,25 +46,6 @@ export default function HomePage() {
             setCurrentPage(currentPage - 1);
         }
     };
-
-    //get recent learning videos
-    const [recentVideos, setRecentVideos] = useState([]);
-    useEffect(() => {
-        const getRecentVideos = async () => {
-            try {
-                const res = await axios.get(
-                    `http://localhost:8000/video/getRecentLearningVideo/${user.learner_id}`,
-                    {
-                        headers: {Authorization: `Bearer ${token}`},
-                    }
-                );
-                setRecentVideos(res.data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        getRecentVideos().then(r => console.log(r));
-    }, [user]);
 
     //#region DEV: HOANG
     //#region -> Searching Functionalities
@@ -147,15 +125,15 @@ export default function HomePage() {
                                 <p className='see-all'> See all</p>
                             </div>
                             <div className='group-blog'>
-                                {currentVideos.map((video) => (
+                                {currentVideos.map(({description, link_img, video_title, view}) => (
                                     <div className='blog'>
-                                        <img alt='img' src={video.link_img} className='blog-image'/>
-                                        <h3>{video.video_title}</h3>
-                                        <p className='p3'>{video.description}</p>
+                                        <img alt='img' src={link_img} className='blog-image'/>
+                                        <h3>{video_title}</h3>
+                                        <p className='p3'>{description}</p>
                                         <div className='blog-footer'>
                                             <p className='read-more'>Read more</p>
                                             <div className='view-count'>
-                                                {video.view}
+                                                {view}
                                             </div>
                                         </div>
                                     </div>
@@ -173,15 +151,15 @@ export default function HomePage() {
                             </div>
 
                             <div className='video-group'>
-                                {recentVideos.slice(0, 4).map((video) => (
+                                {recentVideos.slice(0, 4).map(({description, link_img, time, topic, video_title}) => (
                                     <div className='video'>
-                                        <img alt='img' src={video.link_img} className='video-image'/>
+                                        <img alt='img' src={link_img} className='video-image'/>
                                         <div className='video-info'>
-                                            <p className='topic-name'>{video.topic}</p>
-                                            <p className='time'>{video.time}</p>
+                                            <p className='topic-name'>{topic}</p>
+                                            <p className='time'>{time}</p>
                                         </div>
-                                        <h4>{video.video_title}</h4>
-                                        <p className='p4'>{video.description}</p>
+                                        <h4>{video_title}</h4>
+                                        <p className='p4'>{description}</p>
                                     </div>
                                 ))}
 
