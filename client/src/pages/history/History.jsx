@@ -5,32 +5,12 @@ import MarkedBookWhiteIcon from "../../assets/images/marked-book-white_icon.png"
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
-
+import { useUser } from "../../components/UserContext";
 export const History = () => {
     // const [recentVideos, setRecentVideos] = useState([]);
     const token = localStorage.getItem("token");
-    const [user, setUser] = useState({});
+    const user = useUser();
     const [recentVideos, setRecentVideos] = useState([]);
-
-    //get user by token body
-
-    useEffect(() => {
-        const getUser = async () => {
-            try {
-                const res = await axios.get(
-                    `http://localhost:8000/learner/get-learner-by-token/${token}`,
-                    {
-                        headers: {Authorization: `Bearer ${token}`},
-                    }
-                );
-                setUser(res.data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        getUser();
-    }, [token]);
-
 
     useEffect(() => {
         const getRecentVideos = async () => {

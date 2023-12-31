@@ -9,6 +9,7 @@ import VideoPage from './pages/video/VideoPage.jsx'
 import History from './pages/history/History.jsx'
 import './App.css'
 import VideoListPage from "./pages/videoList/VideoListPage";
+import { UserProvider } from './components/UserContext.js'
 
 // test Ci/cd
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
         return <Route component={Component} path={path}/>
     };
     return (
+        <UserProvider>
         <Router>
             <div>
                 <Switch>
@@ -49,5 +51,6 @@ export default function App() {
                 </Switch>
             </div>
         </Router>
+        </UserProvider>
     )
 }
