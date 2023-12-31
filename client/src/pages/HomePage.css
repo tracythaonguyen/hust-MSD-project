@@ -248,16 +248,20 @@ h2 {
     margin: 5px;
     border: none;
 }
+
 .middle-content .nav-btn:focus {
     border: none;
     outline: none;
 }
+
 .middle-content .nav-btn:active {
     background-color: #69d5d6;
 }
+
 .middle-content .nav-btn:hover {
     border: none;
 }
+
 .middle-content .nav-btn:visited {
     border: none;
 }
