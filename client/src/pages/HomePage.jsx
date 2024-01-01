@@ -52,11 +52,34 @@ export default function HomePage() {
     const [filterData, setFilterData] = useState("");
     //#region -> Searching Functionalities
     // search function with param is input text from search-term className
-    const search = (searchTerm) => {
+    const search = async (searchTerm) => {
         console.log("Search Term: ", searchTerm);
         setFilterData(searchTerm);
         if (searchByTag) {
             // TODO: Search by tag
+            // find the tag with name is searchTerm
+            const tag = tags.find(({tag_name}) => {
+                return tag_name === searchTerm;
+            });
+            // check if tag is found
+            if (tag) {
+                console.log("Tag found: ", tag);
+                // get the video list with tag_id by using axios.get("http://localhost:8000/video/getVideosByTag/:tag_id")
+                try {
+                    const res = await axios.get(`http://localhost:8000/video/getVideosByTag/${tag.tag_id}`);
+                    console.log("Search Results: ", res.data);
+                    // Navigate to TopicPage with searchResults
+                    history.push({
+                        pathname: '/videoList',
+                        state: {initVideoListData: res.data},
+                    });
+                } catch (err) {
+                    console.log(err);
+                }
+            } else {
+                // show error message
+                alert("Tag not found!");
+            }
         } else {
             if (searchTerm !== "") {
                 const newVideoList = videos.filter((video) => {
@@ -148,17 +171,32 @@ export default function HomePage() {
         });
     }
     //#region -> Search by tag Functionalities
+    // fetch all tags data
+    const [tags, setTags] = useState([]);
+    useEffect(() => {
+        const getTags = async () => {
+            try {
+                const res = await axios.get("http://localhost:8000/tag");
+                setTags(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getTags().then(r => console.log(r));
+    }, []);
+
     // button to select search by tag or by name
     const [searchByTag, setSearchByTag] = useState(false);
     const searchByTagButton = () => {
-        console.log("Search by tag");
-        setSearchByTag(!searchByTag); // Toggle dropdown visibility
-        // change the text of button
-        if (searchByTag) {
+        if (!searchByTag) {
             document.getElementById("search-by-tag").innerHTML = "Search by tag";
         } else {
             document.getElementById("search-by-tag").innerHTML = "Search by name";
         }
+        console.log(`Search by tag: ${searchByTag}`);
+        setSearchByTag(!searchByTag); // Toggle dropdown visibility
+        // change the text of button
+
     }
 
     //#endregion
@@ -227,8 +265,8 @@ export default function HomePage() {
                                 <p className='see-all'> See all</p>
                             </div>
                             <div className='group-blog'>
-                                {currentVideos.map(({description, link_img, video_title, view}) => (
-                                    <div className='blog'>
+                                {currentVideos.map(({video_id, description, link_img, video_title, view}) => (
+                                    <div className='blog' key={video_id}>
                                         <img alt='img' src={link_img} className='blog-image'/>
                                         <h3>{video_title}</h3>
                                         <p className='p3'>{description}</p>
