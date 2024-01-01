@@ -53,11 +53,11 @@ const FillInTheBlankQuiz = ({ transcript, video_id, track_id }) => {
     if (correctAnswers === text) {
       alert("Correct answer");
       axios
-        .put("http://localhost:8000/update-completed/", {
+        .put("http://localhost:8000/history/update-completed/", {
           learner_id: user.learner_id,
           video_id: video_id,
           track_id: track_id,
-          complete: 1,
+          completed: 1,
         })
         .then((response) => {})
         .catch((error) => {
