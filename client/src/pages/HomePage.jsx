@@ -48,32 +48,36 @@ export default function HomePage() {
         }
     };
 
-    //#region DEV: HOANG
+    //#region NEW FUNCTIONS -> DEV: HOANG
     const [filterData, setFilterData] = useState("");
     //#region -> Searching Functionalities
     // search function with param is input text from search-term className
     const search = (searchTerm) => {
         console.log("Search Term: ", searchTerm);
         setFilterData(searchTerm);
-        if (searchTerm !== "") {
-            const newVideoList = videos.filter((video) => {
-                return Object.values(video)
-                    .join(" ")
-                    .toLowerCase()
-                    .includes(searchTerm.toLowerCase());
-            });
-            // debug
-            console.log("Search Results: ", newVideoList);
-            // Navigate to TopicPage with searchResults
-            history.push({
-                pathname: '/videoList',
-                state: {initVideoListData: newVideoList},
-            });
+        if (searchByTag) {
+            // TODO: Search by tag
         } else {
-            history.push({
-                pathname: '/videoList',
-                state: {initVideoListData: videos},
-            });
+            if (searchTerm !== "") {
+                const newVideoList = videos.filter((video) => {
+                    return Object.values(video)
+                        .join(" ")
+                        .toLowerCase()
+                        .includes(searchTerm.toLowerCase());
+                });
+                // debug
+                console.log("Search Results: ", newVideoList);
+                // Navigate to TopicPage with searchResults
+                history.push({
+                    pathname: '/videoList',
+                    state: {initVideoListData: newVideoList},
+                });
+            } else {
+                history.push({
+                    pathname: '/videoList',
+                    state: {initVideoListData: videos},
+                });
+            }
         }
     }
     //#endregion
@@ -143,6 +147,20 @@ export default function HomePage() {
             state: {initVideoListData: newVideoList},
         });
     }
+    //#region -> Search by tag Functionalities
+    // button to select search by tag or by name
+    const [searchByTag, setSearchByTag] = useState(false);
+    const searchByTagButton = () => {
+        console.log("Search by tag");
+        setSearchByTag(!searchByTag); // Toggle dropdown visibility
+        // change the text of button
+        if (searchByTag) {
+            document.getElementById("search-by-tag").innerHTML = "Search by tag";
+        } else {
+            document.getElementById("search-by-tag").innerHTML = "Search by name";
+        }
+    }
+
     //#endregion
 
     return (
@@ -155,7 +173,8 @@ export default function HomePage() {
                         <div className='top-content'>
                             <div className='search-group'>
                                 <div className='search-box'>
-                                    <button className='search-option-button'>Search by name</button>
+                                    <button id='search-by-tag' className='search-option-button'
+                                        onClick={() => searchByTagButton()}>Search by name</button>
                                     <input type="text" className='search-term'
                                            placeholder="Input Keyword..."
                                            value={filterData}
