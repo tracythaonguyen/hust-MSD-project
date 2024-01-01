@@ -1,13 +1,12 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Header from "../../components/Header";
 import "./userPage.css";
 import CameraIcon from "../../assets/images/add-camera_icon.png";
 import MarkedBookIcon from "../../assets/images/marked-book_icon.png";
 import MarkedBookWhiteIcon from "../../assets/images/marked-book-white_icon.png";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import { useEffect, useState } from "react";
+import {Link} from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";
-import { useUser } from "../../components/UserContext";
+import {useUser} from "../../components/UserContext";
 
 export const UserPage = () => {
   const [user, setUser] = useState(useUser());
@@ -35,63 +34,63 @@ export const UserPage = () => {
     getAccount();
   }, [user]);
 
-  const avatarLink =
-    "https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2023/02/hinh-avatar-anh-dai-dien-FB-mac-dinh.jpg?fit\u003d560%2C560\u0026ssl\u003d1";
-  const handleUpdateUser = () => {
-    //update user
-    console.log("data to update", user);
-    axios
-      .put(
-        `http://localhost:8000/learner/update-learner/${user.learner_id}`,
-        user,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    //update account
-    axios
-      .put(
-        `http://localhost:8000/account/update-account/${account.account_id}`,
-        account,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    const saveBtn = document.querySelector(".saveBtn");
-    saveBtn.style.display = "none";
-  };
-  const handleInputLearnerChange = (e) => {
-    // Update the user state when input changes
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value,
-    });
-  };
+    const avatarLink =
+        "https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2023/02/hinh-avatar-anh-dai-dien-FB-mac-dinh.jpg?fit\u003d560%2C560\u0026ssl\u003d1";
+    const handleUpdateUser = () => {
+        //update user
+        console.log("data to update", user);
+        axios
+            .put(
+                `http://localhost:8000/learner/update-learner/${user.learner_id}`,
+                user,
+                {
+                    headers: {Authorization: `Bearer ${token}`},
+                }
+            )
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        //update account
+        axios
+            .put(
+                `http://localhost:8000/account/update-account/${account.account_id}`,
+                account,
+                {
+                    headers: {Authorization: `Bearer ${token}`},
+                }
+            )
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        const saveBtn = document.querySelector(".saveBtn");
+        saveBtn.style.display = "none";
+    };
+    const handleInputLearnerChange = (e) => {
+        // Update the user state when input changes
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value,
+        });
+    };
 
-  const handleInputAccountChange = (e) => {
-    // Update the user state when input changes
-    setAccount({
-      ...account,
-      [e.target.name]: e.target.value,
-    });
-  };
+    const handleInputAccountChange = (e) => {
+        // Update the user state when input changes
+        setAccount({
+            ...account,
+            [e.target.name]: e.target.value,
+        });
+    };
 
-  const handleEditMode = () => {
-    const saveBtn = document.querySelector(".saveBtn");
-    saveBtn.style.display = "block";
-  };
+    const handleEditMode = () => {
+        const saveBtn = document.querySelector(".saveBtn");
+        saveBtn.style.display = "block";
+    };
 
   return (
     <div className="userPage">
@@ -114,16 +113,14 @@ export const UserPage = () => {
               <div className="taskText">Video Favourite Page</div>
             </button>
           </Link>
-          <Link to ='/record'>
-            <button className="task task-4">
-                <img alt="book icon" src={MarkedBookIcon}></img>
-                <div className="taskText">Record Page</div>
-            </button>
-          </Link>
+          <button className="task task-4">
+            <img alt="book icon" src={MarkedBookIcon}></img>
+            <div className="taskText">Something Page</div>
+          </button>
         </div>
 
-        { user && (
-          <div className    ="userContent">
+        {user && (
+          <div className="userContent">
             <div className="contentHeader">
               <button className="editInfo" onClick={handleEditMode}>
                 Edit Information
@@ -141,92 +138,92 @@ export const UserPage = () => {
               </div>
             </div>
 
-            <div className="contentBody">
-              <div className="infoContainer">
-                <div className="infos">
-                  <div className="info">
-                    <label className="infoLabel">First Name</label>
-                    <input
-                      placeholder={account.first_name}
-                      type="text"
-                      className="inputText"
-                      name="first_name"
-                      onChange={handleInputAccountChange}
-                    ></input>
-                  </div>
-                  <div className="info">
-                    <label className="infoLabel">Last</label>
-                    <input
-                      placeholder={account.last_name}
-                      type="text"
-                      className="inputText"
-                      name="last_name"
-                      onChange={handleInputAccountChange}
-                    ></input>
-                  </div>
-                </div>
-                <div className="infos">
-                  <div className="info">
-                    <label className="infoLabel">Birthdate</label>
-                    <input type="date" className="inputDate" name="dob"></input>
-                  </div>
-                  <div className="info">
-                    <label className="infoLabel">Occupation</label>
-                    <input
-                      placeholder={user.occupation}
-                      type="text"
-                      className="inputText"
-                      name="occupation"
-                      onChange={handleInputLearnerChange}
-                    ></input>
-                  </div>
-                </div>
-                <div className="infos">
-                  <div className="info">
-                    <label className="infoLabel">Location</label>
-                    <input
-                      placeholder={user.address}
-                      type="text"
-                      className="inputText"
-                      name="address"
-                      onChange={handleInputLearnerChange}
-                    ></input>
-                  </div>
-                </div>
+                        <div className="contentBody">
+                            <div className="infoContainer">
+                                <div className="infos">
+                                    <div className="info">
+                                        <label className="infoLabel">First Name</label>
+                                        <input
+                                            placeholder={account.first_name}
+                                            type="text"
+                                            className="inputText"
+                                            name="first_name"
+                                            onChange={handleInputAccountChange}
+                                        ></input>
+                                    </div>
+                                    <div className="info">
+                                        <label className="infoLabel">Last</label>
+                                        <input
+                                            placeholder={account.last_name}
+                                            type="text"
+                                            className="inputText"
+                                            name="last_name"
+                                            onChange={handleInputAccountChange}
+                                        ></input>
+                                    </div>
+                                </div>
+                                <div className="infos">
+                                    <div className="info">
+                                        <label className="infoLabel">Birthdate</label>
+                                        <input type="date" className="inputDate" name="dob"></input>
+                                    </div>
+                                    <div className="info">
+                                        <label className="infoLabel">Occupation</label>
+                                        <input
+                                            placeholder={user.occupation}
+                                            type="text"
+                                            className="inputText"
+                                            name="occupation"
+                                            onChange={handleInputLearnerChange}
+                                        ></input>
+                                    </div>
+                                </div>
+                                <div className="infos">
+                                    <div className="info">
+                                        <label className="infoLabel">Location</label>
+                                        <input
+                                            placeholder={user.address}
+                                            type="text"
+                                            className="inputText"
+                                            name="address"
+                                            onChange={handleInputLearnerChange}
+                                        ></input>
+                                    </div>
+                                </div>
 
-                <div className="infos">
-                  <div className="info">
-                    <label className="infoLabel">Phone number</label>
-                    <input
-                      type="text"
-                      placeholder={user.phone_number}
-                      className="inputText"
-                      name="phone_number"
-                      onChange={handleInputLearnerChange}
-                    ></input>
-                  </div>
-                  <div className="info">
-                    <label className="infoLabel">Email</label>
-                    <input
-                      placeholder={account.email}
-                      type="text"
-                      className="inputText"
-                      name="email"
-                      onChange={handleInputAccountChange}
-                    ></input>
-                  </div>
-                </div>
+                                <div className="infos">
+                                    <div className="info">
+                                        <label className="infoLabel">Phone number</label>
+                                        <input
+                                            type="text"
+                                            placeholder={user.phone_number}
+                                            className="inputText"
+                                            name="phone_number"
+                                            onChange={handleInputLearnerChange}
+                                        ></input>
+                                    </div>
+                                    <div className="info">
+                                        <label className="infoLabel">Email</label>
+                                        <input
+                                            placeholder={account.email}
+                                            type="text"
+                                            className="inputText"
+                                            name="email"
+                                            onChange={handleInputAccountChange}
+                                        ></input>
+                                    </div>
+                                </div>
 
-                <button className="saveBtn" onClick={handleUpdateUser}>
-                  Save
-                </button>
-              </div>
+                                <button className="saveBtn" onClick={handleUpdateUser}>
+                                    Save
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default UserPage;

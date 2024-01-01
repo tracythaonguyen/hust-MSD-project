@@ -7,6 +7,7 @@ import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import useFetchUser from "../utilities/useFetchUser";
 import useFetchRecentVideos from "../utilities/useFetchRecentVideos";
+
 export default function HomePage() {
     const history = useHistory();
     const token = localStorage.getItem('token');
@@ -48,13 +49,12 @@ export default function HomePage() {
     };
 
     //#region DEV: HOANG
+    const [filterData, setFilterData] = useState("");
     //#region -> Searching Functionalities
-    const [searchTerm, setSearchTerm] = useState("");
-
     // search function with param is input text from search-term className
     const search = (searchTerm) => {
         console.log("Search Term: ", searchTerm);
-        setSearchTerm(searchTerm);
+        setFilterData(searchTerm);
         if (searchTerm !== "") {
             const newVideoList = videos.filter((video) => {
                 return Object.values(video)
@@ -77,7 +77,72 @@ export default function HomePage() {
         }
     }
     //#endregion
+    //#region -> Filter by Popular Functionalities
+    // Sort by view count
+    const sortByViewCount = () => {
+        const newVideoList = videos.sort((a, b) => {
+            return b.view - a.view;
+        });
+        // debug
+        console.log("Sort By View Count: ", newVideoList);
+        // Navigate to TopicPage with searchResults
+        history.push({
+            pathname: '/videoList',
+            state: {initVideoListData: newVideoList},
+        });
+    }
+    //#endregion
+    //#region -> Filter by New Functionalities
+    // Sort by upload_date
+    const sortByUploadDate = () => {
+        const newVideoList = videos.sort(({upload_date: upload_date1}, {upload_date}) => {
+            return upload_date - upload_date1;
+        });
+        // debug
+        console.log("Sort By Upload Date: ", newVideoList);
+        // Navigate to TopicPage with searchResults
+        history.push({
+            pathname: '/videoList',
+            state: {initVideoListData: newVideoList},
+        });
+    }
+    //#endregion
+    //#region -> Dropdown Categories Functionalities
+    const [categories, setCategories] = useState([]);
+    const [showDropdown, setShowDropdown] = useState(false);
 
+    useEffect(() => {
+        const getCategories = async () => {
+            try {
+                const res = await axios.get("http://localhost:8000/category");
+                setCategories(res.data);
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        getCategories().then(r => console.log(r));
+    }, []);
+
+    // Show dropdown categories with name when click on Categories button
+    const showDropdownCategories = () => {
+        console.log("Show dropdown categories");
+        setShowDropdown(!showDropdown); // Toggle dropdown visibility
+    }
+
+    // Filter by category id
+    const filterByCategory = (categoryId) => {
+        console.log("Filter by category id: ", categoryId);
+        const newVideoList = videos.filter(({category_id}) => {
+            return category_id === categoryId;
+        });
+        // debug
+        console.log("Filter By Category: ", newVideoList);
+        // Navigate to TopicPage with searchResults
+        history.push({
+            pathname: '/videoList',
+            state: {initVideoListData: newVideoList},
+        });
+    }
     //#endregion
 
     return (
@@ -90,21 +155,39 @@ export default function HomePage() {
                         <div className='top-content'>
                             <div className='search-group'>
                                 <div className='search-box'>
+                                    <button className='search-option-button'>Search by name</button>
                                     <input type="text" className='search-term'
-                                           placeholder="Search your favourite course"
-                                           value={searchTerm}
-                                           onChange={(e) => setSearchTerm(e.target.value)}></input>
+                                           placeholder="Input Keyword..."
+                                           value={filterData}
+                                           onChange={(e) => setFilterData(e.target.value)}></input>
                                     <button type="submit" className='search-button'
-                                            onClick={() => search(searchTerm)}>
+                                            onClick={() => search(filterData)}>
                                         Search
                                     </button>
                                 </div>
-
                                 <div className='topic-group'>
-                                    <button className='topic-item'>Popular</button>
-                                    <button className='topic-item'>New</button>
-                                    <button className='topic-item'>Categories</button>
-                                    <button className='topic-item'>Search by</button>
+                                    <button className='topic-item'
+                                            onClick={() => sortByViewCount()}>Popular
+                                    </button>
+                                    <button className='topic-item'
+                                            onClick={() => sortByUploadDate()}>New
+                                    </button>
+                                    <div className="dropdown">
+                                        <button className='topic-item'
+                                                onClick={() => showDropdownCategories()}>Categories
+                                        </button>
+                                        {showDropdown && (
+                                            <div className="dropdown-content">
+                                                {categories.map(({category_id, category_name}) => (
+                                                    <button key={category_id}
+                                                            onClick={() => filterByCategory(category_id)}>
+                                                        {category_name}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                    {/*<button className='topic-item'>Search by</button>*/}
                                 </div>
                             </div>
                         </div>
