@@ -221,15 +221,23 @@ async function handleVideoView(req, res) {
   try {
     const { videoId } = req.params;
     const { learnerId } = req.body;
+
+    await pool.query('BEGIN');
+
     await pool.query('SELECT * FROM add_history($1, $2)', [videoId, learnerId]);
     await pool.query('SELECT update_click_time($1, $2)', [learnerId, videoId]);
+
     await pool.query('COMMIT');
+
+    res.status(200).json({ message: 'View recorded successfully' });
   } catch (error) {
-    console.error(error.message)
+    console.error(error.message);
     await pool.query('ROLLBACK');
-    throw error;
+
+    res.status(500).json({ message: 'An error occurred' });
   }
 }
+
 
 export default {
   getAllVideos,
