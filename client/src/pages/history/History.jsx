@@ -62,10 +62,12 @@ export const History = () => {
                         <img alt="book icon" src={MarkedBookIcon}></img>
                         <div className="taskText">Video Favourite Page</div>
                     </button>
-                    <button className="task task-4">
-                        <img alt="book icon" src={MarkedBookIcon}></img>
-                        <div className="taskText">Something Page</div>
-                    </button>
+                    <Link to = 'record'>
+                        <button className="task task-4">
+                            <img alt="book icon" src={MarkedBookIcon}></img>
+                            <div className="taskText">Record Page</div>
+                        </button>
+                    </Link>
                 </div>
 
                 <div className="historyContent">

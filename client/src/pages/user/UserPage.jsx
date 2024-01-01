@@ -12,7 +12,6 @@ import { useUser } from "../../components/UserContext";
 export const UserPage = () => {
   const [user, setUser] = useState(useUser());
   const token = localStorage.getItem("token");
-
   //get account by token
   const [account, setAccount] = useState({
     first_name: "",
@@ -115,14 +114,16 @@ export const UserPage = () => {
               <div className="taskText">Video Favourite Page</div>
             </button>
           </Link>
-          <button className="task task-4">
-            <img alt="book icon" src={MarkedBookIcon}></img>
-            <div className="taskText">Something Page</div>
-          </button>
+          <Link to ='/record'>
+            <button className="task task-4">
+                <img alt="book icon" src={MarkedBookIcon}></img>
+                <div className="taskText">Record Page</div>
+            </button>
+          </Link>
         </div>
 
-        {user && (
-          <div className="userContent">
+        { user && (
+          <div className    ="userContent">
             <div className="contentHeader">
               <button className="editInfo" onClick={handleEditMode}>
                 Edit Information
