@@ -76,6 +76,21 @@ export default function HomePage() {
         }
     }
     //#endregion
+    //#region -> Filter by Popular Functionalities
+    // Sort by view count
+    const sortByViewCount = () => {
+        const newVideoList = videos.sort((a, b) => {
+            return b.view - a.view;
+        });
+        // debug
+        console.log("Sort By View Count: ", newVideoList);
+        // Navigate to TopicPage with searchResults
+        history.push({
+            pathname: '/videoList',
+            state: {initVideoListData: newVideoList},
+        });
+    }
+    //#endregion
     //#region -> Filter by New Functionalities
     // Sort by upload_date
     const sortByUploadDate = () => {
