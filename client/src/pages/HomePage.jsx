@@ -7,6 +7,7 @@ import axios from 'axios';
 import {useHistory} from 'react-router-dom';
 import useFetchUser from "../utilities/useFetchUser";
 import useFetchRecentVideos from "../utilities/useFetchRecentVideos";
+
 export default function HomePage() {
     const history = useHistory();
     const token = localStorage.getItem('token');
@@ -166,12 +167,15 @@ export default function HomePage() {
                                 </div>
                                 <div className='topic-group'>
                                     <button className='topic-item'
-                                        onClick={() => sortByViewCount()}>Popular</button>
+                                            onClick={() => sortByViewCount()}>Popular
+                                    </button>
                                     <button className='topic-item'
-                                        onClick={() => sortByUploadDate()}>New</button>
+                                            onClick={() => sortByUploadDate()}>New
+                                    </button>
                                     <div className="dropdown">
                                         <button className='topic-item'
-                                                onClick={() => showDropdownCategories()}>Categories</button>
+                                                onClick={() => showDropdownCategories()}>Categories
+                                        </button>
                                         {showDropdown && (
                                             <div className="dropdown-content">
                                                 {categories.map(({category_id, category_name}) => (

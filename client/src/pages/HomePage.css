@@ -363,7 +363,7 @@ h4 {
     background-color: #f1f1f1;
     min-width: 160px;
     overflow: auto;
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -375,4 +375,6 @@ h4 {
     display: block;
 }
 
-.dropdown button:hover {background-color: #ddd;}
+.dropdown button:hover {
+    background-color: #ddd;
+}
