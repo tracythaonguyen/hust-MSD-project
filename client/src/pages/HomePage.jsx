@@ -155,9 +155,9 @@ export default function HomePage() {
         setSearchByTag(!searchByTag); // Toggle dropdown visibility
         // change the text of button
         if (searchByTag) {
-            document.getElementById("search-option-button").innerHTML = "Search by tag";
+            document.getElementById("search-by-tag").innerHTML = "Search by tag";
         } else {
-            document.getElementById("search-option-button").innerHTML = "Search by name";
+            document.getElementById("search-by-tag").innerHTML = "Search by name";
         }
     }
 
@@ -173,7 +173,8 @@ export default function HomePage() {
                         <div className='top-content'>
                             <div className='search-group'>
                                 <div className='search-box'>
-                                    <button className='search-option-button'>Search by name</button>
+                                    <button id='search-by-tag' className='search-option-button'
+                                        onClick={() => searchByTagButton()}>Search by name</button>
                                     <input type="text" className='search-term'
                                            placeholder="Input Keyword..."
                                            value={filterData}
