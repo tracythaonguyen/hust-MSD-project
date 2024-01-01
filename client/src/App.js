@@ -7,6 +7,7 @@ import Landing from './pages/landing/Landing'
 import UserPage from './pages/user/UserPage'
 import VideoPage from './pages/video/VideoPage.jsx'
 import History from './pages/history/History.jsx'
+import RecordPage from './pages/user/RecordPage.jsx'
 import './App.css'
 import VideoListPage from "./pages/videoList/VideoListPage";
 import {UserProvider} from './components/UserContext.js'
@@ -46,11 +47,12 @@ export default function App() {
                         {/*Search video page*/}
                         <ProtectedRoute path="/videoList" component={VideoListPage}/>
 
-                        <ProtectedRoute path="/video" component={VideoPage}/>
-                        <ProtectedRoute path="/history" component={History}/>
-                    </Switch>
-                </div>
-            </Router>
+                    <ProtectedRoute path="/video" component={VideoPage}/>
+                    <ProtectedRoute path="/history" component={History}/>
+                    <ProtectedRoute path="/record" component={RecordPage}/>
+                </Switch>
+            </div>
+        </Router>
         </UserProvider>
     )
 }
