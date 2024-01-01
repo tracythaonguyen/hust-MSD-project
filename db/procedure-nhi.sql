@@ -2,7 +2,7 @@
 
 -- Drop the function add_history
 DROP FUNCTION IF EXISTS add_history(INT, INT);
-
+ 
 CREATE OR REPLACE FUNCTION add_history(p_video_id INT, p_learner_id INT)
 RETURNS TABLE (
     history_id INT,
@@ -21,27 +21,16 @@ BEGIN
         BEGIN
             -- Iterate over track_ids related to the given video_id
             FOR v_track_id IN (SELECT track.track_id FROM track WHERE track.video_id = p_video_id) LOOP
-                -- Insert a new history row
-                BEGIN
-                    INSERT INTO history (learner_id, video_id, track_id, completed)
-                    VALUES (p_learner_id, p_video_id, v_track_id, 0)
-                    RETURNING * INTO 
-                        history_id,
-                        learner_id,
-                        video_id,
-                        track_id,
-                        completed;
-
-                    -- Return the inserted row
-                    RETURN ;
-                EXCEPTION
-                    WHEN others THEN
-                        -- Handle the exception (e.g., raise a notice or log the error)
-                        RAISE NOTICE 'Failed to insert row with invalid learner_id: %', p_learner_id;
-                END;
+				INSERT INTO history (learner_id, video_id, track_id, completed)
+				VALUES (p_learner_id, p_video_id, v_track_id, 0)
+				RETURNING * INTO 
+					history_id,
+					learner_id,
+					video_id,
+					track_id,
+					completed;
             END LOOP;
-
-            INSERT INTO progress (learner_id, video_id)
+			INSERT INTO progress (learner_id, video_id)
             VALUES (p_learner_id, p_video_id);
         END;
     END IF;
