@@ -45,7 +45,7 @@ CREATE TABLE video (
   source_link TEXT NOT NULL,
   link_img TEXT,
   description TEXT NOT NULL,
-  view INT,
+  view INT DEFAULT 0,
   upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
