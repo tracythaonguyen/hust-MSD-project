@@ -1,25 +1,33 @@
 // Module
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 // CSS
-import './TopicStyle.css'
+import './VideoListStyle.css'
 // Components
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import * as Constant from './Constant'
 
 
-export const TopicPage = () => {
+export const VideoListPage = () => {
+    const location = useLocation();
+    const initVideoListData = location.state && location.state.initVideoListData;
+    let smallBoxData = [];
+
+    // Convert initVideoListData to smallBoxData
+    if (initVideoListData !== undefined && initVideoListData.length !== 0) {
+        console.log("Search results: " + initVideoListData);
+        smallBoxData = initVideoListData.map(({video_id, link_img, video_title}) => ({
+            id: video_id,
+            name: video_title,
+            image: link_img,
+            // progress: searchResult.progress,
+        }));
+    }
+
     const boxStyle = {
         background: `url('${Constant.BACKGROUND_IMAGE}') center/cover`,
     };
-
-    const smallBoxData = Array.from({length: 12}, (_, index) => ({
-        id: index + 1,
-        name: `Small Box ${index + 1}`,
-        image: `https://via.placeholder.com/150`,
-        progress: (index + 1) * 10, // Set progress value based on your data
-    }));
 
     const itemsPerPage = 6;
     const totalPages = Math.ceil(smallBoxData.length / itemsPerPage);
@@ -67,24 +75,29 @@ export const TopicPage = () => {
                             <img src={box.image} alt={box.name}/>
                             <div className="small-box-content">
                                 <div className="small-box-name">{box.name}</div>
-                                <div className="percentage-text">{box.progress}%</div>
+                                {/*<div className="percentage-text">{box.progress}%</div>*/}
                             </div>
-                            <div className="progress-bar">
-                                <div
-                                    className="progress-bar-inner"
-                                    style={{width: `${box.progress}%`}}
-                                />
-                            </div>
+                            {/*<div className="progress-bar">*/}
+                            {/*    <div*/}
+                            {/*        className="progress-bar-inner"*/}
+                            {/*        style={{width: `${box.progress}%`}}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
                         </Link>
                     ))}
                 </div>
                 <div className="button-container">
-                    <button className="button" onClick={handlePrevPage} disabled={currentPage === 1}>
-                        Previous
-                    </button>
-                    <button className="button" onClick={handleNextPage} disabled={currentPage === totalPages}>
-                        Next
-                    </button>
+                    {/*Only show if the number of small box > item per page*/}
+                    {smallBoxData.length > itemsPerPage && (
+                        <div className="pagination">
+                            <button className="button" onClick={handlePrevPage} disabled={currentPage === 1}>
+                                Previous
+                            </button>
+                            <button className="button" onClick={handleNextPage} disabled={currentPage === totalPages}>
+                                Next
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
             <Footer></Footer>
@@ -92,4 +105,4 @@ export const TopicPage = () => {
     )
 }
 
-export default TopicPage;
+export default VideoListPage;

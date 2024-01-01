@@ -111,8 +111,3 @@ FOR EACH ROW
 WHEN (OLD.completed = 0 AND NEW.completed = 1)
 EXECUTE PROCEDURE update_highest_score();
 
-select * from history
-
-INSERT INTO account(username, password, email, user_role, first_name, last_name) values ('hazel_lime','hazellime','hazel.lime@example.com', 'learner', 'Hazel', 'Lime');
-INSERT INTO learner(dob, occupation, address, phone_number, account_id) VALUES('2002-11-08', 'Student', '203 St BroadWay', '0987654321', 8);
-select add_history(1, 6)
