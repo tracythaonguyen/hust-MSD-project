@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const FillInTheBlankQuiz = ({ transcript }) => {
   // Split the transcript string into an array of words
@@ -9,6 +9,10 @@ const FillInTheBlankQuiz = ({ transcript }) => {
   ];
   // Initialize answers state with empty strings for each word
   const [answers, setAnswers] = useState(Array(wordsArray.length).fill(""));
+
+  useEffect(() => {
+    setAnswers(Array(wordsArray.length).fill(""));
+  }, [transcript]);
 
   var correctAnswers = "";
   for (var i = 0; i < wordsArray.length; i++) {
@@ -44,7 +48,7 @@ const FillInTheBlankQuiz = ({ transcript }) => {
     console.log("Submitted Answers:", text);
     console.log("Corrected Answer:", correctAnswers);
     if (correctAnswers === text) {
-        
+      alert("Correct answer");
     }
     else alert("Wrong answer");
   };
