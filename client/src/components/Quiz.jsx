@@ -52,10 +52,10 @@ const FillInTheBlankQuiz = ({ transcript }) => {
       alert("Correct answer");
       axios
       .get("http://localhost:8000/update-completed/", {
-        learner_id = ,
-        video_id = ,
-        track_id = ,
-        complete = true
+        // learner_id = ,
+        // video_id = ,
+        // track_id = ,
+        complete : true
       })
       .then((response) => {
 
