@@ -10,11 +10,11 @@ import {Link, useHistory} from 'react-router-dom'
 export const Landing = () => {
     const history = useHistory();
 
-    const login = () =>{
+    const login = () => {
         history.push("/login");
     }
 
-    const register = () =>{
+    const register = () => {
         history.push("/register");
     }
 
