@@ -188,15 +188,17 @@ async function getFavouriteVideo(req, res) {
     const { id } = req.params
     console.log('z', id)
     const favouriteVideo = await pool.query(
-      `SELECT video_id, video_title, level, description, link_img, category_name
-      FROM video JOIN favourite
-      WHERE learner_id = $1`,
+      `SELECT v.video_id, v.video_title, v.level, v.description, v.link_img, c.category_name, v.view, v.upload_date
+      FROM favorite f
+      JOIN video v ON f.video_id = v.video_id
+      JOIN category c ON v.category_id = c.category_id
+      WHERE f.learner_id = $1`,
       [id]
     )
     return res.status(200).json(favouriteVideo.rows)
   } catch (error) {
     console.error(error.message)
-    return res.status(500).json({ message: 'Internal server error22' })
+    return res.status(500).json({ message: 'Internal server error' })
   }
 }
 
