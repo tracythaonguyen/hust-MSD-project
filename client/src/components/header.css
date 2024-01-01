@@ -63,7 +63,6 @@
 }
 
 
-
 .header-right-item .profile {
     display: flex;
     align-items: center;
@@ -78,7 +77,8 @@
     z-index: 1;
     margin-top: 10px;
 }
-.header-right-item .logout{
+
+.header-right-item .logout {
     display: flex;
     align-items: center;
     color: #5B5B5B;
@@ -93,13 +93,13 @@
     margin-top: 40px;
 }
 
-.header-right-item .profile:hover, .header-right-item .logout:hover{
+.header-right-item .profile:hover, .header-right-item .logout:hover {
     background: #f5f3f3;
     border-radius: 4px;
-    padding : 5px;
+    padding: 5px;
 
 }
 
-.header-right-item .active{
+.header-right-item .active {
     visibility: visible;
 }

@@ -10,7 +10,7 @@ import History from './pages/history/History.jsx'
 import RecordPage from './pages/user/RecordPage.jsx'
 import './App.css'
 import VideoListPage from "./pages/videoList/VideoListPage";
-import { UserProvider } from './components/UserContext.js'
+import {UserProvider} from './components/UserContext.js'
 
 // test Ci/cd
 export default function App() {
@@ -29,23 +29,23 @@ export default function App() {
     };
     return (
         <UserProvider>
-        <Router>
-            <div>
-                <Switch>
-                    {/* <ProtectedRoute2 exact path="/" component={ Landing } />
+            <Router>
+                <div>
+                    <Switch>
+                        {/* <ProtectedRoute2 exact path="/" component={ Landing } />
                     <ProtectedRoute2 path="/login" component={ Login } />
                     <ProtectedRoute2 path="/register" component={ Register } />
                     <ProtectedRoute path="/home" component={ HomePage } />
                     <ProtectedRoute path="/user" component={ UserPage } />
                     <ProtectedRoute path="/topic" component={ SearchPage } /> */}
-                    <ProtectedRoute2 exact path="/" component={Landing}/>
-                    <ProtectedRoute2 path="/login" component={Login}/>
-                    <ProtectedRoute2 path="/register" component={Register}/>
-                    <ProtectedRoute path="/home" component={HomePage}/>
-                    <ProtectedRoute path="/user" component={UserPage}/>
-                    {/*<ProtectedRoute path="/topic" component={ SearchPage } />*/}
-                    {/*Search video page*/}
-                    <ProtectedRoute path="/videoList" component={VideoListPage}/>
+                        <ProtectedRoute2 exact path="/" component={Landing}/>
+                        <ProtectedRoute2 path="/login" component={Login}/>
+                        <ProtectedRoute2 path="/register" component={Register}/>
+                        <ProtectedRoute path="/home" component={HomePage}/>
+                        <ProtectedRoute path="/user" component={UserPage}/>
+                        {/*<ProtectedRoute path="/topic" component={ SearchPage } />*/}
+                        {/*Search video page*/}
+                        <ProtectedRoute path="/videoList" component={VideoListPage}/>
 
                     <ProtectedRoute path="/video" component={VideoPage}/>
                     <ProtectedRoute path="/history" component={History}/>

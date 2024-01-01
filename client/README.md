@@ -2,9 +2,11 @@
 
 > Simple login/register-page-app created with React js.
 
-Logster is a React app that has a Login, Register and Reset password features. This is just the Front-end of the app, no Back-end.
+Logster is a React app that has a Login, Register and Reset password features. This is just the Front-end of the app, no
+Back-end.
 
 ## Table of contents
+
 * [Functionalities](#functionalities)
 * [Technologies](#technologies)
 * [Live App](#live-app)
@@ -38,7 +40,7 @@ To view and test the app you can visit this [link](https://logsterapp.netlify.co
 
 Pull requests are welcome. Please feel free to submit an issue first to discuss what you would like to change.
 
-The process to start is simple, just make sure you have [Node js](https://nodejs.org/en/) installed in your computer. 
+The process to start is simple, just make sure you have [Node js](https://nodejs.org/en/) installed in your computer.
 
 First you need to go to project's main directory which contains package.json file
 
@@ -49,7 +51,9 @@ First you need to go to project's main directory which contains package.json fil
 
     npm start
 ```
+
 or
+
 ```bash
 
     cd [Repository-Directory]
@@ -58,6 +62,7 @@ or
 
     yarn start
 ```
+
 .. happy Coding..!!
 
 
