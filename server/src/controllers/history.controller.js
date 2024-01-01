@@ -79,10 +79,27 @@ async function createHistory(req, res) {
   }
 }
 
+async function updateCompleteTrack(req, res) {
+  try {
+    const { learner_id, video_id, track_id, completed} = req.body
+    const history = await pool.query(
+      'UPDATE history SET completed = $1 WHERE learner_id = $2 AND video_id = $3 AND track_id = $4 RETURNING *',
+      [completed, learner_id, video_id, track_id],
+    )
+    return res
+      .status(200)
+      .json({ message: 'Update history!', data: history.rows[0] })
+  } catch (error) {
+    console.error(error.message)
+    return res.status(500).json({ message: error.message })
+  }
+}
+
 export default {
   getAllHistories,
   getAllHistoriesByLearner,
   getAllHistoriesByVideoOfLearner,
   deleteHistory,
   createHistory,
+  updateCompleteTrack,
 }
