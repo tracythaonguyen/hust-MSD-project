@@ -1,5 +1,5 @@
 import Header from "../../components/Header";
-import "./history.css";
+import "./favourite.css";
 import MarkedBookIcon from "../../assets/images/marked-book_icon.png";
 import MarkedBookWhiteIcon from "../../assets/images/marked-book-white_icon.png";
 import React, { useState } from "react";
@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import useFetchUser from "../../utilities/useFetchUser";
 import useFetchRecentVideos from "../../utilities/useFetchRecentVideos";
 
-export const History = () => {
+export const Favourite = () => {
     // const [recentVideos, setRecentVideos] = useState([]);
     const token = localStorage.getItem("token");
     //get user by token body
@@ -53,16 +53,16 @@ export const History = () => {
                             <div className="taskText">Information Page</div>
                         </button>
                     </Link>
-                    <button className="task task-2">
-                        <img alt="book icon" src={MarkedBookWhiteIcon}></img>
-                        <div className="taskText">Video History Page</div>
-                    </button>
-                    <Link to="/favourite">
-                        <button className="task task-3">
-                            <img alt="book icon" src={MarkedBookIcon}></img>
-                            <div className="taskText">Video Favourite Page</div>
+                    <Link to="/history">
+                        <button className="task task-2">
+                            <img alt="book icon" src={MarkedBookWhiteIcon}></img>
+                            <div className="taskText">Video History Page</div>
                         </button>
                     </Link>
+                    <button className="task task-3">
+                        <img alt="book icon" src={MarkedBookIcon}></img>
+                        <div className="taskText">Video Favourite Page</div>
+                    </button>
                     <Link to='record'>
                         <button className="task task-4">
                             <img alt="book icon" src={MarkedBookIcon}></img>
@@ -125,4 +125,4 @@ export const History = () => {
     );
 };
 
-export default History;
+export default Favourite;
