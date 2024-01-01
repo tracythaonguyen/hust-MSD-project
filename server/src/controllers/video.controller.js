@@ -217,6 +217,20 @@ async function getAllVideosByTagId(req, res) {
   }
 }
 
+async function handleVideoView(req, res) {
+  try {
+    const { videoId } = req.params;
+    const { learnerId } = req.body;
+    await pool.query('SELECT * FROM add_history($1, $2)', [videoId, learnerId]);
+    await pool.query('SELECT update_click_time($1, $2)', [learnerId, videoId]);
+    await pool.query('COMMIT');
+  } catch (error) {
+    console.error(error.message)
+    await pool.query('ROLLBACK');
+    throw error;
+  }
+}
+
 export default {
   getAllVideos,
   deleteVideo,
@@ -228,4 +242,5 @@ export default {
   getRecentLearningVideo,
   getAllVideosByTagId,
   getFavouriteVideo,
+  handleVideoView,
 }

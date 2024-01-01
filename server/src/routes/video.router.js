@@ -43,4 +43,6 @@ router.get(
 // get all videos by tag id
 router.get('/getVideosByTag/:id', videoController.getAllVideosByTagId)
 
+router.get('/view/:id', videoController.handleVideoView)
+
 export default router
