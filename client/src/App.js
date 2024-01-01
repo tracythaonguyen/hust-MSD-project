@@ -7,6 +7,7 @@ import Landing from './pages/landing/Landing'
 import UserPage from './pages/user/UserPage'
 import VideoPage from './pages/video/VideoPage.jsx'
 import History from './pages/history/History.jsx'
+import Favourite from './pages/favourite/Favourite.jsx'
 import RecordPage from './pages/user/RecordPage.jsx'
 import './App.css'
 import VideoListPage from "./pages/videoList/VideoListPage";
@@ -49,6 +50,7 @@ export default function App() {
 
                     <ProtectedRoute path="/video" component={VideoPage}/>
                     <ProtectedRoute path="/history" component={History}/>
+                    <ProtectedRoute path="/favourite" component={Favourite}/>
                     <ProtectedRoute path="/record" component={RecordPage}/>
                 </Switch>
             </div>

@@ -63,10 +63,12 @@ export const RecordPage = () => {
               <div className="taskText">Video History Page</div>
             </button>
           </Link>
-          <button className="task task-3">
-            <img alt="book icon" src={MarkedBookIcon}></img>
-            <div className="taskText">Video Favourite Page</div>
-          </button>
+          <Link to="/history">
+            <button className="task task-3">
+              <img alt="book icon" src={MarkedBookIcon}></img>
+              <div className="taskText">Video Favourite Page</div>
+            </button>
+          </Link>
           <Link to="record">
             <button className="task task-4">
               <img alt="book icon" src={MarkedBookIcon}></img>

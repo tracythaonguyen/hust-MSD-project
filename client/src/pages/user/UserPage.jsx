@@ -107,7 +107,7 @@ export const UserPage = () => {
               <div className="taskText">Video History Page</div>
             </button>
           </Link>
-          <Link to="/history">
+          <Link to="/favourite">
             <button className="task task-3">
               <img alt="book icon" src={MarkedBookIcon}></img>
               <div className="taskText">Video Favourite Page</div>
