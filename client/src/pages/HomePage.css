@@ -31,13 +31,26 @@ body {
 .search-term {
     border: 0;
     flex: 1;
-    margin: 0 auto 0 60px;
+    margin: 0 0 0 10px;
     height: 60px;
     color: #82839a99;
     font-size: 20px;
     font-weight: 400;
     letter-spacing: 1px;
     padding-left: 20px;
+}
+
+.search-option-button {
+    background-color: #ffffff;
+    border: 0;
+    border-radius: 12px;
+    margin: 5px 5px 5px 10px;
+    height: 50px;
+    width: 150px;
+    color: #82839a99;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0;
 }
 
 .search-button {
@@ -63,6 +76,7 @@ body {
     background-color: #ffffff;
     border-radius: 10px;
     height: 60px;
+    min-width: 250px;
     flex-basis: 19%;
     color: #252641;
     font-size: 24px;
@@ -336,4 +350,31 @@ h4 {
     letter-spacing: 1px;
     line-height: 32px;
     text-align: left;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    /*display: none;*/
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content button {
+    min-width: 250px;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown button:hover {
+    background-color: #ddd;
 }
