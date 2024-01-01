@@ -21,4 +21,6 @@ router.delete('/:id', historyController.deleteHistory)
 // create history
 router.post('/create', historyController.createHistory)
 
+router.put('/update-completed', historyController.updateCompleteTrack)
+
 export default router
