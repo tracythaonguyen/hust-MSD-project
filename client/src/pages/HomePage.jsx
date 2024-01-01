@@ -1,37 +1,20 @@
-import React from 'react';
-import Landing from './landing/Landing';
+import React, {useEffect, useState} from 'react';
 import Header from "../components/Header";
 import Footer from '../components/Footer';
 import './HomePage.css';
 import imgUrl from '../assets/images/ads.png';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-
-
-
+import {useHistory} from 'react-router-dom';
+import useFetchUser from "../utilities/useFetchUser";
+import useFetchRecentVideos from "../utilities/useFetchRecentVideos";
 export default function HomePage() {
+    const history = useHistory();
     const token = localStorage.getItem('token');
-    const [user, setUser] = useState({});
-    //get user by token body
-    useEffect(() => {
-        const getUser = async () => {
-            try {
-                const res = await axios.get(`http://localhost:8000/learner/get-learner-by-token/${token}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setUser(res.data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        getUser();
-    }, [token]);
-                
-                
-
+    const user = useFetchUser(token);
+    const recentVideos = useFetchRecentVideos(user, token);
     //connect to API to get videos
     const [videos, setVideos] = useState([]);
-     
+
     useEffect(() => {
         const getVideos = async () => {
             try {
@@ -41,7 +24,7 @@ export default function HomePage() {
                 console.log(err);
             }
         };
-        getVideos();
+        getVideos().then(r => console.log(r));
     }, []);
 
 
@@ -52,52 +35,67 @@ export default function HomePage() {
     const startIndex = currentPage * videosPerPage;
     const endIndex = startIndex + videosPerPage;
     const currentVideos = videos.slice(startIndex, endIndex);
-    console.log("1",currentVideos);
+    console.log("1", currentVideos);
     const handleNextPage = () => {
-        if(currentPage < videos.length / videosPerPage - 1){
+        if (currentPage < videos.length / videosPerPage - 1) {
             setCurrentPage(currentPage + 1);
         }
     };
     const handlePrevPage = () => {
-        if(currentPage > 0){
+        if (currentPage > 0) {
             setCurrentPage(currentPage - 1);
         }
     };
 
-    //get recent learning videos
-    const [recentVideos, setRecentVideos] = useState([]);
-    useEffect(() => {
-        const getRecentVideos = async () => {
-            try {
-                const res = await axios.get(
-                    `http://localhost:8000/video/getRecentLearningVideo/${user.learner_id}`,
-                    {
-                        headers: { Authorization: `Bearer ${token}` },
-                    }
-                );
-                setRecentVideos(res.data);
-            } catch (err) {
-                console.log(err);
-            }
-        };
-        getRecentVideos();
-    }, [user]);
+    //#region DEV: HOANG
+    //#region -> Searching Functionalities
+    const [searchTerm, setSearchTerm] = useState("");
 
+    // search function with param is input text from search-term className
+    const search = (searchTerm) => {
+        console.log("Search Term: ", searchTerm);
+        setSearchTerm(searchTerm);
+        if (searchTerm !== "") {
+            const newVideoList = videos.filter((video) => {
+                return Object.values(video)
+                    .join(" ")
+                    .toLowerCase()
+                    .includes(searchTerm.toLowerCase());
+            });
+            // debug
+            console.log("Search Results: ", newVideoList);
+            // Navigate to TopicPage with searchResults
+            history.push({
+                pathname: '/videoList',
+                state: {initVideoListData: newVideoList},
+            });
+        } else {
+            history.push({
+                pathname: '/videoList',
+                state: {initVideoListData: videos},
+            });
+        }
+    }
+    //#endregion
+
+    //#endregion
 
     return (
         <div className="text-center" style={HeaderStyle}>
             {/* {token == null ? ( */}
-            {false ? (
-                <Landing /> // Display LandingPage if logged in
-            ) : (
+            {(
                 <React.Fragment>
-                    <Header />
+                    <Header/>
                     <div className='content-container'>
                         <div className='top-content'>
                             <div className='search-group'>
                                 <div className='search-box'>
-                                    <input type="text" className='search-term' placeholder="Search your favourite course"></input>
-                                    <button type="submit" className='search-button'>
+                                    <input type="text" className='search-term'
+                                           placeholder="Search your favourite course"
+                                           value={searchTerm}
+                                           onChange={(e) => setSearchTerm(e.target.value)}></input>
+                                    <button type="submit" className='search-button'
+                                            onClick={() => search(searchTerm)}>
                                         Search
                                     </button>
                                 </div>
@@ -112,12 +110,13 @@ export default function HomePage() {
                         </div>
                         <div className='advertisement'>
                             <div className='paragraph'>
-                                <p className='p1'> By Group x in <span className='highlight'> ICT-K65</span> </p>
+                                <p className='p1'> By Group x in <span className='highlight'> ICT-K65</span></p>
                                 <h1>Learn English online and improve your skills through our high-quality courses.</h1>
-                                <p className='p2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempos Lorem ipsum dolor sitamet, consectetur adipiscing elit, sed</p>
+                                <p className='p2'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                                    eiusmod tempos Lorem ipsum dolor sitamet, consectetur adipiscing elit, sed</p>
                                 <button className='start-btn'>Start learning now</button>
                             </div>
-                            <img alt='img' src={imgUrl} className='image' />
+                            <img alt='img' src={imgUrl} className='image'/>
                         </div>
 
                         <div className='middle-content'>
@@ -126,15 +125,15 @@ export default function HomePage() {
                                 <p className='see-all'> See all</p>
                             </div>
                             <div className='group-blog'>
-                                {currentVideos.map((video) => (
+                                {currentVideos.map(({description, link_img, video_title, view}) => (
                                     <div className='blog'>
-                                        <img alt='img' src={video.link_img} className='blog-image' />
-                                        <h3>{video.video_title}</h3>
-                                        <p className='p3'>{video.description}</p>
+                                        <img alt='img' src={link_img} className='blog-image'/>
+                                        <h3>{video_title}</h3>
+                                        <p className='p3'>{description}</p>
                                         <div className='blog-footer'>
                                             <p className='read-more'>Read more</p>
                                             <div className='view-count'>
-                                                {video.view}
+                                                {view}
                                             </div>
                                         </div>
                                     </div>
@@ -152,22 +151,22 @@ export default function HomePage() {
                             </div>
 
                             <div className='video-group'>
-                                {recentVideos.slice(0,4).map((video) => (
+                                {recentVideos.slice(0, 4).map(({description, link_img, time, topic, video_title}) => (
                                     <div className='video'>
-                                        <img alt='img' src={video.link_img} className='video-image' />
+                                        <img alt='img' src={link_img} className='video-image'/>
                                         <div className='video-info'>
-                                            <p className='topic-name'>{video.topic}</p>
-                                            <p className='time'>{video.time}</p>
+                                            <p className='topic-name'>{topic}</p>
+                                            <p className='time'>{time}</p>
                                         </div>
-                                        <h4>{video.video_title}</h4>
-                                        <p className='p4'>{video.description}</p>
+                                        <h4>{video_title}</h4>
+                                        <p className='p4'>{description}</p>
                                     </div>
                                 ))}
-        
+
                             </div>
                         </div>
                     </div>
-                    <Footer />
+                    <Footer/>
                 </React.Fragment>
             )}
         </div>

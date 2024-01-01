@@ -10,7 +10,7 @@ export const Header = () => {
     const handleLogOut = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('username');
-        localStorage.removeItem('learner_id');        
+        localStorage.removeItem('learner_id');
         window.location.href = '/';
     }
     const ShowOption = () => {
@@ -20,7 +20,7 @@ export const Header = () => {
         logout.classList.toggle('active');
         profile.classList.toggle('active');
     }
-    
+
     return (
         <div className="header">
             <Link to="/">

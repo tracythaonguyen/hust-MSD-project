@@ -33,4 +33,7 @@ router.put(
   learnerController.updateLearnerScore,
 )
 
+// update learner by id
+router.put('/update-learner/:id', verifyLearner, learnerController.updateLearner)
+
 export default router

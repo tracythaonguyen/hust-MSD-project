@@ -69,18 +69,14 @@ async function deleteAccount(req, res) {
   }
 }
 
-async function updateUserName(req, res) {
+async function updateAccount(req, res) {
   try {
-    const { username } = req.body;
+    const { first_name, last_name, email } = req.body;
     const { id } = req.params;
 
-    if (!username) {
-      return res.status(400).json({ message: "User name is required" });
-    }
-
     const account = await pool.query(
-      "UPDATE account SET username = $1 WHERE account_id = $2 RETURNING *",
-      [username, id]
+      "UPDATE account SET first_name= $1, last_name=$2, email=$3 WHERE account_id = $4 RETURNING *",
+      [first_name, last_name, email, id]
     );
     // Check if account exists
     if (!account.rows.length) {
@@ -190,7 +186,7 @@ async function getAccountByToken(req, res) {
 export default {
   getAllAccounts,
   deleteAccount,
-  updateUserName,
+  updateAccount,
   createAccount,
   searchAccountByUserName,
   login,

@@ -1,6 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
-import {useState} from 'react'
 import axios from 'axios';
 import {toast} from 'react-hot-toast';
 import login from '../../assets/images/login.png'
@@ -19,9 +18,9 @@ export const Login = () => {
         //print form input
         e.preventDefault();
         axios.post('http://localhost:8000/account/login', {
-            username: username,
-            password: password
-        },//with token
+                username: username,
+                password: password
+            },//with token
         )
             .then((response) => {
                 console.log(response);
