@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const FillInTheBlankQuiz = ({ transcript }) => {
@@ -49,8 +50,20 @@ const FillInTheBlankQuiz = ({ transcript }) => {
     console.log("Corrected Answer:", correctAnswers);
     if (correctAnswers === text) {
       alert("Correct answer");
-    }
-    else alert("Wrong answer");
+      axios
+      .get("http://localhost:8000/update-completed/", {
+        learner_id = ,
+        video_id = ,
+        track_id = ,
+        complete = true
+      })
+      .then((response) => {
+
+      })
+      .catch((error) => {
+        console.error("Error update result:", error);
+      });
+    } else alert("Wrong answer");
   };
 
   return (

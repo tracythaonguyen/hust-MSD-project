@@ -26,6 +26,8 @@ export default function VideoPage({
   const [playingStates, setPlayingStates] = useState();
 
   const [stopTime, setStopTime] = useState(null);
+  const [startTime, setStartTime] = useState(null);
+
   const [IDtrackChosen, setIDTrackChosen] = useState(null);
   const [trackIndexChosen, setTrackIndexChosen] = useState(null);
   sourceLink = "https://www.youtube.com/watch?v=Z6a6x0tH_pU";
@@ -48,16 +50,18 @@ export default function VideoPage({
   }, [videoID]);
 
   const playTrack = async (trackIndex, startTime, endTime) => {
-    console.log(startTime);
-    playerRefs.current[videoID].seekTo(startTime, "seconds");
+    // console.log(startTime);
     setStopTime(endTime);
+    setStartTime(startTime);
     setTrackIndexChosen(trackIndex);
+    playerRefs.current[videoID].seekTo(startTime, "seconds");
     setPlayingStates(true);
   };
 
   const handleProgress = (videoID) => (state) => {
     if (state.playedSeconds > stopTime) {
       setPlayingStates(false);
+      playerRefs.current[videoID].seekTo(startTime, "seconds");
     }
 
     for (var i = 0; i < listTrack.length; i++) {
@@ -131,7 +135,7 @@ export default function VideoPage({
             {trackIndexChosen != null && (
               <div className="userScript">
                 <FillInTheBlankQuiz
-                  transcript={listTrack[trackIndexChosen][1].transcript}            
+                  transcript={listTrack[trackIndexChosen][1].transcript}
                 />
               </div>
             )}
