@@ -8,6 +8,7 @@ import { faArrowLeftLong } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ReactPlayer from "react-player";
+import FillInTheBlankQuiz from "../../components/Quiz";
 export default function VideoPage({
   videoID,
   videoTitle,
@@ -19,16 +20,20 @@ export default function VideoPage({
 }) {
   const [listTrack, setListTrack] = useState([]);
   const playerRefs = useRef({});
-  const [displayTrack, setDisplayTrack] = useState(null);
-  const [displayTrackID, setDisplayTrackID] = useState(null);
+  const [displayingTrack, setDisplayTrack] = useState(null);
+  const [displayingTrackID, setDisplayTrackID] = useState(null);
   const [playByTrack, setPlayByTrack] = useState(false);
+  const [playingStates, setPlayingStates] = useState();
 
-  sourceLink = "https://www.youtube.com/watch?v=nPz-OXEVafM";
-  videoID = 1;
-  videoTitle = "Perry the Platypus plumber";
+  const [stopTime, setStopTime] = useState(null);
+  const [IDtrackChosen, setIDTrackChosen] = useState(null);
+  const [trackIndexChosen, setTrackIndexChosen] = useState(null);
+  sourceLink = "https://www.youtube.com/watch?v=Z6a6x0tH_pU";
+  videoID = 3;
+  videoTitle = "1 Minute Microwave CHOCOLATE CHIP COOKIE";
 
   let temp;
-  // get all track of video
+  // get all track of video by videoID
   useEffect(() => {
     axios
       .get("http://localhost:8000/track/" + videoID)
@@ -42,23 +47,27 @@ export default function VideoPage({
       });
   }, [videoID]);
 
-  const playTrack = async (startTime, endTime) => {
+  const playTrack = async (trackIndex, startTime, endTime) => {
     console.log(startTime);
     playerRefs.current[videoID].seekTo(startTime, "seconds");
-    playerRefs.current[videoID].setState({ playing: false });
+    setStopTime(endTime);
+    setTrackIndexChosen(trackIndex);
+    setPlayingStates(true);
   };
 
   const handleProgress = (videoID) => (state) => {
-    console.log("onProgress", state.playedSeconds);
+    if (state.playedSeconds > stopTime) {
+      setPlayingStates(false);
+    }
+
     for (var i = 0; i < listTrack.length; i++) {
       if (
         state.playedSeconds > listTrack[i][1].start_time &&
         state.playedSeconds < listTrack[i][1].end_time &&
-        listTrack[i][1].track_id != displayTrackID
+        listTrack[i][1].track_id != displayingTrackID
       ) {
         setDisplayTrack(listTrack[i][1].transcript);
         setDisplayTrackID(listTrack[i][1].track_id);
-        console.log(displayTrack);
       }
     }
   };
@@ -79,7 +88,12 @@ export default function VideoPage({
               <button
                 className="task active"
                 onClick={() =>
-                  playTrack(track[1].start_time, track[1].end_time)
+                  playTrack(
+                    Number(track[0]),
+                    // track[1].track_id,
+                    track[1].start_time,
+                    track[1].end_time
+                  )
                 }
               >
                 <img alt="book icon" src={MarkedBookWhiteIcon}></img>
@@ -90,15 +104,6 @@ export default function VideoPage({
               </button>
             ))}
           </div>
-
-          {/* <h4>Practice Quiz</h4>
-          <div className="tasksBar">
-            <button className="task active">
-              <img alt="book icon" src={MarkedBookWhiteIcon}></img>
-              <div className="taskText"> Lesson 01 : Introduction about XD</div>
-              <div className="taskTime">30 mins</div>
-            </button>
-          </div> */}
         </div>
 
         <div className="videoPageRight">
@@ -119,14 +124,17 @@ export default function VideoPage({
                 height="100%"
                 style={{ borderRadius: "20px" }}
                 controls={false}
-                playing={false}
+                playing={playingStates}
                 onProgress={handleProgress(videoID)}
               />
             </div>
-
-            <div className="userScript">
-              <p>{displayTrack}</p>
-            </div>
+            {trackIndexChosen != null && (
+              <div className="userScript">
+                <FillInTheBlankQuiz
+                  transcript={listTrack[trackIndexChosen][1].transcript}            
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
