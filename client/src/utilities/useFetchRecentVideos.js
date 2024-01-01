@@ -1,5 +1,5 @@
 // useFetchRecentVideos.js
-import { useState, useEffect } from 'react';
+import {useEffect, useState} from 'react';
 import axios from 'axios';
 
 const useFetchRecentVideos = (user, token) => {
@@ -12,7 +12,7 @@ const useFetchRecentVideos = (user, token) => {
                     const res = await axios.get(
                         `http://localhost:8000/video/getRecentLearningVideo/${user.learner_id}`,
                         {
-                            headers: { Authorization: `Bearer ${token}` },
+                            headers: {Authorization: `Bearer ${token}`},
                         }
                     );
                     setRecentVideos(res.data);
