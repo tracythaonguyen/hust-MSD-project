@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useUser } from "./UserContext";
 
-const FillInTheBlankQuiz = ({ transcript }) => {
+const FillInTheBlankQuiz = ({ transcript, video_id, track_id }) => {
   // Split the transcript string into an array of words
+  const [user, setUser] = useState(useUser());
   const wordsArray = transcript.split(/\s+/);
   console.log(wordsArray);
   const displayArray = [
@@ -51,18 +53,16 @@ const FillInTheBlankQuiz = ({ transcript }) => {
     if (correctAnswers === text) {
       alert("Correct answer");
       axios
-      .get("http://localhost:8000/update-completed/", {
-        // learner_id = ,
-        // video_id = ,
-        // track_id = ,
-        complete : true
-      })
-      .then((response) => {
-
-      })
-      .catch((error) => {
-        console.error("Error update result:", error);
-      });
+        .put("http://localhost:8000/update-completed/", {
+          learner_id: user.learner_id,
+          video_id: video_id,
+          track_id: track_id,
+          complete: 1,
+        })
+        .then((response) => {})
+        .catch((error) => {
+          console.error("Error update result:", error);
+        });
     } else alert("Wrong answer");
   };
 
