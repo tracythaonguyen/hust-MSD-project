@@ -14,17 +14,28 @@ router.get('/search', videoController.searchVideoByTitle)
 router.get('/:id', videoController.getVideoById)
 
 // delete an video by id
-router.delete('/:id', verifyAdmin,videoController.deleteVideo)
+router.delete('/:id', verifyAdmin, videoController.deleteVideo)
 
 // update video
 router.put('/:id', videoController.updateVideoTitle)
 
 // create video with category
-router.post('/create', verifyAdmin,videoController.createVideoWithCategoryandTag)
+router.post(
+  '/create',
+  verifyAdmin,
+  videoController.createVideoWithCategoryandTag,
+)
 
 // get all tags of a video
 router.get('/getTags/:id', videoController.getAllTagsOfVideo)
 
-router.get('/getRecentLearningVideo/:id', verifyLearner ,videoController.getRecentLearningVideo)
+router.get(
+  '/getRecentLearningVideo/:id',
+  verifyLearner,
+  videoController.getRecentLearningVideo,
+)
+
+// get all videos by tag id
+router.get('/getVideosByTag/:id', videoController.getAllVideosByTagId)
 
 export default router

@@ -183,6 +183,21 @@ async function getRecentLearningVideo(req, res) {
   }
 }
 
+// get all videos by tag id
+async function getAllVideosByTagId(req, res) {
+  try {
+    const { id } = req.params
+    const videos = await pool.query(
+      `SELECT * FROM video WHERE video_id IN (SELECT video_id FROM tag_to_video WHERE tag_id = $1)`,
+      [id],
+    )
+    return res.status(200).json(videos.rows)
+  } catch (error) {
+    console.error(error.message)
+    return res.status(500).json({ message: 'Internal server error' })
+  }
+}
+
 export default {
   getAllVideos,
   deleteVideo,
@@ -192,4 +207,5 @@ export default {
   createVideoWithCategoryandTag,
   getAllTagsOfVideo,
   getRecentLearningVideo,
+  getAllVideosByTagId,
 }
