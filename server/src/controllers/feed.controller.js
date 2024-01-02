@@ -15,13 +15,13 @@ async function getAllFeeds(req, res) {
 
 async function getAllFeedsByVideo(req, res) {
   try {
-    const { video_id } = req.params
+    const { id } = req.params
     const allFeeds = await pool.query(
       'SELECT * FROM feedback WHERE video_id = $1 ORDER BY feedback_id ASC',
-      [video_id],
+      [id],
     )
     // Check if feed exists
-    if (!feed.rows.length) {
+    if (!allFeeds.rows.length) {
       return res.status(404).json({ message: 'Feed in video not found' })
     }
     return res

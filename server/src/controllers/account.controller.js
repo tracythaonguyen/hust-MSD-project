@@ -28,7 +28,7 @@ async function login(req, res) {
       //success => return token
       const user = { account_id: account[0].account_id, role: account[0].user_role };
       //ACCESS_TOKEN_SECRET = b33701b6be784f1b5363e4e8f8f600ad5af985de274299dc302f2186d29e3b9467acb6eae83e894a566836d6b71276d7336a785f249f4e5c7af6cde0e90014cb
-      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1h'});
+      const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '24h'});
       res.json({token: accessToken})
     }
   } catch (error) {

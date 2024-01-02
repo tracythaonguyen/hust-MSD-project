@@ -8,7 +8,7 @@ import {
 const router = express.Router()
 
 // get all learners
-router.get('/', verifyAdmin, learnerController.getAllLearners)
+router.get('/', learnerController.getAllLearners)
 
 // delete an learner by id
 router.delete('/:id', verifyAdmin, learnerController.deleteLearner)
