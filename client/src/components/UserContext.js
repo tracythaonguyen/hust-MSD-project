@@ -19,7 +19,7 @@ export const UserProvider = ({children}) => {
                 );
                 setUser(response.data);
             } catch (error) {
-                console.error(error);
+                console.error("Provider error: " + error);
             }
         };
 

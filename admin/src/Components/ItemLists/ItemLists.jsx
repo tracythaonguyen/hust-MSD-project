@@ -9,7 +9,6 @@ import './itemlists.scss';
 
 function ItemLists({ type }) {
     let data;
-
     // Dynamicaly change the ui content
     switch (type) {
         case 'user':
