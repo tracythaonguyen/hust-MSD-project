@@ -83,40 +83,43 @@
             top: 50%;
             -webkit-transform: translate(-50%, -50%);
             transform: translate(-50%, -50%);
-            animation: spin ease-in 2.5s forwards;
+            animation: spin ease-in 2s forwards;
             animation-name: spin;
             -webkit-animation-name: spin;
             transition-timing-function: ease-in-out;
             -webkit-transition-timing-function: ease-in-out;
-            animation-duration: 2.5s;
-            -webkit-animation-duration: 2.5s;
+            animation-duration: 2s;
+            -webkit-animation-duration: 2s;
             animation-fill-mode: forwards;
             -webkit-animation-fill-mode: forwards;
+        }
+        &.success{
+            background: green;
         }
 
         &.success:before {
             position: absolute;
-            content: '';
-            width: 25px;
-            height: 25px/2;
+            content: '.';
+            width: 20px;
+            height: 20px/2;
             border: 4px solid #fefefe;
             border-right: 0;
             border-top: 0;
             left: 50%;
             top: 50%;
-            -webkit-transform: translate(-50%, -50%) rotate(0deg) scale(0);
+            -webkit-transform: translate(-50%, -50%) rotate(0deg) scale(-1);
             transform: translate(-50%, -50%) rotate(0deg) scale(0);
             -webkit-animation: success ease-in 0.15s forwards;
             animation: success ease-in 0.15s forwards;
-            animation-delay: 2.5s;
+            animation-delay: 2s;
         }
 
         &.error {
             position: relative;
             -webkit-animation: vibrate ease-in 0.5s forwards;
             animation: vibrate ease-in 0.5s forwards;
-            -webkit-animation-delay: 2.5s;
-            animation-delay: 2.5s;
+            -webkit-animation-delay: 2s;
+            animation-delay: 2s;
 
             &:before {
                 color: #fff;
@@ -131,7 +134,7 @@
                 transform: translate(-50%, -50%) scale(0);
                 -webkit-animation: error ease-in 0.5s forwards;
                 animation: error ease-in 0.5s forwards;
-                animation-delay: 2.5s;
+                animation-delay: 2s;
             }
         }
     }
@@ -166,6 +169,10 @@
     }
 }
 
+/* .success{
+    background: green;
+} */
+
 @keyframes success {
     from {
         transform: translate(-50%, -50%) rotate(0) scale(0);
@@ -182,7 +189,7 @@
     }
 
     to {
-        -webkit-transform: translate(-50%, -50%) rotate(-45deg) scale(1);
+        -webkit-transform: translate(-50%, -50%) rotate(-45deg) scaleX(1);
     }
 }
 

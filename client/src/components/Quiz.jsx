@@ -6,6 +6,7 @@ import './Quiz.css'
 const FillInTheBlankQuiz = ({ transcript, video_id, track_id }) => {
   // Split the transcript string into an array of words
   const [user, setUser] = useState(useUser());
+  console.log("User:", user);
   const [buttonClass, setButtonClass] = useState("buttonSubmit");
   const wordsArray = transcript.split(/\s+/);
   console.log(wordsArray);
@@ -51,31 +52,6 @@ const FillInTheBlankQuiz = ({ transcript, video_id, track_id }) => {
     ));
   };
 
-  const handleSubmit = () => {
-    // Implement logic to check answers, submit, or provide feedback
-    let text = answers.join("").toLowerCase();
-    console.log("Submitted Answers:", text);
-    console.log("Corrected Answer:", correctAnswers);
-    if (correctAnswers === text) {
-      alert("Correct answer");
-      setButtonClass("buttonSubmit success");
-      axios
-        .put("http://localhost:8000/history/update-completed/", {
-          learner_id: user.learner_id,
-          video_id: video_id,
-          track_id: track_id,
-          completed: 1,
-        })
-        .then((response) => { })
-        .catch((error) => {
-          console.error("Error update result:", error);
-        });
-    } else {
-      alert("Wrong answer");
-      setButtonClass("buttonSubmit error");
-    }
-  };
-
   var animateButton = function (e) {
 
     e.preventDefault();
@@ -90,11 +66,38 @@ const FillInTheBlankQuiz = ({ transcript, video_id, track_id }) => {
     }, 6000);
   };
 
-  var classname = document.getElementsByClassName("button");
+  var classname = document.getElementsByClassName("buttonSubmit");
 
   for (var i = 0; i < classname.length; i++) {
     classname[i].addEventListener('click', animateButton, false);
   }
+
+  const handleSubmit = () => {
+    // Implement logic to check answers, submit, or provide feedback
+    let text = answers.join("").toLowerCase();
+    console.log("Submitted Answers:", text);
+    console.log("Corrected Answer:", correctAnswers);
+    if (correctAnswers === text) {
+      // alert("Correct answer");
+      setButtonClass("buttonSubmit success");
+      axios
+        .put("http://localhost:8000/history/update-completed/", {
+          learner_id: user.learner_id,
+          video_id: video_id,
+          track_id: track_id,
+          completed: 1,
+        })
+        .then((response) => { })
+        .catch((error) => {
+          console.error("Error update result:", error);
+        });
+    } else {
+      // alert("Wrong answer");
+      setButtonClass("buttonSubmit error");
+    }
+  };
+
+
 
   return (
     <div>
