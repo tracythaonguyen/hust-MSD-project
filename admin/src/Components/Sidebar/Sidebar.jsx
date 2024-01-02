@@ -15,7 +15,10 @@ import './Sidebar.scss';
 function Sidebar() {
     // color state management using react context
     const { darkMode, dispatch } = useContext(ColorContext);
-
+    const handeLogout = () => {
+        localStorage.clear();
+        window.location.href = '/login';
+    };
     return (
         <div className="sidebar">
             <div className="logo">
@@ -42,7 +45,7 @@ function Sidebar() {
 
                     <Link to="/videos" style={{ textDecoration: 'none' }}>
                         <li>
-                            <TableChartIcon className="icon" /> Products
+                            <TableChartIcon className="icon" /> Videos
                         </li>
                     </Link>
                     <Link to="/orders" style={{ textDecoration: 'none' }}>
@@ -50,12 +53,6 @@ function Sidebar() {
                             <CreditCardIcon className="icon" /> Orders
                         </li>
                     </Link>
-                    <li>
-                        <CreditCardIcon className="icon" /> Balance
-                    </li>
-                    <li>
-                        <BarChartIcon className="icon" /> Status
-                    </li>
 
                     <p className="spann">Seetings</p>
                     <li>
@@ -64,7 +61,8 @@ function Sidebar() {
                     <li>
                         <SettingsRoundedIcon className="icon" /> Setting
                     </li>
-                    <li>
+                    
+                    <li onClick={handeLogout}>
                         <LogoutIcon className="icon" /> Log Out
                     </li>
                 </ul>

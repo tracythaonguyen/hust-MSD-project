@@ -7,6 +7,10 @@ import './Home.scss';
 
 function Home() {
     //
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = '/login';
+    }
     return (
         <div className="home">
             <div className="home_sidebar">
