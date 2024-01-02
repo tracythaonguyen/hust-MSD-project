@@ -5,22 +5,24 @@ import MarkedBookWhiteIcon from "../../assets/images/marked-book-white_icon.png"
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import useFetchUser from "../../utilities/useFetchUser";
-import useFetchRecentVideos from "../../utilities/useFetchRecentVideos";
+import useFetchFavouriteVideos from "../../utilities/useFetchFavouriteVideos";
 
 export const Favourite = () => {
     // const [recentVideos, setRecentVideos] = useState([]);
     const token = localStorage.getItem("token");
     //get user by token body
     const user = useFetchUser(token);
-    const recentVideos = useFetchRecentVideos(user, token);
+    const favouriteVideos = useFetchFavouriteVideos(user, token);
 
-    const smallBoxData = recentVideos.map((video, index) => ({
+    const smallBoxData = favouriteVideos.map((video, index) => ({
         id: video.video_id,
         name: video.video_title,
         image: video.link_img,
-        progress: (index + 1) * 10, // Set progress value based on your data),
-        date: new Date(video.click_time).toLocaleDateString('en-US'),
-        time: new Date(video.click_time).toLocaleTimeString('en-US'),
+        description: video.description,
+        view:video.view,
+        // progress: (index + 1) * 10, // Set progress value based on your data),
+        // date: new Date(video.click_time).toLocaleDateString('en-US'),
+        // time: new Date(video.click_time).toLocaleTimeString('en-US'),
     }));
 
     const itemsPerPage = 6;
@@ -73,7 +75,7 @@ export const Favourite = () => {
 
                 <div className="historyContent">
                     <div className="contentHeader">
-                        <h1 className="contentTitle">Video History</h1>
+                        <h1 className="contentTitle">Your Favourite Video</h1>
                     </div>
 
                     <div className="contentBody">
@@ -89,15 +91,15 @@ export const Favourite = () => {
                                         <img src={box.image} alt={box.name} />
                                         <div className="small-box-content">
                                             <div className="small-box-name">{box.name}</div>
-                                            <div className="percentage-text">{box.progress}%</div>
+                                            <div className="percentage-text">{box.view} View</div>
                                         </div>
-                                        <div className="progress-bar">
+                                        {/* <div className="progress-bar">
                                             <div
                                                 className="progress-bar-inner"
                                                 style={{ width: `${box.progress}%` }}
                                             />
-                                        </div>
-                                        <div className="small-text">Recently watch: {box.date}, {box.time}</div>
+                                        </div> */}
+                                        <div className="small-text">{box.description}</div>
                                     </Link>
                                 ))}
                             </div>
