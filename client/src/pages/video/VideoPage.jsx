@@ -11,15 +11,7 @@ import ReactPlayer from "react-player";
 import FillInTheBlankQuiz from "../../components/Quiz";
 import { useUser } from "../../components/UserContext";
 
-export default function VideoPage({
-  videoID,
-  videoTitle,
-  categoryId,
-  level,
-  sourceLink,
-  description,
-  linkImg,
-}) {
+function VideoPage(props) {
   const [listTrack, setListTrack] = useState([]);
   const playerRefs = useRef({});
   const [displayingTrack, setDisplayTrack] = useState(null);
@@ -34,28 +26,34 @@ export default function VideoPage({
   const token = localStorage.getItem("token");
   const [user, setUser] = useState(useUser());
 
-  sourceLink = "https://www.youtube.com/watch?v=Z6a6x0tH_pU";
-  videoID = 3;
-  videoTitle = "1 Minute Microwave CHOCOLATE CHIP COOKIE";
+  const [videoTitle, setVideoTitle] = useState(null);
+  const [sourceLink, setSourceLink] = useState(null);
 
-  let temp;
+  const { videoID } = props.match.params;
+  const [videoData, setVideoData] = useState(null);
 
   useEffect(() => {
-    const getAccount = async () => {
+    const getVideos = async () => {
       try {
-        const res = await axios.get(
-          `http://localhost:8000/account/get-account-by-token/${token}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        // setAccount(res.data);
+        const res = await axios.get("http://localhost:8000/video/" + videoID);
+        setVideoData(res.data.data);
       } catch (err) {
         console.log(err);
       }
     };
-    getAccount();
-  }, [user]);
+
+    getVideos().then((r) => console.log(r));
+  }, [videoID]);
+
+  useEffect(() => {
+    // Actions dependent on state updates
+    if (videoData) {
+      setSourceLink(videoData.source_link);
+      setVideoTitle(videoData.video_title);
+    }
+  }, [videoData]);
+
+  let temp;
 
   // get all track of video by videoID
   useEffect(() => {
@@ -69,7 +67,7 @@ export default function VideoPage({
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [videoID]);
+  }, []);
 
   const playTrack = async (trackIndex, trackID, startTime, endTime) => {
     // console.log(startTime);
@@ -138,35 +136,38 @@ export default function VideoPage({
             <div className="videoPageTitle">{videoTitle}</div>
             <div className="videoTime">
               <img alt="clock icon" src={IconClock}></img>
-              <p>1 hour</p>
+              {/* <p>1 hour</p> */}
             </div>
           </div>
-
-          <div className="videoPageInfo">
-            <div className="video">
-              <ReactPlayer
-                ref={(player) => (playerRefs.current[videoID] = player)}
-                url={sourceLink}
-                width="100%"
-                height="100%"
-                style={{ borderRadius: "20px" }}
-                controls={false}
-                playing={playingStates}
-                onProgress={handleProgress(videoID)}
-              />
-            </div>
-            {trackIndexChosen != null && (
-              <div className="userScript">
-                <FillInTheBlankQuiz
-                  transcript={listTrack[trackIndexChosen][1].transcript}
-                  video_id={videoID}
-                  track_id={IDtrackChosen}
+          {sourceLink != null && (
+            <div className="videoPageInfo">
+              <div className="video">
+                <ReactPlayer
+                  ref={(player) => (playerRefs.current[videoID] = player)}
+                  url={sourceLink}
+                  width="100%"
+                  height="100%"
+                  style={{ borderRadius: "20px" }}
+                  controls={false}
+                  playing={playingStates}
+                  onProgress={handleProgress(videoID)}
                 />
               </div>
-            )}
-          </div>
+              {trackIndexChosen != null && (
+                <div className="userScript">
+                  <FillInTheBlankQuiz
+                    transcript={listTrack[trackIndexChosen][1].transcript}
+                    video_id={videoID}
+                    track_id={IDtrackChosen}
+                  />
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 }
+
+export default VideoPage;
