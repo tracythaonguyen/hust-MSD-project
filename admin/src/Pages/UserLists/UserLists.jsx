@@ -24,14 +24,13 @@ function Lists({ type }) {
                     <div className="btnn">
                         <Link
                             to={`/${
-                                type === 'product' ? 'products' : 'user' ? 'users' : 'blogs'
+                                type === 'video' ? 'videos' : 'user' ? 'users' : 'blogs'
                             }/addnew`}
                             style={{ textDecoration: 'none' }}
                         >
                             <button type="button">Add New {type}</button>
                         </Link>
                     </div>
-
                     {type === 'user' ? <DataTable /> : <TableList />}
                 </div>
             </div>
