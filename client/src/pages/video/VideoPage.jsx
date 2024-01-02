@@ -101,7 +101,7 @@ function VideoPage(props) {
     <div className="videoPage">
       <div className="videoPageContainer">
         <div className="videoPageLeft">
-          <Link to="/topic">
+          <Link to="/home">
             <button className="backButton">
               <FontAwesomeIcon icon={faArrowLeftLong} />
             </button>
