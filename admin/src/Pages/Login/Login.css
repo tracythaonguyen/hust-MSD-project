@@ -1,0 +1,132 @@
+.loginContainer {
+    display: flex;
+}
+
+.loginContainer a {
+    text-decoration: none;
+}
+
+.login-left {
+    margin: 20px;
+    position: relative;
+    flex: 1;
+}
+
+.loginContainer img {
+    width: 100%;
+    position: relative;
+}
+
+.loginContainer .img-text {
+    position: absolute;
+    left: 60px;
+    bottom: 8%;
+    color: #fff;
+}
+
+.loginContainer .img-text h2 {
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 240%;
+}
+
+.loginContainer .img-text p {
+    letter-spacing: 1px;
+}
+
+.loginContainer .login-right {
+    text-align: center;
+    margin-top: 70px;
+    justify-content: center;
+    flex: 1;
+}
+
+.loginContainer .option {
+    display: flex;
+    margin: 20px 25%;
+    border-radius: 33px;
+    background: rgba(73, 187, 189, 0.60);
+    width: 329px;
+    height: 59px;
+    padding: 8px;
+    justify-content: space-between;
+
+}
+
+.loginContainer .login,
+.loginContainer .register {
+    color: #fff;
+    margin: 0 30px 0 10px;
+    background: none;
+    padding: 10px 40px 0 40px;
+
+}
+
+.loginContainer .visited {
+    border-radius: 33px;
+    background: #49BBBD;
+    border: none;
+    outline: none;
+}
+
+
+.loginContainer .visited:hover {
+    cursor: pointer;
+}
+
+.loginContainer .visited:active {
+    transform: translateY(4px);
+}
+
+.loginContainer .login-right .desc {
+    color: #5B5B5B;
+    font-size: 16px;
+    font-weight: 400;
+    /* text-align: left; */
+    /* width: 80%; */
+    margin: 70px 0 0 0;
+}
+
+.loginContainer form {
+    margin: 30px 0 0 15%;
+    text-align: left;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.loginContainer form .inputText {
+    border-radius: 40px;
+    border: 1px solid #49BBBD;
+    background: #FFF;
+    width: 435px;
+    height: 54px;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+
+.loginContainer form button {
+    border-radius: 36px;
+    background: #49BBBD;
+    width: 232px;
+    height: 49px;
+    flex-shrink: 0;
+    color: #fff;
+    border: none;
+}
+
+.loginContainer .form-bottom {
+    font-weight: 400;
+    margin: 0 0 5px 5px;
+    display: flex;
+}
+
+.loginContainer .forgot-pwd {
+    color: #49BBBD;
+    margin-left: 170px;
+}
+
+.loginContainer #sub_btn {
+    margin-top: 40px;
+}
