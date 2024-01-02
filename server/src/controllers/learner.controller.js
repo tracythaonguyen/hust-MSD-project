@@ -5,7 +5,7 @@ const { sign, verify } = jwt
 async function getAllLearners(req, res) {
   try {
     const allLearners = await pool.query(
-      'SELECT * FROM learner ORDER BY learner_id ASC',
+      'SELECT * FROM learner natural join account ORDER BY learner_id ASC',
     )
     console.log(allLearners.rows)
     return res.status(200).json(allLearners.rows)
