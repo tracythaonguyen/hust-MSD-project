@@ -48,7 +48,7 @@ function DataTable() {
       width: 170,
       renderCell: (params) => (
         <div className="actionn">
-          <Link to='/users/2'>
+          <Link to={`/users/${params.row.id}`}>
             <button type="button" className="view_btn">
               View
             </button>

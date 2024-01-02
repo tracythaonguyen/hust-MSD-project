@@ -31,7 +31,6 @@ function Lists({ type }) {
                             <button type="button">Add New {type}</button>
                         </Link>
                     </div>
-
                     {type === 'user' ? <DataTable /> : <TableList />}
                 </div>
             </div>

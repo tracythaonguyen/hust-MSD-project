@@ -15,7 +15,6 @@ function Home() {
 
             <div className="home_main">
                 <Navbar />
-
                 <div className="bg_color" />
 
                 <div className="home_items">
@@ -30,6 +29,7 @@ function Home() {
                     <TableList />
                 </div>
             </div>
+
         </div>
     );
 }
