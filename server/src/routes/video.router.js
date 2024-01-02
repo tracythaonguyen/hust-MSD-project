@@ -21,10 +21,10 @@ router.put("/:id", videoController.updateVideoTitle);
 
 // create video with category
 router.post(
-  "/create",
-  verifyAdmin,
-  videoController.createVideoWithCategoryandTag
-);
+    '/create',
+    videoController.createVideoWithCategoryandTag,
+)
+
 
 // get all tags of a video
 router.get("/getTags/:id", videoController.getAllTagsOfVideo);

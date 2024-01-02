@@ -5,7 +5,6 @@ import React, { useState } from "react";
 import Input from "../../Components/Input/Input";
 import Navbar from "../../Components/Navbar/Navbar";
 import Sidebar from "../../Components/Sidebar/Sidebar";
-import noImage from "../../Images/photo-camera.png";
 import "./New.scss";
 import axios from "axios";
 
@@ -27,7 +26,7 @@ function AddNew({ inputs, titlee, type }) {
       dynamicInpVal = {
         video_title: "",
         description: "",
-        category: "",
+        category_id: "",
         source_link: "",
         link_img: "",
         level: "",
@@ -52,9 +51,9 @@ function AddNew({ inputs, titlee, type }) {
   // Dynamicaly change the data for different pages
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     // If the input is a select element, set the value based on the selected option
-    if (e.target.tagName.toLowerCase() === 'select') {
+    if (e.target.tagName.toLowerCase() === "select") {
       const selectedIndex = e.target.selectedIndex;
       const selectedOption = e.target.options[selectedIndex];
       setUserInp((prevUserInp) => ({
@@ -65,13 +64,19 @@ function AddNew({ inputs, titlee, type }) {
       setUserInp((prevUserInp) => ({ ...prevUserInp, [name]: value }));
     }
   };
-  
 
   const handleSubmit = (e) => {
     e.preventDefault();
     //post request to api to create new video
-    const res = axios.post(`http://localhost:8000//${type}`, userInp);
-    console.log("zzz",userInp);
+    //set tag to array
+    userInp.tags = userInp.tags.split(",");
+    console.log("userInp", userInp);
+    axios
+      .post(`http://localhost:8000/video/create`, userInp)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <div className="add_new">
@@ -90,31 +95,32 @@ function AddNew({ inputs, titlee, type }) {
             </div>
 
             <form onSubmit={handleSubmit} className="form">
-            {inputs.map((detail) =>
-  detail.type === "select" ? (
-    <div key={detail.id}>
-      <label>{detail.lable}</label>
-      <select
-        {...detail}
-        value={userInp[detail.name]}
-        onChange={handleChange}
-      >
-        {detail.options.map((option) => (
-          <option key={option.id} value={option.value}>
-            {option.name}
-          </option>
-        ))}
-      </select>
-    </div>
-  ) : (
-    <Input
-      key={detail.id}
-      {...detail}
-      value={userInp[detail.name]}
-      onChange={handleChange}
-    />
-  )
-)}
+              {inputs.map((detail) =>
+                detail.type === "select" ? (
+                  <div key={detail.id} className="selectInput">
+                    <label>{detail.lable}</label>
+                    <select
+                      {...detail}
+                      value={userInp[detail.name]}
+                      onChange={handleChange}
+                      className="selectBox"
+                    >
+                      {detail.options.map((option) => (
+                        <option key={option.id} value={option.value}>
+                          {option.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ) : (
+                  <Input
+                    key={detail.id}
+                    {...detail}
+                    value={userInp[detail.name]}
+                    onChange={handleChange}
+                  />
+                )
+              )}
               <button type="submit" className="submit_btn">
                 Submit
               </button>
