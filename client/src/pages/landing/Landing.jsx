@@ -41,7 +41,7 @@ export const Landing = () => {
                         <br></br> much easier
                     </div>
                     <div className="desc">
-                        TOTC is an interesting platform that will teach<br></br> you in more an interactive way
+                        EICT is an interesting platform that will teach<br></br> you in more an interactive way
                     </div>
                     <div className="header-button">
                         <button onClick={register} className="join-for-free">
