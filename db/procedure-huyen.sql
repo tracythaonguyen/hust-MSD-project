@@ -43,6 +43,9 @@ select * from learner;
 CREATE OR REPLACE FUNCTION update_click_time(p_learner_id INT, p_video_id INT)
 RETURNS VOID AS $$
 BEGIN
+    UPDATE video
+    SET view = view + 1
+    WHERE video_id = p_video_id;
     -- Check if a progress record already exists for this learner and video
     IF EXISTS (SELECT 1 FROM progress WHERE learner_id = p_learner_id AND video_id = p_video_id) THEN
         -- Update the existing record
