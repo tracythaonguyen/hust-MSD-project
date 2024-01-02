@@ -79,7 +79,9 @@ export default function (props) {
   //     getVideos().then((r) => console.log(r));
   //   }, [VideoData]);
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    axios.get("http://localhost:8000/video/view" + videoID);
+  };
 
   return (
     <div>
