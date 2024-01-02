@@ -169,9 +169,11 @@
     }
 }
 
-/* .success{
+
+.success{
     background: green;
-} */
+}
+
 
 @keyframes success {
     from {
