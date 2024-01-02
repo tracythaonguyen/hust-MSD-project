@@ -93,7 +93,7 @@ export default function (props) {
         learnerId: user.learner_id,
       })
       .then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error update result:", error);
@@ -124,7 +124,7 @@ export default function (props) {
           <img src={thumbnail} alt={"image"} className="thumbnail" />
           <div class="layer centered"></div>
           <div class="centered">
-            <Link to={`/learn/${videoID}`}>
+            <Link to={`/learn/${videoID}`} className="playImg">
               <img
                 src={startLesson}
                 alt=""
@@ -135,8 +135,9 @@ export default function (props) {
           </div>
         </div>
         <div class="feedback-container">
+          <h4>Feedback</h4>
           {FeedBack.map((feedback) => (
-            <div class = "feedback-msg">
+            <div class="feedback-msg">
               <p>Learner: {feedback[1].learner_id}</p>
               <p>Feedback: {feedback[1].content}</p>
             </div>
