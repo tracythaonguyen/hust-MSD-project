@@ -80,7 +80,7 @@ export default function (props) {
   //   }, [VideoData]);
 
   const handleClick = () => {
-    axios.get("http://localhost:8000/video/view" + videoID);
+    axios.get("http://localhost:8000/video/view/" + videoID);
   };
 
   return (
