@@ -9,13 +9,15 @@ import * as Constant from "./Constant";
 import startLesson from "../../assets/images/start_lesson.png";
 import VideoPage from "../video/VideoPage";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { useUser } from "../../components/UserContext";
+import { faE } from "@fortawesome/free-solid-svg-icons";
 
 export default function (props) {
   const { videoID } = props.match.params;
-  console.log({ videoID: videoID });
+  const [user, setUser] = useState(useUser());
 
   const [VideoData, setVideoData] = useState({});
-  const [FeedBack, setFeedBack] = useState({});
+  const [FeedBack, setFeedBack] = useState([]);
   const [thumbnail, setThumbnail] = useState(
     "https://kansai-resilience-forum.jp/wp-content/uploads/2019/02/IAFOR-Blank-Avatar-Image-1.jpg"
   );
@@ -45,7 +47,7 @@ export default function (props) {
       try {
         const res = await axios.get("http://localhost:8000/video/" + videoID);
         setVideoData(res.data.data);
-        console.log("VideoData: ", res.data.data);
+        // console.log("VideoData: ", res.data.data);
         setThumbnail(VideoData);
       } catch (err) {
         console.log(err);
@@ -53,6 +55,7 @@ export default function (props) {
     };
     getVideos().then((r) => console.log(r));
   }, []);
+
   useEffect(() => {
     const getVideos = async () => {
       try {
@@ -64,23 +67,37 @@ export default function (props) {
     getVideos().then((r) => console.log(r));
   }, [VideoData]);
 
-  //   useEffect(() => {
-  //     const getVideos = async () => {
-  //       try {
-  //         const res = await axios.get(
-  //           "http://localhost:8000/feed/video/" + videoID
-  //         );
-  //         setFeedBack(res.data.data);
-  //         console.log("VideoData: ", FeedBack);
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     };
-  //     getVideos().then((r) => console.log(r));
-  //   }, [VideoData]);
+  useEffect(() => {
+    const getVideos = async () => {
+      try {
+        const res = await axios
+          .get("http://localhost:8000/feed/video/" + videoID)
+          .then((response) => {
+            setFeedBack(Object.entries(response.data.data));
+          });
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getVideos().then((r) => console.log(r));
+  }, [videoID]);
+
+  useEffect(() => {
+    // Actions dependent on state updates
+    console.log("FeedBack ", FeedBack);
+  }, [FeedBack]);
 
   const handleClick = () => {
-    axios.get("http://localhost:8000/video/view" + videoID);
+    axios
+      .post("http://localhost:8000/video/view/" + videoID, {
+        learnerId: user.learner_id,
+      })
+      .then((response) => {
+        // console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error update result:", error);
+      });
   };
 
   return (
@@ -116,6 +133,14 @@ export default function (props) {
               />
             </Link>
           </div>
+        </div>
+        <div class="feedback-container">
+          {FeedBack.map((feedback) => (
+            <div class = "feedback-msg">
+              <p>Learner: {feedback[1].learner_id}</p>
+              <p>Feedback: {feedback[1].content}</p>
+            </div>
+          ))}
         </div>
       </div>
       <Footer></Footer>
