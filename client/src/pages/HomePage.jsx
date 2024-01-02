@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import './HomePage.css';
 import imgUrl from '../assets/images/ads.png';
 import axios from 'axios';
-import {Link, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import useFetchUser from "../utilities/useFetchUser";
 import useFetchRecentVideos from "../utilities/useFetchRecentVideos";
 
@@ -266,7 +266,7 @@ export default function HomePage() {
                             </div>
                             <div className='group-blog'>
                                 {currentVideos.map(({video_id, description, link_img, video_title, view}) => (
-                                    <Link className='blog' key={video_id} to={`/video/${video_id}`}>
+                                    <div className='blog' key={video_id}>
                                         <img alt='img' src={link_img} className='blog-image'/>
                                         <h3>{video_title}</h3>
                                         <p className='p3'>{description}</p>
@@ -276,7 +276,7 @@ export default function HomePage() {
                                                 {view}
                                             </div>
                                         </div>
-                                    </Link>
+                                    </div>
                                 ))}
                             </div>
                             <div className='nav'>
@@ -291,8 +291,8 @@ export default function HomePage() {
                             </div>
 
                             <div className='video-group'>
-                                {recentVideos.slice(0, 4).map(({video_id, description, link_img, time, topic, video_title}) => (
-                                    <Link className='video' key={video_id} to={`/video/${video_id}`}>
+                                {recentVideos.slice(0, 4).map(({description, link_img, time, topic, video_title}) => (
+                                    <div className='video'>
                                         <img alt='img' src={link_img} className='video-image'/>
                                         <div className='video-info'>
                                             <p className='topic-name'>{topic}</p>
@@ -300,7 +300,7 @@ export default function HomePage() {
                                         </div>
                                         <h4>{video_title}</h4>
                                         <p className='p4'>{description}</p>
-                                    </Link>
+                                    </div>
                                 ))}
 
                             </div>
