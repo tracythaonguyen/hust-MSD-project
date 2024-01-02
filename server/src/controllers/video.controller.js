@@ -63,7 +63,7 @@ async function updateVideoTitle(req, res) {
 async function createVideoWithCategoryandTag(req, res) {
   try {
     const {
-      title,
+      video_title,
       level,
       source_link,
       link_img,
@@ -71,7 +71,7 @@ async function createVideoWithCategoryandTag(req, res) {
       category_id,
       tags,
     } = req.body
-    if (!title) {
+    if (!video_title) {
       return res.status(400).json({ message: 'Title is required' })
     }
     if (!level) {
@@ -84,14 +84,38 @@ async function createVideoWithCategoryandTag(req, res) {
       return res.status(400).json({ message: 'Category is required' })
     }
     const video = await pool.query(
-      'INSERT INTO video (video_title, level, source_link, category_id) VALUES ($1, $2, $3, $4) RETURNING *',
-      [title, level, source_link, category_id],
+      `INSERT INTO video 
+      (video_title, level, source_link, category_id, link_img, description)
+       VALUES ($1, $2, $3, $4, $5, $6 ) RETURNING *`,
+      [video_title, level, source_link, category_id, link_img, description],
     )
     const videoId = video.rows[0].video_id
-    if (tags) {
-      const values = tags.map((tag) => `(${videoId}, ${tag})`).join(', ')
-      const query = `INSERT INTO tag_to_video (video_id, tag_id) VALUES ${values} RETURNING *;`
-      const videoTags = await pool.query(query)
+   //add value to table tag_to_video
+    for (let i = 0; i < tags.length; i++) {
+      //tìm tag_id
+      const tag = await pool.query(
+        `SELECT tag_id FROM tag WHERE tag_name = $1`,
+        [tags[i]],
+      )
+      //nếu tag không tồn tại thì insert vào bảng tag
+      if (!tag.rows.length) {
+        const newTag = await pool.query(
+          `INSERT INTO tag (tag_name) VALUES ($1) RETURNING *`,
+          [tags[i]],
+        )
+        const tagId = newTag.rows[0].tag_id
+        //insert vào bảng tag_to_video
+        await pool.query(
+          `INSERT INTO tag_to_video (tag_id, video_id) VALUES ($1, $2)`,
+          [tagId, videoId],
+        )
+      } else {
+        //insert vào bảng tag_to_video
+        await pool.query(
+          `INSERT INTO tag_to_video (tag_id, video_id) VALUES ($1, $2)`,
+          [tag.rows[0].tag_id, videoId],
+        )
+      }
     }
     return res
       .status(200)

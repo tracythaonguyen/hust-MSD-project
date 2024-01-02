@@ -22,7 +22,6 @@ router.put('/:id', videoController.updateVideoTitle)
 // create video with category
 router.post(
     '/create',
-    verifyAdmin,
     videoController.createVideoWithCategoryandTag,
 )
 

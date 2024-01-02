@@ -166,6 +166,10 @@
     }
 }
 
+.success{
+    background: green;
+}
+
 @keyframes success {
     from {
         transform: translate(-50%, -50%) rotate(0) scale(0);
