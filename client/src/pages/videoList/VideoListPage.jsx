@@ -50,24 +50,24 @@ export const VideoListPage = () => {
         <div className="topicPage">
             <Header></Header>
             {/*    TOPIC PART    */}
-            <div className="box-container">
-                <div className="box" style={boxStyle}>
-                    {/* Image container on the left */}
-                    <div className="image-container">
-                        <img src={Constant.TOPIC_LOGO} alt={"image"}/>
-                    </div>
-                    {/* Text box on the right */}
-                    <div className="text-box">
-                        {/* Content goes here */}
-                        <h2>Change to Topic Name Here</h2>
-                        <p>Change to Topic Description Here. The Image and Background Image also should take from Topic
-                            Data</p>
-                    </div>
-                </div>
-            </div>
+            {/*<div className="box-container">*/}
+            {/*    <div className="box" style={boxStyle}>*/}
+            {/*        /!* Image container on the left *!/*/}
+            {/*        <div className="image-container">*/}
+            {/*            <img src={Constant.TOPIC_LOGO} alt={"image"}/>*/}
+            {/*        </div>*/}
+            {/*        /!* Text box on the right *!/*/}
+            {/*        <div className="text-box">*/}
+            {/*            /!* Content goes here *!/*/}
+            {/*            <h2>Change to Topic Name Here</h2>*/}
+            {/*            <p>Change to Topic Description Here. The Image and Background Image also should take from Topic*/}
+            {/*                Data</p>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
             {/*    DATA PART    */}
             <div className="big-box">
-                <h2>TOPIC</h2>
+                {/*<h2>TOPIC</h2>*/}
                 <br/>
                 <div className="small-box-container">
                     {visibleSmallBoxes.map((box) => (
