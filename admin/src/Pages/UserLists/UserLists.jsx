@@ -20,16 +20,20 @@ function Lists({ type }) {
                 <Navbar />
 
                 {/* mui data table */}
+                {/* if type is not user */}
+
                 <div className="data_table">
                     <div className="btnn">
-                        <Link
-                            to={`/${
-                                type === 'video' ? 'videos' : 'user' ? 'users' : 'blogs'
-                            }/addnew`}
-                            style={{ textDecoration: 'none' }}
-                        >
-                            <button type="button">Add New {type}</button>
-                        </Link>
+                        {type !== 'user' && (
+                            <Link
+                                to={`/${
+                                    type === 'video' ? 'videos' : 'blogs'
+                                }/addnew`}
+                                style={{ textDecoration: 'none' }}
+                            >
+                                <button type="button">Add New {type}</button>
+                            </Link>
+                        )}
                     </div>
                     {type === 'user' ? <DataTable /> : <TableList />}
                 </div>

@@ -12,8 +12,9 @@
       padding: 30px 25px;
 
       .user_detail {
+        min-width: 1000px;
         box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-        text-align: center;
+        text-align: left;
         padding: 20px;
         border-radius: 3px;
         flex: 3;

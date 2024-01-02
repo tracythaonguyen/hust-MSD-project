@@ -32,7 +32,12 @@ function DataTable() {
   }, []);
 
   const handleDelete = (id) => {
-    setLearners(learners.filter((item) => item.account_id !== id));
+    fetch(`http://localhost:8000/learner/${id}`, {
+      method: "DELETE",
+    }).then(() => {
+      const newLearners = learners.filter((learner) => learner.id !== id);
+      setLearners(newLearners);
+    });
   };
 
   const columns = [

@@ -11,13 +11,13 @@ const router = express.Router()
 router.get('/', learnerController.getAllLearners)
 
 // delete an learner by id
-router.delete('/:id', verifyAdmin, learnerController.deleteLearner)
+router.delete('/:id', learnerController.deleteLearner)
 
 // create an learner
 router.post('/create', verifyAdmin, learnerController.createLearner)
 
 // get an learner by id
-router.get('/:id', verifyLearner, learnerController.getLearnerById)
+router.get('/:id', learnerController.getLearnerById)
 
 // get an learner by token
 router.get(
