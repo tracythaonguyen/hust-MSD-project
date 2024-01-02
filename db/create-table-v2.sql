@@ -102,3 +102,17 @@ CREATE TABLE feedback(
   content VARCHAR(500) NOT NULL,
   feedback_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+ALTER TABLE history
+DROP CONSTRAINT history_learner_id_fkey,
+ADD CONSTRAINT history_learner_id_fkey
+FOREIGN KEY (learner_id)
+REFERENCES learner(learner_id)
+ON DELETE CASCADE;
+
+ALTER TABLE progress
+DROP CONSTRAINT progress_learner_id_fkey,
+ADD CONSTRAINT progress_learner_id_fkey
+FOREIGN KEY (learner_id)
+REFERENCES learner(learner_id)
+ON DELETE CASCADE;
