@@ -1,48 +1,48 @@
-import express from 'express'
-import videoController from '../controllers/video.controller.js'
-import { verifyAdmin, verifyLearner } from '../middlewares/verifyToken.js'
+import express from "express";
+import videoController from "../controllers/video.controller.js";
+import { verifyAdmin, verifyLearner } from "../middlewares/verifyToken.js";
 
-const router = express.Router()
+const router = express.Router();
 
 // get all categories
-router.get('/', videoController.getAllVideos)
+router.get("/", videoController.getAllVideos);
 
 // search video by title
-router.get('/search', videoController.searchVideoByTitle)
+router.get("/search", videoController.searchVideoByTitle);
 
 // get video by id
-router.get('/:id', videoController.getVideoById)
+router.get("/:id", videoController.getVideoById);
 
 // delete an video by id
-router.delete('/:id', verifyAdmin, videoController.deleteVideo)
+router.delete("/:id", verifyAdmin, videoController.deleteVideo);
 
 // update video
-router.put('/:id', videoController.updateVideoTitle)
+router.put("/:id", videoController.updateVideoTitle);
 
 // create video with category
 router.post(
-    '/create',
-    verifyAdmin,
-    videoController.createVideoWithCategoryandTag,
-)
+  "/create",
+  verifyAdmin,
+  videoController.createVideoWithCategoryandTag
+);
 
 // get all tags of a video
-router.get('/getTags/:id', videoController.getAllTagsOfVideo)
+router.get("/getTags/:id", videoController.getAllTagsOfVideo);
 
 router.get(
-    '/getRecentLearningVideo/:id',
-    verifyLearner,
-    videoController.getRecentLearningVideo,
-)
+  "/getRecentLearningVideo/:id",
+  verifyLearner,
+  videoController.getRecentLearningVideo
+);
 
 router.get(
-    '/getFavouriteVideo/:id',
-    verifyLearner,
-    videoController.getFavouriteVideo,
-)
+  "/getFavouriteVideo/:id",
+  verifyLearner,
+  videoController.getFavouriteVideo
+);
 // get all videos by tag id
-router.get('/getVideosByTag/:id', videoController.getAllVideosByTagId)
+router.get("/getVideosByTag/:id", videoController.getAllVideosByTagId);
 
-router.get('/view/:id', videoController.handleVideoView)
+router.post("/view/:id", videoController.handleVideoView);
 
-export default router
+export default router;
