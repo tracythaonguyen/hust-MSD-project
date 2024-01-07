@@ -219,6 +219,7 @@
 .thumbnail-container .thumbnail {
   width: 100%;
   border-radius: 10px;
+  max-height: 120vh;
 }
 
 .playImg {
@@ -232,11 +233,15 @@
 }
 
 .feedback-container {
-  width: 30%;
+  width: 32%;
   background-color: #d9d9d9;
   border-radius: 10px;
-  padding: 10px;
+  padding: 15px;
   min-height: 70vh;
+  height: fit-content;
+  max-height: 120vh;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  overflow-y: scroll; /* Add vertical scrollbar */
 }
 
 .feedback-msg {
@@ -244,4 +249,17 @@
   border-radius: 10px;
   padding: 10px;
   margin: 10px;
+}
+
+.feed-content {
+  background-color: white;
+  max-height: max-content;
+  padding: 5px;
+  border-radius: 0px 15px 15px 15px;
+  display: flex;
+  /* overflow-wrap: break-word; */
+}
+
+.feed-content p {
+  word-break: break-all;
 }

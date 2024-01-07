@@ -25,6 +25,19 @@ export default function (props) {
     background: `url('https://th.bing.com/th/id/R.81a3f59406b577c14dcbb0e139c3ffc0?rik=aQa6tM2bLkMiGw&riu=http%3a%2f%2fpicz.in%2fdata%2fmedia%2f7%2fSchool_BG_Classroom_6_by_TaskedAngelStock.jpg&ehk=WgjA7QvKAAQq8mbSc58ojqFSgzoKXh2UuUQ%2btTvk7F8%3d&risl=&pid=ImgRaw&r=0') center/cover`,
   };
 
+  useEffect(() => {
+    const getListUser = async () => {
+      try {
+        const res = await axios.get("http://localhost:8000/video/" + videoID);
+        setVideoData(res.data.data);
+        // console.log("VideoData: ", res.data.data);
+        setThumbnail(VideoData);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+  }, []);
+
   const getThumbnail = function (url, size) {
     let video, results;
     if (url == null) {
@@ -139,7 +152,9 @@ export default function (props) {
           {FeedBack.map((feedback) => (
             <div class="feedback-msg">
               <p>Learner: {feedback[1].learner_id}</p>
-              <p>Feedback: {feedback[1].content}</p>
+              <div class="feed-content">
+                <p>Feedback: {feedback[1].content}</p>
+              </div>
             </div>
           ))}
         </div>
