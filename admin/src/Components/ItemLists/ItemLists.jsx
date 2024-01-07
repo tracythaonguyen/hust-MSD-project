@@ -6,16 +6,55 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './itemlists.scss';
+import {useEffect, useState} from 'react';
 
 function ItemLists({ type }) {
     let data;
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        switch (type) {
+            case 'user':
+                fetch('http://localhost:8000/learner')
+                    .then((res) => res.json())
+                    .then((data) => {
+                        setCount(data.length);
+                    });
+                break;
+            case 'videos':
+                fetch('http://localhost:8000/video')
+                    .then((res) => res.json())
+                    .then((data) => {
+                        setCount(data.length);
+                    });
+                break;
+            case 'categories':
+                fetch('http://localhost:8000/category')
+                    .then((res) => res.json())
+                    .then((data) => {
+                        setCount(data.length);
+                    });
+                break;
+            case 'tag':
+                fetch('http://localhost:8000/tag')
+                    .then((res) => res.json())
+                    .then((data) => {
+                        setCount(data.length);
+                    });
+                break;
+            default:
+                break;
+        }
+    },[]);
+
+
     // Dynamicaly change the ui content
     switch (type) {
         case 'user':
             data = {
                 title: 'USERS',
                 isMoney: false,
-                count: 232,
+                count: count,
                 icon: (
                     <PermIdentityIcon
                         style={{
@@ -33,7 +72,7 @@ function ItemLists({ type }) {
             data = {
                 title: 'VIDEOS',
                 isMoney: false,
-                count: 34,
+                count: count,
 
                 icon: (
                     <LocalGroceryStoreOutlinedIcon
@@ -52,7 +91,7 @@ function ItemLists({ type }) {
             data = {
                 title: 'CATEGORIES',
                 isMoney: false,
-                count: 10,
+                count: count,
                 icon: (
                     <AttachMoneyOutlinedIcon
                         style={{
@@ -62,14 +101,14 @@ function ItemLists({ type }) {
                         className="icon"
                     />
                 ),
-                link: 'See all categories',
+                link: '',
                 linkto: '/categories',
             };
             break;
         case 'tag':
             data = {
                 title: 'TAG',
-                count: 44,
+                count: count,
                 isMoney: false,
                 icon: (
                     <PaidOutlinedIcon
@@ -80,7 +119,7 @@ function ItemLists({ type }) {
                         className="icon"
                     />
                 ),
-                link: 'See all details',
+                link: '',
                 linkto: '/',
             };
             break;
@@ -92,14 +131,9 @@ function ItemLists({ type }) {
         <div className="item_listss">
             <div className="name">
                 <p>{data.title}</p>
-                <span className="persentage positive">
-                    <KeyboardArrowUpIcon />
-                    20 %
-                </span>
             </div>
 
             <div className="counts">
-                {data.isMoney && <AttachMoneyOutlinedIcon />}
                 {data.count}
             </div>
 
